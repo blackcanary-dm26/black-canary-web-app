@@ -4,8 +4,13 @@ const socket = io('http://localhost:3069');
 //these functions are invoked in their components' componentsDidMount() life cycle method
 
 //========= socket.on listeners ==============//
-
-    export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations){ //in home component 
+    export function socketOn(){
+        socket.on('connect', ()=> {
+            console.log(socket.id)
+        })
+    }
+    
+    export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests){ //in home component 
         socket.on('heartbeat', data=> {
             // console.log('data in controller', data)
             //pass in action reducers to heartbeat function in component
@@ -13,6 +18,7 @@ const socket = io('http://localhost:3069');
             getUserInfo(data.userInfo);
             getGroups(data.groups);
             getActiveLocations(data.activeLocations);
+            getPendingFriendRequests(data.pendingFriendRequests);
         })
     }
 
@@ -20,6 +26,12 @@ const socket = io('http://localhost:3069');
         socket.on('update user', user=>{
             //pass in getUserInfo action reducer in component
             getUserInfo(user)
+        })
+    }
+
+    export function searchResults(saveToState){
+        socket.on('search results', data=> {
+            saveToState(data)
         })
     }
     
@@ -34,6 +46,7 @@ const socket = io('http://localhost:3069');
     //=============== emit sockets ===================//
 
     export function sendLocation(alert){ //in situations, send objects with user info with user location, array of recipient ids to add to the active_locations table in db
+        console.log(alert)
         socket.emit('send location', alert)
     }
 
@@ -50,8 +63,8 @@ const socket = io('http://localhost:3069');
         socket.emit('delete user', userId)
     }
 
-    export function addGroup(userId, group){
-        socket.emit('add group', {userId, group})
+    export function addGroup(group){
+        socket.emit('add group', group)
     }
 
     export function addFriendToGroup(groupId, friendId){ //on contact/group page
@@ -63,23 +76,26 @@ const socket = io('http://localhost:3069');
         socket.emit('remove friend from group', {groupId, friendId})
     }
 
-    export function requestFriend(userId, friendId){ //on contact page
-        socket.emit('friend request', {userId, friendId})
+    export function requestFriend(friendId){ //on contact page
+        socket.emit('friend request', friendId)
     }
 
     export function confirmFriendRequest(requestId){
         //on profile or contacts page
+        console.log('controller, confirm friend', requestId)
         socket.emit('confirm friend request', requestId)
     }
 
     export function declineFriendRequest(requestId){
         //on profile or contacts page
         //requestId is friend.id
+        console.log('controller, decline friend', requestId)
         socket.emit('decline friend request', requestId)
     }
 
     export function deleteGroup(groupId){
         //on groups page
+        // console.log('scktctrl delete group id',groupId)
         socket.emit('delete group', groupId)
     }
 
@@ -99,3 +115,9 @@ const socket = io('http://localhost:3069');
     //     // contacts are an array of contact_ids
     //     socket.emit('edit emergency group', contacts)
     // }
+
+
+
+    export function friendSearch(firstName){
+        socket.emit('friend search', firstName);
+    }

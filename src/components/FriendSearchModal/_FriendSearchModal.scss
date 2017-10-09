@@ -1,9 +1,13 @@
 .modalContainer{
-  position: absolute;
-    // width: 100%;
-    // height: 50vh;
+    position: absolute;
+    top: 70px;
+    left: calc((100vw - 300px) / 2);
+    width: 300px;
+    // overflow-x: scroll;
+    border-radius: 10px;
+    min-height: 300px;
     background-color: $grey;
-    z-index: 299;
+    z-index: 6;
 
     .friendbuttn{
       margin-left: 10px;
@@ -13,15 +17,28 @@
       width: 52px;
       height: 34px;
       padding-left: 3px;
+      font-family: $sans;
+      &:focus {
+        outline: none;
+      }
 
     }
 
     .input{
       margin-left: 15px;
-      width: 165px;
+      width: 210px;
       height: 35px;
       margin-bottom: 10px;
       border-radius: 4px;
+      background-color: $white-translucent;
+      color: $black;
+      text-transform: uppercase;
+      font-family: $sans;
+      border: none;
+      border-radius: 10px;
+      &:focus {
+        outline: none;
+      }
     }
 
      .x{
@@ -56,7 +73,8 @@
        margin-top: 5px;
        margin-bottom: 13px;
        color: $white;
-       word-wrap: break-word;
+      //  word-wrap: break-word;
+      //  overflow-x: scroll;
      }
 
     .result h4{
@@ -64,7 +82,9 @@
       letter-spacing: 1px;
       margin-top: 5px;
       color: $white;
-      word-wrap: break-word;
+      // word-wrap: break-word;
+      // overflow-x: scroll;
+      
     }
 
     .result button{
@@ -75,10 +95,22 @@
       margin: 10px;
       width: 70px;
       margin-left: 20px;
+      font-family: $sans;
+      &:focus {
+        outline: none;
+      }
 
     }
 
     .text{
-      margin-top: 13px;
+      margin: 13px 5px 13px 0;
+      // border: 1px solid red;
+      width: 185px;
+      // margin-right: 5px;
+      line-height: 1.1em;
+      // overflow-x: scroll;
+      div {
+        overflow-x: scroll;
+      }
     }
 }

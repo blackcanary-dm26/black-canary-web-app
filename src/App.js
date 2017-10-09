@@ -28,7 +28,7 @@ class App extends Component {
       TweenMax.to($('.line2'), 0.5, {transform: 'none', opacity: '0', width: '0', ease: TweenMax.Power1.easeInOut});
       TweenMax.to($('.line1'), 0.5, {transform: 'none', opacity: '0', width: '0', ease: TweenMax.Power1.easeInOut});
       TweenMax.to($('.line3'), 0.5, {transform: 'none', opacity: '0', width: '0', ease: TweenMax.Power1.easeInOut});
-      TweenMax.to($('.Menu'), 0, {right: 0});
+      TweenMax.to($('.Menu'), 0, {display: 'flex'});
       TweenMax.to($('.Menu'), 1.25, {opacity: 1, delay: 0.25, ease: TweenMax.Power1.easeInOut})
       TweenMax.to($('.menuContainer'), 1.25, {transform:'rotate(0deg)', ease: TweenMax.Power1.easeInOut})
       TweenMax.to($('.x'), 1.25, {opacity: 1, scale: '1', delay: 0.35, ease: TweenMax.Power1.easeInOut})
@@ -44,7 +44,7 @@ class App extends Component {
       TweenMax.to($('.line2'), 0.5, {transform: 'none', opacity: '1', width: '30px', ease: TweenMax.Power1.easeInOut});
       TweenMax.to($('.line1'), 0.5, {transform: 'none', opacity: '1', width: '30px', ease: TweenMax.Power1.easeInOut});
       TweenMax.to($('.line3'), 0.5, {transform: 'none', opacity: '1', width: '30px', ease: TweenMax.Power1.easeInOut});
-      TweenMax.to($('.Menu'), 0, {right: '-100vw', delay: 2.7});
+      TweenMax.to($('.Menu'), 0, {display: 'none', delay: 2.7});
       TweenMax.to($('.Menu'), 1.25, {opacity: 0, delay: 0.25, ease: TweenMax.Power1.easeInOut})
       TweenMax.to($('.menuContainer'), 1.25, {transform:'rotate(90deg)', ease: TweenMax.Power1.easeInOut})
       TweenMax.to($('.x'), 1.25, {opacity: 0, scale: '0.2', delay: 0, ease: TweenMax.Power1.easeInOut})
@@ -67,7 +67,7 @@ class App extends Component {
           :
           <Menu toggleMenu={this.toggleMenu} amIOpen={this.state.menuModal}/>
         */}
-        <div>
+        <div className="navbar">
           <div className="menu" onClick={()=>this.toggleMenu('on')}>
             <div className="hamburger line1"/>
             <div className="hamburger line2"/>

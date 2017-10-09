@@ -8,12 +8,13 @@ const initialState = {
         auth_id: '',
         socket_id: '',
         id: '',
-        location: '',
         safe_haven: 'Calypso\'s Island',
         emergency_group_created: false
     },
-    friends: [], //array of friend objects [{friend_username, friend_firstname, friend_lastname, friend_email, friend_id, friend_status, friend_pic, user_id}] 
-    groups: [], //array of group objects [{groupID, groupName, members:[]}]
+    userLoc: '',
+    friends: [], //array of friend objects [{friend_username, friend_firstname, friend_lastname, friend_email, friend_user_id, friend_status, friend_pic, current_user_id, friend_table_id}] 
+    groups: [], //array of group objects [{groupID, groupName, members:[{username, userID}]}]
+    pendingFriendRequests: [],
     activeLocations: {
         1: [
             {
@@ -67,6 +68,7 @@ const initialState = {
 const GET_USER_INFO = 'GET_USER_INFO',
       UPDATE_USER_LOCATION = 'UPDATE_USER_LOCATION',
       GET_FRIENDS_LIST = 'GET_FRIENDS_LIST',
+      GET_PENDING_FRIEND_REQUESTS = 'GET_PENDING_FRIEND_REQUESTS',
       GET_GROUPS = 'GET_GROUPS',
       GET_ACTIVE_LOCATIONS = 'GET_ACTIVE_LOCATIONS',
       DELETE_USER = 'DELETE_USER';
@@ -98,6 +100,12 @@ export function getFriendsList(friends){
     }
 }
 
+export function getPendingFriendRequests(requests) {
+    return {
+        type: GET_PENDING_FRIEND_REQUESTS,
+        payload: requests
+    }
+}
 
 //get groups 
 // add to componentDidMount, inside socket.on('heartbeat')
@@ -133,13 +141,14 @@ export default function reducer(state = initialState, action){
             break;
         case UPDATE_USER_LOCATION:
             // console.log('reducer get user info', action.payload)
-            let user = Object.assign({}, state.user);
-            user.location = action.payload;
-            return Object.assign({}, state, {user})
+            return Object.assign({}, state, {userLoc: action.payload})
             break;
         case GET_FRIENDS_LIST:
         // console.log('reducer get friends',action.payload)
             return Object.assign({}, state, {friends: action.payload})
+            break;
+        case GET_PENDING_FRIEND_REQUESTS:
+            return Object.assign({}, state, {pendingFriendRequests: action.payload})
             break;
         case GET_GROUPS:
         // console.log('reducer get groups', action.payload)
@@ -153,6 +162,6 @@ export default function reducer(state = initialState, action){
         default:
             break;
     }
-    console.log(state)
+    // console.log(state)
     return state;
 }

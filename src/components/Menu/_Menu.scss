@@ -4,14 +4,14 @@
         height: 100%;
         font-family: $sans;
         font-size: 1.2em;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: flex-start;
         position: absolute;
         background-color: $black-translucent;
         z-index: 99;
 
-        right: 100vw;
+        // right: 100vw;
         opacity: 0;
         // animation: slideIn 1s;
         a {
@@ -110,15 +110,5 @@
               }
             }
 
-        }
-
-        @keyframes slideIn{
-            0% {
-                transform: translate3d(-100%, 0, 0);
-                visibility: visible;
-            }
-            100% {
-                transform: translate3d(0, 0, 0);
-            }
         }
     }

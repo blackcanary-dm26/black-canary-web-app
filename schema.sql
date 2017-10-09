@@ -86,6 +86,10 @@ insert into friends (user_id, friend_id, friend_status) values (8, 3, true);
 insert into friends (user_id, friend_id, friend_status) values (6, 2, false);
 insert into friends (user_id, friend_id, friend_status) values (7, 1, true);
 insert into friends (user_id, friend_id, friend_status) values (7, 2, false);
+INSERT INTO friends (user_id, friend_id, friend_status) VALUES (18, 1, true);
+INSERT INTO friends (user_id, friend_id, friend_status) VALUES (18, 2, true);
+INSERT INTO friends (user_id, friend_id, friend_status) VALUES (18, 3, true);
+
 
 -- GROUPS TABLE --
 CREATE TABLE IF NOT EXISTS groups (

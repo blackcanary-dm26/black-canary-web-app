@@ -1,16 +1,16 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import io from 'socket.io-client';
 import MapContainer from './../MapContainer/MapContainer';
 import Login from '../Login/Login';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
-import {heartbeat, renameGroup} from './../../controllers/socketCTRL';
+import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests} from './../../ducks/reducer';
+import {heartbeat, renameGroup, socketOn} from './../../controllers/socketCTRL';
 import map from '../../images/placeholder_map.gif'
 
-const socket = io('http://localhost:3069');
+// import io from 'socket.io-client';
+// const socket = io('http://localhost:3069');
 
 
 class Home extends Component{
@@ -29,14 +29,15 @@ class Home extends Component{
 
     componentDidMount(){
 
-        socket.on('connect', ()=> {
-            console.log('home socket id:',socket.id)
-            socket.emit('save socket_id', {socketId: socket.id})
-        })
+        // socket.on('connect', ()=> {
+        //     console.log('home socket id:',socket.id)
+        //     socket.emit('save socket_id', {socketId: socket.id})
+        // })
+        socketOn();
 
-        let {getUserInfo, getFriendsList, getGroups, getActiveLocations} = this.props;
+        let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests} = this.props;
 
-        heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations);
+        heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests);
 
     }
 
@@ -46,26 +47,27 @@ class Home extends Component{
             // console.log(`state username`, this.state.user.username);
             // console.log(`props username`, props.user.username);
             if(this.state.user.username !== props.user.username) {
-                // console.log('HELLO HERAAM', props.user)
+                console.log('HELLO HERAAM', props.user)
                 this.setState({
                     user: props.user,
                     userLoggedIn: true
                 })
                 setInterval(() => {
-                    navigator.geolocation.getCurrentPosition(position => {
-                        this.setState({
-                            location: {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            }
-                        })
-                        props.updateUserLocation(`${position.coords.latitude}*${position.coords.longitude}`)
-                        
-                    })
+                    
                 }, 1000)
 
 
             }
+            navigator.geolocation.getCurrentPosition(position => {
+                this.setState({
+                    location: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                })
+                props.updateUserLocation(`${position.coords.latitude}*${position.coords.longitude}`)
+                
+            })
         }
     }
 
@@ -74,8 +76,8 @@ class Home extends Component{
 
 
     render(){
-        let {user, friends, groups, getActiveLocations} = this.props;
-        // console.log(user);
+        let {user, userLoc, friends, groups, getActiveLocations} = this.props;
+        // console.log(userLoc);
         return(
             <div id="Home">
                 
@@ -98,7 +100,8 @@ let outputActions = {
     updateUserLocation,
     getFriendsList,
     getGroups,
-    getActiveLocations
+    getActiveLocations,
+    getPendingFriendRequests
 }
 
 export default connect(mapStateToProps, outputActions)(Home);

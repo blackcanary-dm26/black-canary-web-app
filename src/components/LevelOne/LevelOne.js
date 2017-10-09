@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
-import io from 'socket.io-client';
 import {connect} from 'react-redux';
 import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
-const socket = io('http://localhost:3069');
-// const socket = io('http://localhost:3069');
-
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
+
+// import io from 'socket.io-client';
+// const socket = io('http://localhost:3069');
 
 
 class LevelOne extends Component {
@@ -50,124 +49,6 @@ class LevelOne extends Component {
             time: 24,
             timeMS: (24 * 3600000)
           }
-        ],
-        contacts: [
-          {
-            firstName: 'Janise',
-            lastName: 'Suski',
-            username: 'janises',
-            userID: 1,
-            socketID: '98734jbfhljabh38y7r8734oybfjsdhbfwp495bfuijfsgnk547',
-            email: 'janises@janises.janises'
-          },
-          {
-            firstName: 'Andi',
-            lastName: 'Platter',
-            username: 'meatGap',
-            userID: 2,
-            socketID: '98asjdfhauiwefnkjfgskrguroybfjsdhbf8734y534hgsdf63g263',
-            email: 'andi@meat.gap'
-          },
-          {
-            firstName: 'Abby',
-            lastName: 'Thelin',
-            username: 'noBats',
-            userID: 3,
-            socketID: '732h5bd672bdhu5489dhj834hf743ihfbfjsdhbfwp495bfuijfsgnk547',
-            email: 'abby@noBats.tuna'
-          },
-          {
-            firstName: 'Marissa',
-            lastName: 'Fishbeck',
-            username: 'princessHackamore',
-            userID: 3,
-            socketID: '732asdkjfhauiwefhakjsdfalkslkasjdfiaowehfdhbfwp495bfuijfsgnk547',
-            email: 'tapth@saltha.gathpacho'
-          },
-          {
-            firstName: 'Alan',
-            lastName: 'Miller',
-            username: 'alien',
-            userID: 4,
-            socketID: '732h98234f59e7634asdghf2946msndfblrehfsdhbfwp495bfuijfsgnk547',
-            email: 'alan@theystillthinkimhuman.mothership'
-          },
-          {
-            firstName: 'Mom',
-            lastName: '',
-            username: 'knk',
-            userID: 35,
-            socketID: '732kasjdhf74qbafjlhskf7q98234hfkjdff743ihfbfjsdhbfwp495bfuijfsgnk547',
-            email: 'mom@mom.mom'
-          },
-          {
-            firstName: 'Jake',
-            lastName: 'Keator',
-            username: 'jakeSnake',
-            userID: 44,
-            socketID: '7akjsdafhlao723hflakhf34fbajshfs3784kufhibfblrehfsdhbfwp495bfuijfsgnk547',
-            email: 'brother@brother.brother'
-          },
-          {
-            firstName: 'Andrew',
-            lastName: 'Skywalker',
-            username: 'darthEquitus',
-            userID: 49,
-            socketID: '7akj69afhlaskdjhflaiuwehfa93783784kufhibwi34y89iljbdf8wp495bfuijfsgnk547',
-            email: 'boyfriend@boyfriend.boyfriend'
-          },
-          {
-            groupName: 'Family',
-            groupID: '1',
-            groupMembers: [
-              {
-                firstName: 'Mom',
-                lastName: '',
-                username: 'knk',
-                userID: 35,
-                socketID: '732kasjdhf74qbafjlhskf7q98234hfkjdff743ihfbfjsdhbfwp495bfuijfsgnk547',
-                email: 'mom@mom.mom'
-              },
-              {
-                firstName: 'Jake',
-                lastName: 'Keator',
-                username: 'jakeSnake',
-                userID: 44,
-                socketID: '7akjsdafhlao723hflakhf34fbajshfs3784kufhibfblrehfsdhbfwp495bfuijfsgnk547',
-                email: 'brother@brother.brother'
-              },
-            ]
-          },
-          {
-            groupName: 'Emergency Contacts',
-            groupID: '2',
-            groupMembers: [
-              {
-                firstName: 'Mom',
-                lastName: '',
-                username: 'knk',
-                userID: 35,
-                socketID: '732kasjdhf74qbafjlhskf7q98234hfkjdff743ihfbfjsdhbfwp495bfuijfsgnk547',
-                email: 'mom@mom.mom'
-              },
-              {
-                firstName: 'Jake',
-                lastName: 'Keator',
-                username: 'jakeSnake',
-                userID: 44,
-                socketID: '7akjsdafhlao723hflakhf34fbajshfs3784kufhibfblrehfsdhbfwp495bfuijfsgnk547',
-                email: 'brother@brother.brother'
-              },
-              {
-                firstName: 'Andrew',
-                lastName: 'Skywalker',
-                username: 'darthEquitus',
-                userID: 49,
-                socketID: '7akj69afhlaskdjhflaiuwehfa93783784kufhibwi34y89iljbdf8wp495bfuijfsgnk547',
-                email: 'boyfriend@boyfriend.boyfriend'
-              },
-            ]
-          },
         ]
       }
   }
@@ -184,7 +65,14 @@ class LevelOne extends Component {
     this.setState({
       title: event.target.value
     })
-    console.log(this.state.title);
+    // console.log(this.state.title);
+  }
+
+  saveMessage(event){
+    event.preventDefault()
+    this.setState({
+        message: event.target.value
+    })
   }
 
   toggleFriend(event, userObj) {
@@ -210,9 +98,14 @@ class LevelOne extends Component {
 
   toggleGroup(event, groupObj) {
     event.preventDefault()
-    let index = this.state.groupRecipients.indexOf(groupObj.groupID);
+    let gr = [...this.state.groupRecipients];
+    let index = -1;
+    for(let i = 0; i < gr; i++){
+      if(groupObj.groupID === gr[i].groupID) {
+        let index = i;
+      }
+    }
   
-    let gr = [...this.state.groupRecipients.slice(0)];
     if(index >= 0) {
       console.log('We, the '+groupObj.groupName+'are being removed')      
       //remove from recip and change color back
@@ -222,12 +115,15 @@ class LevelOne extends Component {
       //to recip, change color
       console.log('We, the '+groupObj.groupName+'were added')
       TweenMax.to($(`#${groupObj.groupID}`), 0, { backgroundColor: '#fef36e', color: '#111', ease: TweenMax.Power1.easeInOut})
-      gr.push(groupObj.groupID);
+      gr.push(groupObj);
     }
 
     this.setState({
       groupRecipients: gr
     })
+    setTimeout(()=>{
+      console.log(this.state.groupRecipients)
+    }, 1000);
 
   }
 
@@ -238,9 +134,10 @@ class LevelOne extends Component {
   }
 
   sendLocToSocket() {
+    console.log('I am ',this.props.userLoc);
     sendLocation({
       user_id: this.props.user.id,
-      user_coordinates: this.props.location,
+      user_coordinates: this.props.userLoc,
       situation: this.state.title,
       situation_level: 1,
       message: this.state.message,
@@ -261,7 +158,7 @@ class LevelOne extends Component {
             <section className="situationContainer">
               <div className="messageWrapper">
                 <h3>Message:</h3>
-                <textarea maxLength="180"></textarea>
+                <textarea maxLength="180" onChange={e => this.saveMessage(e)}></textarea>
               </div>
               <div className="recipWrapper">
                 <h3>To:</h3>
@@ -292,7 +189,7 @@ class LevelOne extends Component {
                 </select>
               </div>
               <div className="buttnWrapper">
-                <button onClick={() => {console.log('no fuk u'); this.sendLocToSocket()}}>SEND</button>
+                <button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button>
               </div>
             </section>
           </div>

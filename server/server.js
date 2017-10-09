@@ -119,7 +119,7 @@ passport.use(new Auth0Strategy({
 
 io.on('connection', socket => {
     console.log('A user has connected, socket ID: ', socket.id);
-    let userInfo, groups, friends, activeLocations, emergencyGroup;
+    let userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests;
 
 // heartbeat updates the connected user every second
 if(currentUser.id) {
@@ -175,8 +175,14 @@ if(currentUser.id) {
                 data.map(e => {
                     // console.log(e);
                     let {message, situation} = e;
-                    let coord = e.coordinates.split('*');
-                    let coordinates = {lat: 1*coord[0], lng: 1*coord[1]};
+                    let coordinates;
+                    if(e.coordinates) {
+                        let coord = e.coordinates.split('*');
+                        coordinates = {lat: 1*coord[0], lng: 1*coord[1]};
+                    }else {
+                        coordinates ={lat: 40.226192, lng:  -111.660776}
+                    }
+                    
                     let senderName = `${e.senderfirstname} ${e.senderlastname}`;
 
                     activeLocations[e.situationlevel].push({senderName, coordinates, message, situation})
@@ -185,6 +191,12 @@ if(currentUser.id) {
 
                 // activeLocations = data
             });
+            
+            app.get('db').get_pending_friend_requests([currentUser.id])
+                .then(requests => {
+                    // console.log(requests)
+                    pendingFriendRequests = requests
+                })
 
         // app.get('db').get_emergency_group([currentUser.id])
         //     .then(data=> {
@@ -192,7 +204,7 @@ if(currentUser.id) {
         //     })
 
             // console.log('userInfo:', userInfo, 'groups:', groups, 'friends:', friends, 'activeLocations:', activeLocations)
-        socket.emit('heartbeat', {userInfo, groups, friends, activeLocations, emergencyGroup})
+        socket.emit('heartbeat', {userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests})
     }
 }
 
@@ -206,22 +218,22 @@ if(currentUser.id) {
 
     socket.on('send location', data => {
         // post data to active_locations table in db
-
+        console.log('send location data:', data)
         app.get('db').add_active_location([data.user_id, data.user_coordinates, data.situation, data.situation_level, data.message])
-            .then(location=> {
-                console.log(location)
-                //loop through recipients array and add location for each recipient
-                data.individual_recip.length > 0 ?
-                    location.map(individual => {
-                        app.get('db').add_location_recipient([location.id, individual])
+            .then(alert=> {
+                console.log('send location alert[0]', alert[0])
+                let all = [...data.individual_recip];
+                data.group_recip.map(group => {
+                    group.members.map(member => {
+                        all.push(member.userID)
                     })
-                    : null;
+                });
+                let x = new Set(all);
+                allRecip = Array.from(x);
 
-                data.group_recip.length > 0 ?
-                    location.map(group_member => {
-                        app.get('db').add_location_recipient([location.id, group_member])
-                    })
-                    : null;
+                allRecip.map(recip => {
+                    app.get('db').add_location_recipient([alert[0].id, recip])
+                })
             })
     })
 
@@ -242,21 +254,25 @@ if(currentUser.id) {
     })
 
     socket.on('delete user', userId => {
-        console.log(userId)
+        // console.log(userId)
         app.get('db').delete_user([userId])
     })
 
-    socket.on('add group', data=> {
-        // console.log('data:', data)
-        app.get('db').add_group([data.userId, data.group.group_name])
-        .then(group=> {
+    socket.on('add group', group=> {
+        // console.log('group:', group)
+        app.get('db').add_group([currentUser.id, group.group_name])
+        .then(returnedGroup=> {
             // console.log('group',group)
-            app.get('db').add_friend_to_group([group[0].id, data.group.friendId])
+            //loop through group.members => 
+            group.members.map(member=> {
+                // console.log('returned group:', returnedGroup)
+                app.get('db').add_friend_to_group([returnedGroup[0].id, member.friend_user_id])
+            })
         })
     })
 
     socket.on('rename group', group=> {
-        console.log('rename group:',group)
+        console.log('rename group:', group)
         app.get('db').rename_group([group.group_name, group.id]);
     })
 
@@ -279,15 +295,47 @@ if(currentUser.id) {
         })
     })
 
-    socket.on('friend request', data=> {
-        app.get('db').request_friend([data.userId, data.friendId])
+    socket.on('friend search', firstName => {
+        let results;
+        app.get('db').search_by_firstName([firstName])
+            .then(friends => {
+                console.log('friend search, friends', friends)
+                // friends.map(friend=> {
+                //     app.get('db').search_for_pending([friend.id])
+                //         .then(friend => {
+                //             if(friend) {
+                //                 if(friend.friend_status === false) {
+                //                     socket.emit('search results', )
+                //                 }
+                //             }
+                //         })
+                // })
+
+
+
+                socket.emit('search results', friends)
+            })
+
+                //see friends of current user, save to array
+                //loop through friends array to see if requested friends are the same
+                //if friends array[0].friend_status = false, send "pending"
+                //if true, splice that friend out of requested friends array
+
+        
+    })
+
+    socket.on('friend request', friendId=> {
+        app.get('db').request_friend([currentUser.id, friendId])
+
     })
 
     socket.on('confirm friend request', requestId=> {
+        console.log('server, confirm friend', requestId)
         app.get('db').confirm_friend([requestId])
     })
 
     socket.on('decline friend request', requestId=> {
+        console.log('server, decline friend', requestId)
         app.get('db').decline_friend([requestId])
     })
 

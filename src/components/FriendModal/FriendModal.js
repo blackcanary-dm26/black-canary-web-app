@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import io from 'socket.io-client';
 import addFriend from '../../images/addFriendIconReal.png'
 import x from '../../images/x.png'
 import TweenMax from 'gsap';
 import $ from 'jquery';
-const socket = io('http://localhost:3069');
+
+// import io from 'socket.io-client';
+// const socket = io('http://localhost:3069');
 
 
 export default class FriendModal extends Component{

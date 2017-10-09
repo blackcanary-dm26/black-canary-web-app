@@ -17,7 +17,7 @@ export default class Menu extends Component{
                 <div className='navigateContainer'>
 
                     <div className='menuContainer'>
-                      <Link to='/' onClick={()=> this.props.toggleMenu('exit')} className="home buttn">Home</Link>
+                      <Link to='/home' onClick={()=> this.props.toggleMenu('exit')} className="home buttn">Home</Link>
                       <Link onClick={()=> this.props.toggleMenu('exit')} to='/profile' className="profile buttn" > Profile</Link>
                       <Link onClick={()=> this.props.toggleMenu('exit')} to='/situations' className="situations buttn">Situations</Link>
                       <Link onClick={()=> this.props.toggleMenu('exit')} to='/about' className="about buttn">About</Link>

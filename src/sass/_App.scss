@@ -1,13 +1,22 @@
 .App{
-    width: 100%;
+    width: 100vw;
+    overflow-x: hidden;
     height: 100vh;
 
+    .navbar {
+      width: 100vw;
+      height: 50px;
+      // border: 1px solid red;
+      position: fixed;
+      z-index: 7;
+      background-color: $black;
+    }
     .menu{
         width: 30px;
         height: 30px;
         position: fixed;
         margin: 15px;
-        z-index: 7;
+        // z-index: 7;
         cursor: pointer;
 
     }
@@ -23,12 +32,12 @@
         width: 100%;
 
         .bellIcon{
-            margin: 20px;
+            // margin: 20px;
             position: fixed;
-            top: 0;
-            right: 0;
+            top: 20px;
+            right: 15px;
             cursor: pointer;
-            z-index: 7;
+            // z-index: 7;
         }
     }
 

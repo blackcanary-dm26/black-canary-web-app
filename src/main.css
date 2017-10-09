@@ -64,16 +64,16 @@ table {
   letter-spacing: 0.2em;
   font-family: "ABeeZee", sans-serif;
   background-color: #111;
-  width: 100%; }
+  width: 100vw;
+  padding-top: 50px; }
   .Contacts .header {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     height: 100px;
-    position: absolute;
-    margin-left: 20px; }
+    position: absolute; }
     .Contacts .header .head {
       color: #efefef;
       font-family: "ABeeZee", sans-serif;
@@ -87,7 +87,7 @@ table {
     display: flex;
     justify-content: space-around;
     margin-top: 100px;
-    width: 100%;
+    width: 100vw;
     align-items: flex-start;
     position: relative; }
     .Contacts .listOfFriends .imgContainer {
@@ -267,7 +267,8 @@ table {
 #Home {
   background-color: #111;
   height: 100vh;
-  width: 100vw; }
+  width: 100vw;
+  padding-top: 50px; }
   #Home .navContainer {
     width: 100vw;
     height: 30vh;
@@ -422,6 +423,7 @@ table {
     background-color: rgba(239, 239, 239, 0.3);
     color: #efefef;
     border: none;
+    border-radius: 10px;
     letter-spacing: 0.2em; }
     #Level1 .messageWrapper textarea:focus {
       outline: none; }
@@ -570,6 +572,7 @@ table {
     background-color: rgba(239, 239, 239, 0.3);
     color: #efefef;
     border: none;
+    border-radius: 10px;
     letter-spacing: 0.2em; }
     #Level2 .messageWrapper textarea:focus {
       outline: none; }
@@ -609,25 +612,28 @@ table {
 
 .ProfileContainer {
   position: relative;
-  height: 100%;
-  width: 100%; }
+  min-height: 100vh;
+  width: 100vw; }
   .ProfileContainer .Profile {
     text-transform: uppercase;
     font-family: "ABeeZee", sans-serif;
     background: #111;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    left: 0; }
-    .ProfileContainer .Profile .nameContainer {
-      width: 100%;
-      display: flex;
-      height: 13%;
+    flex-wrap: wrap;
+    padding: 50px 0; }
+    .ProfileContainer .Profile .nameWrapper {
+      width: 100vw;
       justify-content: center;
-      align-items: flex-end; }
+      align-items: center;
+      display: flex; }
+    .ProfileContainer .Profile .nameContainer {
+      width: 320px;
+      display: flex;
+      height: 100px;
+      justify-content: center;
+      align-items: center; }
       .ProfileContainer .Profile .nameContainer .name {
         color: #efefef;
         font-size: 1.6em;
@@ -635,28 +641,35 @@ table {
         margin-top: 20px;
         font-family: "ABeeZee", sans-serif;
         letter-spacing: .2em; }
-      .ProfileContainer .Profile .nameContainer .editIcon {
-        width: 7%;
-        margin-left: 10px;
-        margin-top: 20px;
-        cursor: pointer; }
-        @media (min-width: 160px) {
-          .ProfileContainer .Profile .nameContainer .editIcon {
-            width: 1.5em; } }
+    .ProfileContainer .Profile .editIcon {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      opacity: 0.5; }
+      .ProfileContainer .Profile .editIcon:hover {
+        opacity: 1; }
     .ProfileContainer .Profile .nameInputContainer {
-      width: 100%;
-      height: 13%;
+      width: 320px;
+      height: 100px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       flex-direction: row;
-      align-items: flex-end;
+      align-items: center;
       position: relative; }
+      .ProfileContainer .Profile .nameInputContainer .editIcon {
+        margin-left: 5px; }
       .ProfileContainer .Profile .nameInputContainer .nameInput {
         font-size: 1.5rem;
         line-height: 1.2em;
+        border-radius: 10px;
+        position: relative;
+        top: 5px;
         text-align: center;
         text-transform: uppercase;
-        width: 70%;
+        width: 250px;
         background-color: #3a3a3a;
         color: #efefef;
         border: none;
@@ -667,6 +680,7 @@ table {
         color: #FEF36E;
         font-size: 22px;
         position: relative;
+        top: 5px;
         padding-left: 10px;
         background-color: #111;
         border: none;
@@ -678,65 +692,79 @@ table {
       justify-content: center;
       position: relative; }
       .ProfileContainer .Profile .imgContainer .imgPlaceholder {
-        width: 9em;
-        height: 9em;
+        width: 150px;
+        height: 150px;
+        border-radius: 40px;
+        border: 1px solid #FEF36E;
         background-color: #efefef;
         margin-top: 10%;
         position: relative; }
-        @media (min-width: 800px) {
-          .ProfileContainer .Profile .imgContainer .imgPlaceholder {
-            background-color: #efefef;
-            width: 9em;
-            height: 9em;
-            margin-top: 5%; } }
+    .ProfileContainer .Profile .safeHavenWrapper {
+      flex-wrap: wrap;
+      color: #efefef;
+      letter-spacing: 0.2em;
+      line-height: 1.2em;
+      padding-top: 10px; }
     .ProfileContainer .Profile .safehavenContainer {
-      height: 20%;
+      width: 320px;
       display: flex;
+      height: 50px;
       justify-content: center;
       align-items: center; }
       .ProfileContainer .Profile .safehavenContainer .safeHaven {
         color: #efefef;
+        font-size: 1rem;
+        position: relative;
+        margin-top: 20px;
         font-family: "ABeeZee", sans-serif;
         letter-spacing: .2em; }
-      .ProfileContainer .Profile .safehavenContainer .editIcon {
-        width: 7%;
-        margin-left: 10px;
-        cursor: pointer; }
-        @media (min-width: 160px) {
-          .ProfileContainer .Profile .safehavenContainer .editIcon {
-            width: 1.5em; } }
-    .ProfileContainer .Profile .safeHavenInput {
-      height: 20%;
+    .ProfileContainer .Profile .safeHavenInputContainer {
+      width: 320px;
+      height: 50px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center; }
-      .ProfileContainer .Profile .safeHavenInput .changebtn {
+      flex-direction: row;
+      align-items: center;
+      position: relative; }
+      .ProfileContainer .Profile .safeHavenInputContainer .changebtn {
         color: #FEF36E;
         background-color: #111;
         border: none;
         cursor: pointer;
         font-size: 22px; }
-      .ProfileContainer .Profile .safeHavenInput .safeHavenInput {
+      .ProfileContainer .Profile .safeHavenInputContainer button {
+        color: #FEF36E;
+        font-size: 1.6em;
+        position: relative;
+        top: 5px; }
+      .ProfileContainer .Profile .safeHavenInputContainer .safeHavenInput {
+        border-radius: 10px;
         font-size: 1rem;
         line-height: 1.2em;
+        border-radius: 10px;
+        position: relative;
+        top: 5px;
         text-align: center;
         text-transform: uppercase;
-        width: 70%;
+        width: 250px;
         background-color: #3a3a3a;
         color: #efefef;
         border: none;
         letter-spacing: 0.2em; }
-        .ProfileContainer .Profile .safeHavenInput .safeHavenInput:focus {
+        .ProfileContainer .Profile .safeHavenInputContainer .safeHavenInput:focus {
           outline: none; }
     .ProfileContainer .Profile .navigationBtns {
-      width: 100%;
+      width: 100vw;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      margin-top: 60px;
+      margin-top: 40px;
+      padding-bottom: 20px;
       text-decoration: none;
-      cursor: pointer; }
+      cursor: pointer;
+      letter-spacing: 0.2em; }
       .ProfileContainer .Profile .navigationBtns .logOut {
         font-size: 1rem;
         color: #efefef;
@@ -766,6 +794,8 @@ table {
       .ProfileContainer .Profile .navigationBtns .deleteBtn {
         color: #efefef;
         font-size: 1rem;
+        font-family: "ABeeZee", sans-serif;
+        letter-spacing: 0.2em;
         height: 40px !important;
         cursor: pointer;
         text-decoration: none;
@@ -850,6 +880,7 @@ table {
   background-color: #111;
   height: 100vh;
   width: 100vw;
+  padding-top: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -944,13 +975,12 @@ table {
   height: 100%;
   font-family: "ABeeZee", sans-serif;
   font-size: 1.2em;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: flex-start;
   position: absolute;
   background-color: rgba(17, 17, 17, 0.93);
   z-index: 99;
-  right: 100vw;
   opacity: 0; }
   .Menu a {
     text-decoration: none; }
@@ -1015,13 +1045,6 @@ table {
         color: #efefef;
         background-color: #d13030; }
 
-@keyframes slideIn {
-  0% {
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible; }
-  100% {
-    transform: translate3d(0, 0, 0); } }
-
 #About {
   width: 100vw;
   min-height: 100vh;
@@ -1065,7 +1088,7 @@ table {
       left: none; }
     #About header img {
       width: 300px;
-      z-index: 70; }
+      z-index: 6; }
     #About header h3 {
       width: 100vw;
       text-align: center; }
@@ -1337,14 +1360,20 @@ table {
           color: #111; }
 
 .App {
-  width: 100%;
+  width: 100vw;
+  overflow-x: hidden;
   height: 100vh; }
+  .App .navbar {
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    z-index: 7;
+    background-color: #111; }
   .App .menu {
     width: 30px;
     height: 30px;
     position: fixed;
     margin: 15px;
-    z-index: 7;
     cursor: pointer; }
   .App .hamburger {
     position: absolute;
@@ -1356,12 +1385,10 @@ table {
     justify-content: flex-end;
     width: 100%; }
     .App .bell .bellIcon {
-      margin: 20px;
       position: fixed;
-      top: 0;
-      right: 0;
-      cursor: pointer;
-      z-index: 7; }
+      top: 20px;
+      right: 15px;
+      cursor: pointer; }
   .App .line2 {
     top: calc(13px); }
   .App .line3 {
@@ -1548,8 +1575,13 @@ table {
 
 .modalContainer {
   position: absolute;
+  top: 70px;
+  left: calc((100vw - 300px) / 2);
+  width: 300px;
+  border-radius: 10px;
+  min-height: 300px;
   background-color: #3a3a3a;
-  z-index: 299; }
+  z-index: 6; }
   .modalContainer .friendbuttn {
     margin-left: 10px;
     background-color: #FEF36E;
@@ -1557,13 +1589,24 @@ table {
     border: none;
     width: 52px;
     height: 34px;
-    padding-left: 3px; }
+    padding-left: 3px;
+    font-family: "ABeeZee", sans-serif; }
+    .modalContainer .friendbuttn:focus {
+      outline: none; }
   .modalContainer .input {
     margin-left: 15px;
-    width: 165px;
+    width: 210px;
     height: 35px;
     margin-bottom: 10px;
-    border-radius: 4px; }
+    border-radius: 4px;
+    background-color: rgba(239, 239, 239, 0.3);
+    color: #111;
+    text-transform: uppercase;
+    font-family: "ABeeZee", sans-serif;
+    border: none;
+    border-radius: 10px; }
+    .modalContainer .input:focus {
+      outline: none; }
   .modalContainer .x {
     width: .8em;
     height: .8em;
@@ -1585,14 +1628,12 @@ table {
     letter-spacing: 1px;
     margin-top: 5px;
     margin-bottom: 13px;
-    color: #efefef;
-    word-wrap: break-word; }
+    color: #efefef; }
   .modalContainer .result h4 {
     font-size: .9em;
     letter-spacing: 1px;
     margin-top: 5px;
-    color: #efefef;
-    word-wrap: break-word; }
+    color: #efefef; }
   .modalContainer .result button {
     background-color: #111;
     color: #FEF36E;
@@ -1600,9 +1641,16 @@ table {
     border: none;
     margin: 10px;
     width: 70px;
-    margin-left: 20px; }
+    margin-left: 20px;
+    font-family: "ABeeZee", sans-serif; }
+    .modalContainer .result button:focus {
+      outline: none; }
   .modalContainer .text {
-    margin-top: 13px; }
+    margin: 13px 5px 13px 0;
+    width: 185px;
+    line-height: 1.1em; }
+    .modalContainer .text div {
+      overflow-x: scroll; }
 
 body {
   background-color: #111; }

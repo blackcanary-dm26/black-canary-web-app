@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react'
-import io from 'socket.io-client'
 import config from './config'
 import userIcon from './../../images/blackCanaryUser_35px.png';
 import friends from './../../images/blackCanaryFriends_30px.png';
+
 //CHANGE ONCE HOSTED
+// import io from 'socket.io-client'
 // const socket = io('http://localhost:3069')
 
 export class MapContainer extends Component {
