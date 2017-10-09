@@ -325,7 +325,16 @@ if(currentUser.id) {
     })
 
     socket.on('friend request', friendId=> {
-        app.get('db').request_friend([currentUser.id, friendId])
+        //make sure there are no current friends by currentUser.id and friend_user_id 
+        console.log('current user', currentUser.id, 'friendId', friendId)
+        app.get('db').check_for_friends([currentUser.id, friendId])
+        .then(results=> {
+            console.log(results)
+            if(!results[0]){
+                console.log('sent friend request')
+                app.get('db').request_friend([currentUser.id, friendId])
+            }
+        })
 
     })
 
