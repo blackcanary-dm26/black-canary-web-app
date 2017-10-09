@@ -5,7 +5,7 @@ import FriendModal from './../FriendModal/FriendModal';
 import {connect} from 'react-redux';
 import {getFriendsList, getGroups} from './../../ducks/reducer';
 import FriendSearchModal from '../FriendSearchModal/FriendSearchModal'
-import {confirmFriendRequest, declineFriendRequest} from './../../controllers/socketCTRL';
+import {confirmFriendRequest, declineFriendRequest, deleteFriend} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -137,6 +137,7 @@ class Contacts extends Component{
                         <div className='nameContainer'>
                             <p className="name">{friend.friend_firstname}</p>
                             <button className="seeInfo" onClick={_=>this.showModalMethod(friend)}>SEE INFO</button>
+                            <button onClick={()=> deleteFriend(friend.friend_table_id)}>DELETE FRIEND</button>
                         </div>
                     </div>
             )

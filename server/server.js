@@ -347,7 +347,9 @@ if(currentUser.id) {
         app.get('db').remove_friend_from_group([data.groupId, data.friendId])
     })
 
-
+    socket.on('delete friend', friendTableId=> {
+        app.get('db').delete_friend([friendTableId])
+    })
 
     socket.on('disconnect', ()=> {
         console.log('A user has disconnected, socket ID: ', socket.id);
