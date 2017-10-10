@@ -126,7 +126,7 @@ const socket = io('http://localhost:3069');
         socket.emit('remove emergency contact', contactId)
     }
 
-    export function addEmergencyContact(contactId){
+    export function addEmergencyContact(contacts){
         socket.emit('add emergency contact', contactId)
     }
 
