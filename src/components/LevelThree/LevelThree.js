@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
@@ -85,6 +86,11 @@ class LevelThree extends Component {
                 <button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button>
               </div>
             </section>
+          </div>
+
+          <div className="redirect">
+              <p>You do not have any emergency contacts set. Please add your emergency contacts.</p>
+              <Link to="/profile">Set Emergency Contacts</Link>
           </div>
         </div>
     );

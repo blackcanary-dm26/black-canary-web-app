@@ -164,6 +164,7 @@ export default function reducer(state = initialState, action){
             return Object.assign({}, state, {groups: action.payload})
             break;
         case GET_EMERGENCY_GROUP:
+            console.log(action.payload);
             return Object.assign({}, state, {emergencyGroup: action.payload})
             break;
         case GET_ACTIVE_LOCATIONS:
