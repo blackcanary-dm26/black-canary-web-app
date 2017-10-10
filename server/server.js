@@ -198,23 +198,24 @@ if(currentUser.id) {
                     pendingFriendRequests = requests
                 })
 
-        // app.get('db').get_emergency_group([currentUser.id])
-        //     .then(data=> {
-        //         emergencyGroup = data
-        //     })
+            app.get('db').get_emergency_group([currentUser.id])
+                .then(data=> {
+                    console.log('emergency group', data)
+                    emergencyGroup = data
+                })
 
             // console.log('userInfo:', userInfo, 'groups:', groups, 'friends:', friends, 'activeLocations:', activeLocations)
         socket.emit('heartbeat', {userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests})
     }
 }
 
-    socket.on('save socket_id', data => {
-        currentUser.id ?
-        app.get('db').update_socket_id([data.socketId, currentUser.auth_id])
-        :
-        null;
-        // console.log('socket.on save socket_id. data', data,'current user:', currentUser)
-    })
+    // socket.on('save socket_id', data => {
+    //     currentUser.id ?
+    //     app.get('db').update_socket_id([data.socketId, currentUser.auth_id])
+    //     :
+    //     null;
+    //     // console.log('socket.on save socket_id. data', data,'current user:', currentUser)
+    // })
 
     socket.on('send location', data => {
         // post data to active_locations table in db
@@ -266,7 +267,7 @@ if(currentUser.id) {
             //loop through group.members => 
             group.members.map(member=> {
                 // console.log('returned group:', returnedGroup)
-                app.get('db').add_friend_to_group([returnedGroup[0].id, member.friend_user_id])
+                app.get('db').add_friend_to_group([returnedGroup[0].id, member])
             })
         })
     })
@@ -288,11 +289,27 @@ if(currentUser.id) {
             })
     })
 
-    socket.on('edit emergency group', contacts=> {
+    socket.on('edit emergency message', message=> {
         contacts.map(contact=> {
-            app.get('db').edit_emergency_group([currentUser.id, contact])
+            app.get('db').edit_emergency_message([message, currentUser.id])
              
         })
+    })
+
+    socket.on('add emergency contact', contactId => {
+        //get emergency group id by currentUser.id .then => 
+        app.get('db').get_emergency_group_id([currentUser.id])
+            .then(group => {
+                app.get('db').add_emergency_contacts([group.id, contactId])
+            })
+    })
+
+    socket.on('remove emergency contact', contactId => {
+        //get emergency group id
+        app.get('db').get_emergency_group_id([currentUser.id])
+            .then(group=> {
+                app.get('db').remove_emergency_contact([group.id, contactId])
+            })
     })
 
     socket.on('friend search', firstName => {

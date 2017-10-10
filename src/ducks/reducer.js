@@ -70,6 +70,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
       GET_FRIENDS_LIST = 'GET_FRIENDS_LIST',
       GET_PENDING_FRIEND_REQUESTS = 'GET_PENDING_FRIEND_REQUESTS',
       GET_GROUPS = 'GET_GROUPS',
+      GET_EMERGENCY_GROUP = 'GET_EMERGENCY_GROUP',
       GET_ACTIVE_LOCATIONS = 'GET_ACTIVE_LOCATIONS',
       DELETE_USER = 'DELETE_USER';
 
@@ -117,6 +118,14 @@ export function getGroups(groups){
 }
 
 
+//get emergency group
+export function getEmergencyGroup(group){
+    return {
+        type: GET_EMERGENCY_GROUP,
+        payload: group
+    }
+}
+
 //get active locations sent to current user
 // add to componentDidMount, inside socket.on('heartbeat')
 
@@ -153,6 +162,9 @@ export default function reducer(state = initialState, action){
         case GET_GROUPS:
         // console.log('reducer get groups', action.payload)
             return Object.assign({}, state, {groups: action.payload})
+            break;
+        case GET_EMERGENCY_GROUP:
+            return Object.assign({}, state, {emergencyGroup: action.payload})
             break;
         case GET_ACTIVE_LOCATIONS:
         // console.log('reducer get active locations', action.payload)

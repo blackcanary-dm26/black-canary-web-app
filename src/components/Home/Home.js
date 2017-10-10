@@ -5,7 +5,7 @@ import Login from '../Login/Login';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests} from './../../ducks/reducer';
+import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} from './../../ducks/reducer';
 import {heartbeat, renameGroup, socketOn} from './../../controllers/socketCTRL';
 import map from '../../images/placeholder_map.gif'
 
@@ -37,7 +37,7 @@ class Home extends Component{
 
         let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests} = this.props;
 
-        heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests);
+        heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup);
 
     }
 
@@ -101,7 +101,8 @@ let outputActions = {
     getFriendsList,
     getGroups,
     getActiveLocations,
-    getPendingFriendRequests
+    getPendingFriendRequests,
+    getEmergencyGroup
 }
 
 export default connect(mapStateToProps, outputActions)(Home);
