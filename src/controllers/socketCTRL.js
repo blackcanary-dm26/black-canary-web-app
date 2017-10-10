@@ -10,7 +10,7 @@ const socket = io('http://localhost:3069');
         })
     }
     
-    export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests){ //in home component 
+    export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup){ //in home component 
         socket.on('heartbeat', data=> {
             // console.log('data in controller', data)
             //pass in action reducers to heartbeat function in component
@@ -19,6 +19,7 @@ const socket = io('http://localhost:3069');
             getGroups(data.groups);
             getActiveLocations(data.activeLocations);
             getPendingFriendRequests(data.pendingFriendRequests);
+            getEmergencyGroup(data.emergencyGroup);
         })
     }
 
@@ -115,13 +116,19 @@ const socket = io('http://localhost:3069');
         socket.emit('create emergency group', {userId, group})
     }
 
-    // export function editEmergencyGroup(contacts){
-    //     //on settings/profile page
-    //     // contacts are an array of contact_ids
-    //     socket.emit('edit emergency group', contacts)
-    // }
+    export function editEmergencyMessage(message){
+        //on settings/profile page
+        // contacts are an array of contact_ids
+        socket.emit('edit emergency message', message)
+    }
 
+    export function removeEmergencyContact(contactId){
+        socket.emit('remove emergency contact', contactId)
+    }
 
+    export function addEmergencyContact(contactId){
+        socket.emit('add emergency contact', contactId)
+    }
 
     export function friendSearch(firstName){
         socket.emit('friend search', firstName);

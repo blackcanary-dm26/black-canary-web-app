@@ -123,8 +123,8 @@ class Contacts extends Component{
                 <div><img className= "imgContainer" src={friend.friend_pic} alt="profile pic"/></div>
                 <div className='nameContainer'>
                     <p className="name">{friend.friend_firstname}</p>
-                    <button onClick={()=>confirmFriendRequest(friend.friend_table_id)}>CONFIRM FRIEND REQUEST</button>
-                    <button onClick={()=>declineFriendRequest(friend.friend_table_id)}>DECLINE FRIEND REQUEST</button>
+                    <button onClick={()=>confirmFriendRequest(friend.friend_table_id)}>ACCEPT {friend.friend_firstname}'S REQUEST</button>
+                    <button onClick={()=>declineFriendRequest(friend.friend_table_id)}>DECLINE CONTACT REQUEST</button>
                 </div>
             </div>)
         });
@@ -137,7 +137,7 @@ class Contacts extends Component{
                         <div className='nameContainer'>
                             <p className="name">{friend.friend_firstname}</p>
                             <button className="seeInfo" onClick={_=>this.showModalMethod(friend)}>SEE INFO</button>
-                            <button onClick={()=> deleteFriend(friend.friend_table_id)}>DELETE FRIEND</button>
+                            <button onClick={()=> deleteFriend(friend.friend_table_id)}>DELETE CONTACT</button>
                         </div>
                     </div>
             )
@@ -162,7 +162,7 @@ class Contacts extends Component{
                 }
 
                     <div className='header'>
-                        <header className='head'>FRIENDS</header>
+                        <header className='head'>CONTACTS</header>
                         <img className="addFriend" onClick={_=>this.toggleSearch()}src={addFriend} alt="addFriendIcon"/>
                     </div>
                     {
