@@ -292,15 +292,17 @@ if(currentUser.id) {
     socket.on('edit emergency message', message=> {
         contacts.map(contact=> {
             app.get('db').edit_emergency_message([message, currentUser.id])
-             
+             gc
         })
     })
 
-    socket.on('add emergency contact', contactId => {
+    socket.on('add emergency contact', contacts => {
         //get emergency group id by currentUser.id .then => 
         app.get('db').get_emergency_group_id([currentUser.id])
             .then(group => {
-                app.get('db').add_emergency_contacts([group.id, contactId])
+                contacts.map(contactId => {
+                    app.get('db').add_emergency_contacts([group.id, contactId])
+                })
             })
     })
 
