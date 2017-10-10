@@ -266,7 +266,7 @@ if(currentUser.id) {
             //loop through group.members => 
             group.members.map(member=> {
                 // console.log('returned group:', returnedGroup)
-                app.get('db').add_friend_to_group([returnedGroup[0].id, member.friend_user_id])
+                app.get('db').add_friend_to_group([returnedGroup[0].id, member])
             })
         })
     })

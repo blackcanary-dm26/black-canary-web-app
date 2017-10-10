@@ -24,8 +24,10 @@ class Groups extends Component{
         //     {name: 'Emergency',
         //       friends: ['Monday', 'Jocelyn', 'Bailey']},
         // ],
+        AddGroupModal: false,
         groupModal: false,
-        newGroup: {group_name: "", members:[]}
+        newGroupName: '',
+        newGroupMembers: []
       }
       this.showModalMethod = this.showModalMethod.bind(this)
       this.exit = this.exit.bind(this)
@@ -36,13 +38,10 @@ class Groups extends Component{
 
 
     handleChange(e){
+      e.preventDefault();
       this.setState({
-        newGroup: {
-          group_name: e.target.value,
-          members: [...this.state.newGroup.members]
-        }
+        newGroupName: e.target.value
       })
-
     }
 
     showModalMethod(group){
@@ -53,19 +52,20 @@ class Groups extends Component{
     }
 
     addNewGroup(){
-      addGroup(this.state.newGroup)
+
+      addGroup({group_name: this.state.newGroupName, members: this.state.newGroupMembers})
       this.setState({
-        newGroup: {
-          group_name: '',
-          members: []
-        }
+        newGroupName: '',
+        newGroupMembers: [],
+        groupModal: false
       })
+      this.exit()
     }
 
     exit(){
-        console.log('exit')
         this.setState({
-            groupModal: false
+            groupModal: false,
+            AddGroupModal: false
         })
     }
 
@@ -84,14 +84,10 @@ class Groups extends Component{
 //=============== SOMETHING WEIRD GOING ON PLS HELP ================//
 
     toggleFriendAdd(event, friend) {
-      let index = -1;
-      for (let i = 0; i < this.state.newGroup.members.length; i++){
-          if (this.state.newGroup.members[i].username === friend.username) {
-              index = i;
-          }
-      }
+      event.preventDefault();
+      let index = this.state.newGroupMembers.indexOf(friend.friend_user_id);
 
-      let r = this.state.newGroup.members.slice(0);
+      let r = this.state.newGroupMembers.slice(0);
       if(index >= 0) {
           //remove from recip and change color back
           TweenMax.to($(`#${friend.friend_user_id}`), 0, { backgroundColor: 'rgba(239, 239, 239, 0.3)', color: '#efefef', ease: TweenMax.Power1.easeInOut})
@@ -99,23 +95,17 @@ class Groups extends Component{
       } else {
           //to recip, change color
           TweenMax.to($(`#${friend.friend_user_id}`), 0, { backgroundColor: '#fef36e', color: '#111', ease: TweenMax.Power1.easeInOut})
-          r.push(friend);
+          r.push(friend.friend_user_id);
       }
       this.setState({
-          newGroup: {
-            ...this.state.newGroup,
-            members: r
-          } 
+          newGroupMembers: r
       })
-      console.log(this.state.newGroup)
   }
 
 
 
 render(){
   let {groups, friends} = this.props
-  // console.log(groups)
-  // console.log(this.state.newGroup)
   const allGroups = groups.map((group,i) => {
         return (
         <div className='listOfGroups' key={i}>
@@ -144,24 +134,25 @@ render(){
             <div className="addGroupModal">
               <div className="modalBox">
                 <img className="exit" onClick={_=>this.addNewGroupModal("hide")} src={x} alt="close"/>
-                <p className="head" >ADD NEW GROUP</p>
+                <p className="head">ADD NEW GROUP</p>
 
                 <div className="inputField">
                   <input onChange={(e)=> this.handleChange(e)} type="text"/>
-                  {/* <button className="btn">ADD GROUP NAME</button> */}
                 </div>
 
-                <div className="inputField">
+                <div className="addMembersWrapper">
                   <p>ADD GROUP MEMBERS</p>
                   <div className="groupsbox">
-                         {friends.map((friend, i) => {
-                        return <button className="friendNames" key={i} id={friend.friend_user_id} onClick={event => this.toggleFriendAdd(event, friend)}>{friend.friend_username.toUpperCase()}</button>
-                      })}   
+                        {friends.map((friend, i) => {
+                            return <button className="friendNames" key={i} id={friend.friend_user_id} onClick={event => this.toggleFriendAdd(event, friend)}>{friend.friend_firstname.toUpperCase()} {friend.friend_lastname.toUpperCase()}</button>
+                          })
+                        }   
                   </div>
                 </div>
-                      <div>
-                        <button onClick={()=> this.addNewGroup()}>ADD GROUP</button>
-                      </div>
+
+                <div className="buttnWrapper">
+                  <button onClick={()=> this.addNewGroup()}>ADD GROUP</button>
+                </div>
               </div>
             </div>
           }
