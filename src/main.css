@@ -191,9 +191,7 @@ table {
         width: 100%;
         max-height: 170px;
         overflow: scroll;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        text-align: center;
         margin-top: 20px;
         padding: 0 10px; }
         .Groups .addGroupModal .modalBox .groupsbox h3 {
@@ -576,6 +574,35 @@ table {
       #Level3 .buttnWrapper button:hover {
         background-color: #d13030;
         color: #111; }
+  #Level3 .redirect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #d13030;
+    color: #111;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: "ABeeZee", sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-align: center; }
+    #Level3 .redirect p {
+      width: 100vw;
+      padding: 20px; }
+    #Level3 .redirect a {
+      font-family: "ABeeZee", sans-serif;
+      size: 1.3rem;
+      color: #efefef;
+      text-decoration: none;
+      width: 100vw;
+      padding: 20px; }
+      #Level3 .redirect a:hover {
+        color: #111; }
 
 #Level2 {
   min-height: 100vh;
@@ -656,6 +683,35 @@ table {
       #Level2 .buttnWrapper button:hover {
         background-color: #d13030;
         color: #efefef; }
+  #Level2 .redirect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #d13030;
+    color: #111;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: "ABeeZee", sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    text-align: center; }
+    #Level2 .redirect p {
+      width: 100vw;
+      padding: 20px; }
+    #Level2 .redirect a {
+      font-family: "ABeeZee", sans-serif;
+      size: 1.3rem;
+      color: #efefef;
+      text-decoration: none;
+      width: 100vw;
+      padding: 20px; }
+      #Level2 .redirect a:hover {
+        color: #111; }
 
 .ProfileContainer {
   position: relative;
@@ -666,7 +722,7 @@ table {
     font-family: "ABeeZee", sans-serif;
     background: #111;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     padding: 50px 0; }
@@ -767,7 +823,6 @@ table {
         letter-spacing: .2em; }
     .ProfileContainer .Profile .safeHavenInputContainer {
       width: 320px;
-      height: 50px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -801,14 +856,80 @@ table {
         letter-spacing: 0.2em; }
         .ProfileContainer .Profile .safeHavenInputContainer .safeHavenInput:focus {
           outline: none; }
+    .ProfileContainer .Profile .emergencyWrapper {
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      color: #efefef;
+      letter-spacing: 0.2em;
+      line-height: 1.2em;
+      padding: 10px 0 20px 0;
+      min-height: 200px; }
+      .ProfileContainer .Profile .emergencyWrapper .changeEmergencyStuffBtn {
+        margin-left: 0; }
+      .ProfileContainer .Profile .emergencyWrapper span {
+        width: 200px;
+        text-align: center; }
+      .ProfileContainer .Profile .emergencyWrapper p {
+        width: 320px;
+        text-align: center;
+        margin-top: 10px; }
+      .ProfileContainer .Profile .emergencyWrapper .recipWrapper {
+        padding: 0 10px;
+        text-align: center;
+        width: 320px;
+        height: 150px;
+        overflow: scroll;
+        margin-top: 20px;
+        color: #efefef; }
+        .ProfileContainer .Profile .emergencyWrapper .recipWrapper h3 {
+          margin-bottom: 10px; }
+        .ProfileContainer .Profile .emergencyWrapper .recipWrapper button {
+          background-color: rgba(239, 239, 239, 0.3);
+          border: none;
+          height: 30px;
+          padding: 7px;
+          margin: 5px 2px;
+          border-radius: 10px;
+          color: #efefef;
+          letter-spacing: 0.2em;
+          font-family: "ABeeZee", sans-serif;
+          font-size: 1rem; }
+          .ProfileContainer .Profile .emergencyWrapper .recipWrapper button:focus {
+            outline: none; }
+          .ProfileContainer .Profile .emergencyWrapper .recipWrapper button:hover {
+            background-color: #FEF36E;
+            color: #111; }
+      .ProfileContainer .Profile .emergencyWrapper .names {
+        height: 70px;
+        border: 1px solid #FEF36E;
+        border-radius: 10px; }
+      .ProfileContainer .Profile .emergencyWrapper .messageWrapper {
+        text-align: center;
+        width: 300px;
+        margin-left: 0; }
+        .ProfileContainer .Profile .emergencyWrapper .messageWrapper h3 {
+          margin-bottom: 10px; }
+        .ProfileContainer .Profile .emergencyWrapper .messageWrapper textarea {
+          padding: 5px;
+          font-size: 1rem;
+          text-align: center;
+          text-transform: uppercase;
+          width: 290px;
+          height: 120px;
+          background-color: rgba(239, 239, 239, 0.3);
+          color: #efefef;
+          border: none;
+          border-radius: 10px;
+          letter-spacing: 0.2em; }
+          .ProfileContainer .Profile .emergencyWrapper .messageWrapper textarea:focus {
+            outline: none; }
     .ProfileContainer .Profile .navigationBtns {
       width: 100vw;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-      margin-top: 40px;
-      padding-bottom: 20px;
       text-decoration: none;
       cursor: pointer;
       letter-spacing: 0.2em; }

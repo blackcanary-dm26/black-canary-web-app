@@ -127,7 +127,7 @@ const socket = io('http://localhost:3069');
     }
 
     export function addEmergencyContact(contacts){
-        socket.emit('add emergency contact', contactId)
+        socket.emit('add emergency contact', contacts)
     }
 
     export function friendSearch(firstName){

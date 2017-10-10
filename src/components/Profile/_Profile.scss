@@ -3,349 +3,449 @@
     min-height: 100vh;
     width: 100vw;
 
-.Profile{
-    text-transform: uppercase;
-    font-family: $sans;
-    background: $black;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    // justify-content: space-between;
-    // flex-direction: column;
-    flex-wrap: wrap;
-    padding: 50px 0;
-    
-    .nameWrapper{
+    .Profile{
+        text-transform: uppercase;
+        font-family: $sans;
+        background: $black;
         width: 100vw;
-        justify-content: center;
-        align-items: center;
+        min-height: 100vh;
         display: flex;
-        // padding-top: 10px;
-    }
-
-    .nameContainer{
-        width: 320px;
-        display: flex;
-        height: 100px;
-        justify-content: center;
-        align-items: center;
-
-        .name{
-            color: $white;
-            font-size: 1.6em;
-            position: relative;
-            margin-top: 20px;
-            font-family: $sans;
-            letter-spacing: .2em;
-        }
-
+        // justify-content: space-between;
+        // flex-direction: column;
+        flex-wrap: wrap;
+        padding: 50px 0;
         
-    }
-
-    .editIcon{
-        width: 20px;
-        height: 20px;
-        margin-left: 10px;
-        margin-top: 20px;
-        cursor: pointer;
-        opacity: 0.5;
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-    .nameInputContainer{
-        width: 320px;
-        height: 100px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        flex-direction: row;
-        align-items: center;
-        position: relative;
-
-        .editIcon {
-            margin-left: 5px;
+        .nameWrapper{
+            width: 100vw;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            // padding-top: 10px;
         }
 
-        .nameInput{
-            font-size: 1.5rem;
-            line-height: 1.2em;
-            border-radius: 10px;
-            position: relative;
-            top: 5px;
-            text: {
-                align: center;
-                transform: uppercase;
-            }
-            width: 250px;
-            background-color: $grey;
-            color: $white;
-            border: none;
-            letter-spacing: 0.2em;
-            &:focus {
-                outline: none;
-            }
-        }
+        .nameContainer{
+            width: 320px;
+            display: flex;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
 
-        .addNewNameBtn{
-            color: $yellow;
-            font-size: 22px;
-            position: relative;
-            top: 5px;
-            padding-left: 10px;
-            background-color: $black;
-            border: none;
-            letter-spacing: .2em;
-            cursor: pointer;
-        }
-    }
-
-    .imgContainer{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        position: relative;
-
-        .imgPlaceholder{
-            width: 150px;
-            height: 150px;
-            border-radius: 40px;
-            border: 1px solid $yellow;
-            background-color: $white;
-            margin-top: 10%;
-            position: relative;
-        }
-    }
-
-    .safeHavenWrapper {
-        flex-wrap: wrap;
-        color: $white;
-        letter-spacing: 0.2em;
-        line-height: 1.2em;
-        padding-top: 10px;
-    }
-    .safehavenContainer{
-        width: 320px;
-        display: flex;
-        height: 50px;
-        justify-content: center;
-        align-items: center;
-
-        .safeHaven{
-            color: $white;
-            font-size: 1rem;
-            position: relative;
-            margin-top: 20px;
-            font-family: $sans;
-            letter-spacing: .2em;
-        }
-
-    }
-
-    .safeHavenInputContainer{
-        width: 320px;
-        height: 50px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        flex-direction: row;
-        align-items: center;
-        position: relative;
-
-        .changebtn{
-            color: $yellow;
-            background-color: $black;
-            border: none;
-            cursor: pointer;
-            font-size: 22px;
-
-        }
-
-        button {
-            color: $yellow;
-            font-size: 1.6em;
-            position: relative;
-            top: 5px;
-        }
-
-        .safeHavenInput{
-            border-radius: 10px;
-            font-size: 1rem;
-            line-height: 1.2em;
-            border-radius: 10px;
-            position: relative;
-            top: 5px;
-            text: {
-                align: center;
-                transform: uppercase;
-            }
-            width: 250px;
-            background-color: $grey;
-            color: $white;
-            border: none;
-            letter-spacing: 0.2em;
-            &:focus {
-                outline: none;
-            }
-        }
-    }
-
-    .navigationBtns{
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        margin-top: 40px;
-        padding-bottom: 20px;
-        text-decoration: none;
-        cursor:pointer;
-        letter-spacing: 0.2em;
-
-        .logOut{
-            font-size: 1rem;
-            color: $white;
-            text: {
-                decoration: none;
-                transform: uppercase;
-                align: center;
-            }
-            width: 310px;
-            margin-top: 10px;
-            padding: 10px 7px;
-            background-color: $grey;
-            border-radius: 10px;
-            text-decoration: none;
-        }
-
-        .contacts{
-            font-size: 1rem;
-            color: $black;
-            text: {
-                decoration: none;
-                transform: uppercase;
-                align: center;
-            }
-            &:hover {
-                color: $red;
-                background-color: $white-translucent;
-            }
-            width: 310px;
-            margin-top: 10px;
-            padding: 10px 7px;
-            background-color: $yellow;
-            border-radius: 10px;
-        }
-
-        .deleteBtn{
-            
-            color: $white;
-            font: {
-                size: 1rem;
-                family: $sans;
-            }
-            letter-spacing: 0.2em;
-            height: 40px !important;
-            cursor: pointer;
-            text: {
-                decoration: none;
-                transform: uppercase;
-                align: center;
-            }
-            &:hover {
-                color: $black;
-                background-color: $red;
-            }
-            width: 310px;
-            margin-top: 10px;
-            padding: 10px 7px;
-            background-color: $red;
-            border-radius: 10px;
-            border: none;
-                
-        }
-
-    }
-        .deleteModal{
-            width: 80%;
-            background-color: $white;
-            border: {
-                width: 2px;
-                color: $black;
-                radius: 10px;
-                style: solid;
-            }
-            height: 70%;
-            position: absolute;
-            margin-top: -170px;
-            animation: slideInLeft 1s;
-
-            .close{
-                width: 13px;
-                margin: 10px;
-                cursor: pointer;
-            }
-            
-            .head{
-                letter-spacing: 0.2em;
-                width: 97%;
+            .name{
+                color: $white;
+                font-size: 1.6em;
+                position: relative;
+                margin-top: 20px;
                 font-family: $sans;
-                text-align: center;
-                margin-top: 30px;
+                letter-spacing: .2em;
             }
 
-            .deleteBtns{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-around;
-                margin-top: 40px;
+            
+        }
+
+        .editIcon{
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        .nameInputContainer{
+            width: 320px;
+            height: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+
+            .editIcon {
+                margin-left: 5px;
+            }
+
+            .nameInput{
+                font-size: 1.5rem;
+                line-height: 1.2em;
+                border-radius: 10px;
+                position: relative;
+                top: 5px;
+                text: {
+                    align: center;
+                    transform: uppercase;
+                }
+                width: 250px;
+                background-color: $grey;
+                color: $white;
+                border: none;
+                letter-spacing: 0.2em;
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .addNewNameBtn{
+                color: $yellow;
+                font-size: 22px;
+                position: relative;
+                top: 5px;
+                padding-left: 10px;
+                background-color: $black;
+                border: none;
+                letter-spacing: .2em;
                 cursor: pointer;
+            }
+        }
 
-                .no{
-                    width: 100%;
-                    height: 80px;
-                    background-color: $yellow;
-                    font-size: 12px;
-                    border: none;
-                    letter-spacing: 0.2em;
-                    font-family: $sans;
-                    color: $black;
-                    margin-top: 20px;
-                }
+        .imgContainer{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: relative;
 
-                .no:hover{
-                    background-color: $black;
-                    color: $white;
-                }
+            .imgPlaceholder{
+                width: 150px;
+                height: 150px;
+                border-radius: 40px;
+                border: 1px solid $yellow;
+                background-color: $white;
+                margin-top: 10%;
+                position: relative;
+            }
+        }
 
-                .yes{
-                    width: 100%;
-                    border-radius: none;
-                    height: 70px;
-                    background-color: $red;
-                    font-size: 12px;
-                    border: none;
-                    letter-spacing: 0.2em;
-                    font-family: $sans;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin-top: 20px;
-                    color: $white;
-                    text-decoration: none;
+        .safeHavenWrapper {
+            flex-wrap: wrap;
+            color: $white;
+            letter-spacing: 0.2em;
+            line-height: 1.2em;
+            padding-top: 10px;
+        }
+        .safehavenContainer{
+            width: 320px;
+            display: flex;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+
+            .safeHaven{
+                color: $white;
+                font-size: 1rem;
+                position: relative;
+                margin-top: 20px;
+                font-family: $sans;
+                letter-spacing: .2em;
+            }
+
+        }
+
+        .safeHavenInputContainer{
+            width: 320px;
+            // height: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+
+            .changebtn{
+                color: $yellow;
+                background-color: $black;
+                border: none;
+                cursor: pointer;
+                font-size: 22px;
+
+            }
+
+            button {
+                color: $yellow;
+                font-size: 1.6em;
+                position: relative;
+                top: 5px;
+            }
+
+            .safeHavenInput{
+                border-radius: 10px;
+                font-size: 1rem;
+                line-height: 1.2em;
+                border-radius: 10px;
+                position: relative;
+                top: 5px;
+                text: {
+                    align: center;
+                    transform: uppercase;
                 }
-                .yes:hover{
-                    background: $black;
-                    color: $yellow;
+                width: 250px;
+                background-color: $grey;
+                color: $white;
+                border: none;
+                letter-spacing: 0.2em;
+                &:focus {
+                    outline: none;
                 }
             }
         }
 
-        @keyframes slideInLeft { 
-            0% {opacity: 0;} 
-            100% {opacity: 1;} 
-        } 
-}
+        .emergencyWrapper {
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            color: $white;
+            letter-spacing: 0.2em;
+            line-height: 1.2em;
+            padding: 10px 0 20px 0;
+            min-height: 200px;
+            // border: 2px solid $red;
+            // border-radius: 10px;
+
+            .changeEmergencyStuffBtn {
+                margin-left: 0;
+            }
+
+            span {
+                width: 200px;
+                text-align: center;
+            }
+            p {
+                width: 320px;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            
+
+            .recipWrapper {
+                padding: 0 10px;
+                text-align: center;
+                width: 320px;
+                height: 150px;
+                overflow: scroll;
+                margin-top: 20px;
+                color: $white;
+                h3 {
+                    margin-bottom: 10px;
+                }
+                div {
+
+                }
+                button{
+                    background-color: $white-translucent;
+                    border: none;
+                    height: 30px;
+                    padding: 7px;
+                    margin: 5px 2px;
+                    border-radius: 10px;
+                    color: $white;
+                    letter-spacing: 0.2em;
+                    font: {
+                        family: $sans;
+                        size: 1rem;
+                    }
+                    &:focus {
+                        outline: none;
+                    }
+                    &:hover {
+                        background-color: $yellow;
+                        color: $black
+                    }
+                }
+            }
+            .names {
+                height: 70px;
+                // overflow: scroll;
+                border: 1px solid $yellow;
+                border-radius: 10px;
+            }
+            .messageWrapper {
+                // border: 1px solid blue;
+                text-align:center;
+                width: 300px;
+                margin-left: 0;
+                h3 {
+                    margin-bottom: 10px;
+                }
+                textarea {
+                    padding: 5px;
+                    font-size: 1rem;
+                    text: {
+                        align: center;
+                        transform: uppercase;
+                    }
+                    width: 290px;
+                    height: 120px;
+                    background-color: $white-translucent;
+                    color: $white;
+                    border: none;
+                    border-radius: 10px;
+                    letter-spacing: 0.2em;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .navigationBtns{
+            // border: 1px solid green;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            // margin-top: 40px;
+            // padding-bottom: 20px;
+            text-decoration: none;
+            cursor:pointer;
+            letter-spacing: 0.2em;
+
+            .logOut{
+                font-size: 1rem;
+                color: $white;
+                text: {
+                    decoration: none;
+                    transform: uppercase;
+                    align: center;
+                }
+                width: 310px;
+                margin-top: 10px;
+                padding: 10px 7px;
+                background-color: $grey;
+                border-radius: 10px;
+                text-decoration: none;
+            }
+
+            .contacts{
+                font-size: 1rem;
+                color: $black;
+                text: {
+                    decoration: none;
+                    transform: uppercase;
+                    align: center;
+                }
+                &:hover {
+                    color: $red;
+                    background-color: $white-translucent;
+                }
+                width: 310px;
+                margin-top: 10px;
+                padding: 10px 7px;
+                background-color: $yellow;
+                border-radius: 10px;
+            }
+
+            .deleteBtn{
+                
+                color: $white;
+                font: {
+                    size: 1rem;
+                    family: $sans;
+                }
+                letter-spacing: 0.2em;
+                height: 40px !important;
+                cursor: pointer;
+                text: {
+                    decoration: none;
+                    transform: uppercase;
+                    align: center;
+                }
+                &:hover {
+                    color: $black;
+                    background-color: $red;
+                }
+                width: 310px;
+                margin-top: 10px;
+                padding: 10px 7px;
+                background-color: $red;
+                border-radius: 10px;
+                border: none;
+                    
+            }
+
+        }
+            .deleteModal{
+                width: 80%;
+                background-color: $white;
+                border: {
+                    width: 2px;
+                    color: $black;
+                    radius: 10px;
+                    style: solid;
+                }
+                height: 70%;
+                position: absolute;
+                margin-top: -170px;
+                animation: slideInLeft 1s;
+
+                .close{
+                    width: 13px;
+                    margin: 10px;
+                    cursor: pointer;
+                }
+                
+                .head{
+                    letter-spacing: 0.2em;
+                    width: 97%;
+                    font-family: $sans;
+                    text-align: center;
+                    margin-top: 30px;
+                }
+
+                .deleteBtns{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-around;
+                    margin-top: 40px;
+                    cursor: pointer;
+
+                    .no{
+                        width: 100%;
+                        height: 80px;
+                        background-color: $yellow;
+                        font-size: 12px;
+                        border: none;
+                        letter-spacing: 0.2em;
+                        font-family: $sans;
+                        color: $black;
+                        margin-top: 20px;
+                    }
+
+                    .no:hover{
+                        background-color: $black;
+                        color: $white;
+                    }
+
+                    .yes{
+                        width: 100%;
+                        border-radius: none;
+                        height: 70px;
+                        background-color: $red;
+                        font-size: 12px;
+                        border: none;
+                        letter-spacing: 0.2em;
+                        font-family: $sans;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 20px;
+                        color: $white;
+                        text-decoration: none;
+                    }
+                    .yes:hover{
+                        background: $black;
+                        color: $yellow;
+                    }
+                }
+            }
+
+            @keyframes slideInLeft { 
+                0% {opacity: 0;} 
+                100% {opacity: 1;} 
+            } 
+    }
 }
