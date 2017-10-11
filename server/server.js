@@ -290,19 +290,16 @@ if(currentUser.id) {
     })
 
     socket.on('edit emergency message', message=> {
-        contacts.map(contact=> {
-            app.get('db').edit_emergency_message([message, currentUser.id])
-             gc
-        })
+         app.get('db').edit_emergency_message([message, currentUser.id])
     })
 
     socket.on('add emergency contact', contacts => {
         //get emergency group id by currentUser.id .then => 
         app.get('db').get_emergency_group_id([currentUser.id])
             .then(group => {
+                //delete all contacts
                 app.get('db').remove_emergency_contact([group.id])
-                //make sure contactId is not already in the table under currentUser.id
-                //loop through contacts
+                //loop through contacts to add 
                 contacts.map(contactId => {
                     app.get('db').add_emergency_contacts([group.id, contactId])
                 })
