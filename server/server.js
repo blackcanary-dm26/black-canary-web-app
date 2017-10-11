@@ -123,7 +123,7 @@ io.on('connection', socket => {
 
 // heartbeat updates the connected user every second
 if(currentUser.id) {
-    setInterval(heartbeat, 500);
+    setInterval(heartbeat, 100);
     function heartbeat(){
         app.get('db').get_user_info([currentUser.id])
             .then(user=> {
@@ -370,18 +370,16 @@ if(currentUser.id) {
     })
 
     socket.on('add friend to group', data=> {
-        let memberAdded = [];
         //make sure friends cannot be added to group more than once
-        app.get('db').get_group_members([data.groupId]).then(group => {
-            group.map(member=> {
-                if(member.member_id = data.member.id) {
-                    memberAdded.push(member.member_id)
-                }
-            })
+        app.get('db').get_group_members([data.groupId, data.friendId]).then(group => {
+            console.log('group returned', group)
+            if(group.length < 1) {
+                console.log('groupId', data.groupId, 'friendId:', data.friendId)
+                app.get('db').add_friend_to_group([data.groupId, data.friendId])
+            } else {
+                console.log('friend already in group')
+            }
         })
-        if(memberAdded.length < 1) {
-            app.get('db').add_friend_to_group([data.groupId, data.memberId])
-        }
     })
 
     socket.on('remove friend from group', data=> {

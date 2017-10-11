@@ -41,7 +41,7 @@ export default class FriendModal extends Component{
 
     addToGroup(){
         this.state.groupsToAdd.map(e => {
-            addFriendToGroup(e, this.props.friend_user_id);
+            addFriendToGroup(e, this.props.friend.friend_user_id);
         })
         this.props.exit();
 
@@ -49,7 +49,7 @@ export default class FriendModal extends Component{
 
     render(){
         let {friend, exit} = this.props;
-        // console.log(this.state.groupsToAdd)
+        // console.log('friend',friend)
         return(
             <div className="FriendModal">
                 <div className="box">
