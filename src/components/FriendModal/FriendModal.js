@@ -53,9 +53,11 @@ export default class FriendModal extends Component{
                         <p className="info">INFORMATION</p>
                     </div>
                     <div className="information">
-                        <p>USERNAME: {friend.friend_username}</p>
-                        <p>NAME: {friend.friend_firstname} {friend.friend_lastname}</p>
-                        <p>EMAIL: {friend.friend_email}</p>
+                        <div>
+                            <p>USERNAME: {friend.friend_username}</p>
+                            <p>NAME: {friend.friend_firstname} {friend.friend_lastname}</p>
+                            <p>EMAIL: {friend.friend_email}</p>
+                        </div>
                     </div>
 
                     <div className='groups'>

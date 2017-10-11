@@ -1,10 +1,10 @@
 .FriendModal{
         letter-spacing: 1;
         text-transform: uppercase;
-        width: 100%;
-        height: 100%;
+        width: 320px;
+        height: 100vh;
         position: absolute;
-        z-index: 1231231231;
+        z-index: 3;
         background-color: $black;
         display: flex;
         justify-content: center;
@@ -33,15 +33,23 @@
             }
         
         .box{
-            width: 88%;
-            height: 80%;
+            width: 300px;
+            height: 500px;
             background-color: $grey;
-            z-index: 1234;
+            z-index: 3;
+            border-radius: 10px;
+            
         }
 
         .information{
-            width: 93%;
-            height: 25%;
+            width: 260px;
+            // border: 1px solid red;
+            overflow-x: scroll;
+            div {
+                width: 500px;
+                line-height: 1.7em;
+            }
+            height: 90px;
             position: relative;
             display: flex;
             justify-content: space-between;
