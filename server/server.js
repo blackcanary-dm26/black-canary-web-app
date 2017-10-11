@@ -290,7 +290,7 @@ if(currentUser.id) {
     })
 
     socket.on('edit emergency message', message=> {
-         app.get('db').edit_emergency_message([message, currentUser.id])
+        app.get('db').edit_emergency_message([message, currentUser.id])
     })
 
     socket.on('add emergency contact', contacts => {
