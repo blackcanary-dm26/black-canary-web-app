@@ -200,7 +200,7 @@ if(currentUser.id) {
 
             app.get('db').get_emergency_group([currentUser.id])
                 .then(data=> {
-                    console.log('emergency group', data)
+                    // console.log('emergency group', data)
                     emergencyGroup = data
                 })
 
@@ -300,10 +300,10 @@ if(currentUser.id) {
         app.get('db').get_emergency_group_id([currentUser.id])
             .then(group => {
                 //delete all contacts
-                app.get('db').remove_emergency_contact([group.id])
+                app.get('db').remove_emergency_contact([group[0].id])
                 //loop through contacts to add 
                 contacts.map(contactId => {
-                    app.get('db').add_emergency_contacts([group.id, contactId])
+                    app.get('db').add_emergency_contacts([group[0].id, contactId])
                 })
             })
     })

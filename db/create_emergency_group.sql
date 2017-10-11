@@ -1,6 +1,6 @@
--- UPDATE users 
--- SET emergency_group_created = true
--- WHERE id = $1;
+--UPDATE users 
+--SET emergency_group_created = true
+--WHERE id = $1;
 
 
 INSERT INTO emergency (user_id, message)
