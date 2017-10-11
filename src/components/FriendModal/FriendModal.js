@@ -69,12 +69,11 @@ export default class FriendModal extends Component{
                         <p className="added">ADD CONTACT TO GROUP:</p>
                         <div className="groupsbox">
                             {this.props.groups.map((e, i) => {
-                                console.log(e)
                                 return <button className="groupNames" key={i} id={e.groupID} onClick={event => this.toggleGroupAdd(event, e.groupID)}>{e.groupName.toUpperCase()}</button>
                             })}
                         </div>
                         <div className="buttnWrapper">
-                            <button onClick={()=> console.log('add to group')}>ADD</button>
+                            <button onClick={()=> this.addToGroup()}>ADD</button>
                         </div>
                     </div>
                 </div>
