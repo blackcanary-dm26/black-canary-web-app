@@ -3,6 +3,8 @@ import addFriend from '../../images/addFriendIconReal.png'
 import x from '../../images/x.png'
 import TweenMax from 'gsap';
 import $ from 'jquery';
+import {addFriendToGroup} from './../../controllers/socketCTRL';
+//groupId, friend id
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -18,28 +20,31 @@ export default class FriendModal extends Component{
     }
     
 
-    toggleGroupAdd(event, groupObj) {
-        let index = -1;
-        for (let i = 0; i < this.state.groupsToAdd.length; i++){
-            if (this.state.groupsToAdd[i].name === groupObj.name) {
-                index = i;
-            }
-        }
+    toggleGroupAdd(event, groupID) {
+        let index = this.state.groupsToAdd.indexOf(groupID);
 
         let r = this.state.groupsToAdd.slice(0);
         if(index >= 0) {
             //remove from recip and change color back
-            TweenMax.to($(`#${groupObj.name}`), 0, { backgroundColor: 'rgba(239, 239, 239, 0.3)', color: '#efefef', ease: TweenMax.Power1.easeInOut})
+            TweenMax.to($(`#${groupID}`), 0, { backgroundColor: 'rgba(239, 239, 239, 0.3)', color: '#efefef', ease: TweenMax.Power1.easeInOut})
             r.splice(index, 1);
         } else {
             //to recip, change color
-            TweenMax.to($(`#${groupObj.name}`), 0, { backgroundColor: '#fef36e', color: '#111', ease: TweenMax.Power1.easeInOut})
-            r.push(groupObj);
+            TweenMax.to($(`#${groupID}`), 0, { backgroundColor: '#fef36e', color: '#111', ease: TweenMax.Power1.easeInOut})
+            r.push(groupID);
         }
         this.setState({
             groupsToAdd: r
         })
         // console.log(this.state.groupsToAdd)
+    }
+
+    addToGroup(){
+        this.state.groupsToAdd.map(e => {
+            addFriendToGroup(e, this.props.friend_user_id);
+        })
+        this.props.exit();
+
     }
 
     render(){
@@ -64,8 +69,12 @@ export default class FriendModal extends Component{
                         <p className="added">ADD CONTACT TO GROUP:</p>
                         <div className="groupsbox">
                             {this.props.groups.map((e, i) => {
-                                return <button className="groupNames" key={i} id={e.groupid} onClick={event => this.toggleGroupAdd(event, e)}>{e.groupName.toUpperCase()}</button>
+                                console.log(e)
+                                return <button className="groupNames" key={i} id={e.groupID} onClick={event => this.toggleGroupAdd(event, e.groupID)}>{e.groupName.toUpperCase()}</button>
                             })}
+                        </div>
+                        <div className="buttnWrapper">
+                            <button onClick={()=> console.log('add to group')}>ADD</button>
                         </div>
                     </div>
                 </div>

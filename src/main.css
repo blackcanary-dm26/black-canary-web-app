@@ -1506,7 +1506,7 @@ table {
     font-family: "ABeeZee", sans-serif;
     letter-spacing: .09em; }
     .FriendModal .information div {
-      width: 500px;
+      min-width: 330px;
       line-height: 1.7em; }
   .FriendModal .groups {
     display: flex;
@@ -1527,7 +1527,9 @@ table {
       margin-bottom: 10px; }
     .FriendModal .groups .groupsbox {
       width: 90%;
-      height: 55%;
+      height: 150px;
+      overflow: scroll;
+      text-align: center;
       padding: 5px;
       background-color: #111;
       border-radius: 10px;
@@ -1550,6 +1552,20 @@ table {
         .FriendModal .groups .groupsbox button:hover {
           background-color: #FEF36E;
           color: #111; }
+  .FriendModal .buttnWrapper button {
+    background-color: rgba(239, 239, 239, 0.3);
+    color: #FEF36E;
+    font-size: 1.2rem;
+    font-family: "ABeeZee", sans-serif;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px; }
+    .FriendModal .buttnWrapper button:hover {
+      color: #111;
+      background-color: #FEF36E; }
+    .FriendModal .buttnWrapper button:focus {
+      outline: none; }
 
 .App {
   width: 100vw;

@@ -46,7 +46,7 @@
             // border: 1px solid red;
             overflow-x: scroll;
             div {
-                width: 500px;
+                min-width: 330px;
                 line-height: 1.7em;
             }
             height: 90px;
@@ -85,7 +85,9 @@
 
             .groupsbox{
                 width: 90%;
-                height: 55%;
+                height: 150px;
+                overflow: scroll;
+                text-align: center;
                 padding: 5px;
                 // margin-top: 10px;
                 background-color: $black;
@@ -115,6 +117,27 @@
                         color: $black
                     }
                 }
+            }
+        }
+        .buttnWrapper {
+            button {
+            background-color: $white-translucent;
+            color: $yellow;
+            font: {
+                size: 1.2rem;
+                family: $sans;
+            }
+            border-radius: 10px;
+            border: none;
+            padding: 5px 10px;
+            &:hover {
+                color: $black;
+                background-color: $yellow;
+            }
+            &:focus {
+                outline: none;
+            }
+            margin-top: 10px;
             }
         }
     }
