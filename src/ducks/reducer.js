@@ -60,7 +60,7 @@ const initialState = {
         ]
     }, //array of active locations with messages and fromUser {1: [{senderName, coordinates, situation, message, alertID}]}
     //activeLocations: [], //array of active locations with messages and fromUser {senderName, coordinates, situation, message, alertID}
-    emergencyGroup: {}, //{user_id, emergency_id, message, contact_id: []}
+    emergencyGroup: [], //{user_id, emergency_id, message, contact_id: []}
     userLoggedIn: false
 };
 
@@ -164,7 +164,7 @@ export default function reducer(state = initialState, action){
             return Object.assign({}, state, {groups: action.payload})
             break;
         case GET_EMERGENCY_GROUP:
-            console.log(action.payload);
+            // console.log(action.payload);
             return Object.assign({}, state, {emergencyGroup: action.payload})
             break;
         case GET_ACTIVE_LOCATIONS:
