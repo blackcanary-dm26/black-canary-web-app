@@ -110,10 +110,10 @@ const socket = io('http://localhost:3069');
         socket.emit('rename group', group)
     }
 
-    export function createEmergencyGroup(userId, group){
+    export function createEmergencyGroup(group){
         //group includes message and recipients
         //on settings/profile page
-        socket.emit('create emergency group', {userId, group})
+        socket.emit('create emergency group', group)
     }
 
     export function editEmergencyMessage(message){

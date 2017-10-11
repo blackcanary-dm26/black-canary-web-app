@@ -281,11 +281,13 @@ if(currentUser.id) {
         app.get('db').delete_group([groupId])
     })
 
-    socket.on('create emergency group', data=> {
-        app.get('db').create_emergency_group([data.userId, data.group.message])
+    socket.on('create emergency group', emergencyData=> {
+        app.get('db').create_emergency_group([currentUser.id, emergencyData.message])
             .then(data=> {
                 console.log('data from emergency group creation', data)
-                app.get('db').add_emergency_contacts([data.emergency_id, data.group.recipient])
+                emergencyData.group.map(contact=> {
+                    app.get('db').add_emergency_contacts([data.emergency_id, contact])
+                })
             })
     })
 
@@ -297,9 +299,9 @@ if(currentUser.id) {
         //get emergency group id by currentUser.id .then => 
         app.get('db').get_emergency_group_id([currentUser.id])
             .then(group => {
+                //delete all contacts
                 app.get('db').remove_emergency_contact([group.id])
-                //make sure contactId is not already in the table under currentUser.id
-                //loop through contacts
+                //loop through contacts to add 
                 contacts.map(contactId => {
                     app.get('db').add_emergency_contacts([group.id, contactId])
                 })
