@@ -286,7 +286,7 @@ if(currentUser.id) {
             .then(data=> {
                 console.log('data from emergency group creation', data)
                 emergencyData.group.map(contact=> {
-                    app.get('db').add_emergency_contacts([data.emergency_id, data.group])
+                    app.get('db').add_emergency_contacts([data.emergency_id, contact])
                 })
             })
     })
