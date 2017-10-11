@@ -193,7 +193,7 @@ class Profile extends Component{
                         <div className="safeHavenInputContainer">
                             <button onClick={() => {if(this.state.emergencyGroupMembersByID.length > 0) {this.changeEmergencySettings()}} } className="addNewNameBtn changeEmergencyStuffBtn">&#10004;</button>                                                        
                             <span style={{color: '#d13030'}}>Emergency Settings</span>
-                            <img className="editIcon editNameIcon" onClick={() => {if(this.state.emergencyGroupMembersByID.length > 0) {this.setState({emergencyToggle: true})} }} src={editIcon} alt="edit"/>
+                            <img className="editIcon editNameIcon" onClick={() => {if(this.state.emergencyGroupMembersByID.length > 0) {this.setState({emergencyToggle: false})} }} src={editIcon} alt="edit"/>
                             <p>Contacts:</p>
                             <div className="recipWrapper names">
                                 {this.state.emergencyGroupMembersByName.map((e, i) => {
