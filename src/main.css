@@ -811,16 +811,22 @@ table {
     .ProfileContainer .Profile .safehavenContainer {
       width: 320px;
       display: flex;
+      flex-wrap: wrap;
       height: 50px;
       justify-content: center;
       align-items: center; }
       .ProfileContainer .Profile .safehavenContainer .safeHaven {
         color: #efefef;
+        width: 320px;
         font-size: 1rem;
         position: relative;
         margin-top: 20px;
         font-family: "ABeeZee", sans-serif;
         letter-spacing: .2em; }
+      .ProfileContainer .Profile .safehavenContainer .editIcon {
+        margin-left: 0; }
+      .ProfileContainer .Profile .safehavenContainer p {
+        width: 200px; }
     .ProfileContainer .Profile .safeHavenInputContainer {
       width: 320px;
       display: flex;
@@ -902,12 +908,16 @@ table {
             color: #111; }
       .ProfileContainer .Profile .emergencyWrapper .names {
         height: 70px;
+        overflow: scroll;
         border: 1px solid #FEF36E;
-        border-radius: 10px; }
+        border-radius: 10px;
+        padding: 10px;
+        line-height: 1.5em; }
       .ProfileContainer .Profile .emergencyWrapper .messageWrapper {
         text-align: center;
         width: 300px;
-        margin-left: 0; }
+        margin-left: 0;
+        margin-top: 10px; }
         .ProfileContainer .Profile .emergencyWrapper .messageWrapper h3 {
           margin-bottom: 10px; }
         .ProfileContainer .Profile .emergencyWrapper .messageWrapper textarea {
