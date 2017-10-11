@@ -300,6 +300,9 @@ if(currentUser.id) {
         //get emergency group id by currentUser.id .then => 
         app.get('db').get_emergency_group_id([currentUser.id])
             .then(group => {
+                app.get('db').remove_emergency_contact([group.id])
+                //make sure contactId is not already in the table under currentUser.id
+                //loop through contacts
                 contacts.map(contactId => {
                     app.get('db').add_emergency_contacts([group.id, contactId])
                 })
