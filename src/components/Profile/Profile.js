@@ -7,7 +7,7 @@ import $ from 'jquery';
 import TweenMax from 'gsap';
 import {connect} from 'react-redux';
 import {getUserInfo} from './../../ducks/reducer';
-import {editUser, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser} from './../../controllers/socketCTRL';
+import {editUser, createEmergencyGroup, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -104,11 +104,16 @@ class Profile extends Component{
     }
 
     changeEmergencySettings(){
+        if(this.props.emergencyGroup.length === 0) {
+            createEmergencyGroup({message: this.state.emergencyMessage, group: this.state.emergencyGroupMembersByID}) 
+        } else {
+            addEmergencyContact(this.state.emergencyGroupMembersByID);
+            editEmergencyMessage(this.state.emergencyMessage);
+        }
         this.setState({
             emergencyToggle: false
         })
-        addEmergencyContact(this.state.emergencyGroupMembersByID);
-        editEmergencyMessage(this.state.emergencyMessage);
+        
     }
 
     saveMessage(event){
