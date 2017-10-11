@@ -43,7 +43,6 @@ class Login extends Component {
             <div className="infoWrapper">
               <a href="http://localhost:3069/auth"><button>LOGIN OR SIGN UP</button></a>
               {/*REMOVE THE LINK ONCE ALL IS SET UP*/}
-              <Link to='/' onClick={this.userLoggedIn()}><p>Go to home</p></Link>
             </div>
           </div>
       </div>
