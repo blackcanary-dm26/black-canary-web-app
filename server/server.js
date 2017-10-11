@@ -370,7 +370,18 @@ if(currentUser.id) {
     })
 
     socket.on('add friend to group', data=> {
-        app.get('db').add_friend_to_group([data.groupId, data.memberId])
+        let memberAdded = [];
+        //make sure friends cannot be added to group more than once
+        app.get('db').get_group_members([data.groupId]).then(group => {
+            group.map(member=> {
+                if(member.member_id = data.member.id) {
+                    memberAdded.push(member.member_id)
+                }
+            })
+        })
+        if(memberAdded.length < 1) {
+            app.get('db').add_friend_to_group([data.groupId, data.memberId])
+        }
     })
 
     socket.on('remove friend from group', data=> {
