@@ -94,7 +94,7 @@ passport.use(new Auth0Strategy({
   });
 
   app.get('/auth/me', (req, res, next) => {
-      console.log(req.user)
+      console.log('req.user', req.user)
       let response, status=200
       if (!req.user) {
       //    res.status(404).send('User not found');
@@ -103,6 +103,12 @@ passport.use(new Auth0Strategy({
       } else {
       //    res.status(200).send(req.user);
         response = req.user
+
+        //get all info
+        // app.get('db').get_user_info([req.user.id]).then(user=> {
+        //     userInfo = user[0];
+        // })
+
       }
       res.status(status).send(response)
     })
