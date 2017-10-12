@@ -18,17 +18,24 @@ class Menu extends Component{
         axios.get('/auth/me')
             .then(response=> {
                 console.log('auth/me', response.data)
-                this.props.getUserInfo(response.data)
-                
-                let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} = this.props;
-                    
-                heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup);
+                // this.props.getUserInfo(response.data.userInfo)
+                // this.props.getGroups(response.data.groups)
+                // this.props.getFriendsList(response.data.friends)
+                // this.props.getActiveLocations(response.data.getActiveLocations)
+                // this.props.getEmergencyGroup(response.data.getEmergencyGroup)
+                // this.props.getPendingFriendRequests(response.data.getPendingFriendRequests)
             })
             
 
+        }
+        
+    componentDidMount(){
         socketOn();
+        
+        let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} = this.props;
+        
+        heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup);
     }
-
 
             
     
