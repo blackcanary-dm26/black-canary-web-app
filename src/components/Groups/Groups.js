@@ -161,7 +161,7 @@ render(){
 
               !this.state.groupModal
               ?
-                <div>{allGroups}</div>
+                <div style={{marginBottom: '20px'}}>{allGroups}</div>
               :
               <GroupsModal exit={this.exit} group={this.state.group}/>
             }
