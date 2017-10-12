@@ -245,6 +245,11 @@ if(currentUser.id) {
         
     })
 
+    socket.on('update sender location', location=> {
+        console.log('updated location', location)
+        app.get('db').update_sender_location([location, currentUser.id])
+    })
+
     socket.on('update user info', user => {
         //put the user info by user id to (users table) in db
         console.log('server socket.on user,', user)
