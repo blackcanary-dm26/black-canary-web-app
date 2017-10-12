@@ -131,9 +131,6 @@
           }
           border-radius: 10px;
           border: none;
-<<<<<<< HEAD
-          margin-right: 10px;
-=======
           padding: 5px 10px;
           &:hover {
             color: $black;
@@ -143,7 +140,6 @@
             outline: none;
           }
           margin-top: 10px;
->>>>>>> master
         }
       }
 
@@ -255,33 +251,6 @@
       border: 2px; 
       color: white;
 
-<<<<<<< HEAD
-
-
-                button {
-                    background-color: $white-translucent;
-                    border: none;
-                    height: 30px;
-                    padding: 7px;
-                    margin: 5px 2px;
-                    border-radius: 10px;
-                    color: $white;
-                    letter-spacing: 0.2em;
-                    font: {
-                        family: $sans;
-                        size: 1rem;
-                    }
-                    &:focus {
-                        outline: none;
-                    }
-                    &:hover {
-                        background-color: $yellow;
-                        color: $black
-                    }
-                }
-              }
-
-=======
       button {
         background-color: $white-translucent;
         border: none;
@@ -305,7 +274,6 @@
       }
     }
 }
->>>>>>> master
     .listOfGroups{
       display: flex;
       justify-content: center;
