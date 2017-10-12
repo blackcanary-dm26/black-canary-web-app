@@ -244,7 +244,7 @@ console.log('current user', currentUser)
 // if(true) {
     if(currentUser.id) {
         
-    setInterval(heartbeat, 100);
+    setInterval(heartbeat, 500);
     function heartbeat(){
         app.get('db').get_user_info([currentUser.id])
             .then(user=> {
