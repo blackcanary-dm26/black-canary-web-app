@@ -235,7 +235,14 @@ if(currentUser.id) {
                 allRecip.map(recip => {
                     app.get('db').add_location_recipient([alert[0].id, recip])
                 })
+
+                setTimeout(() => {
+                    app.get('db').remove_active_location([alert[0].id])
+                }, 1*data.time_active)
+
             })
+        
+        
     })
 
     socket.on('update user info', user => {
