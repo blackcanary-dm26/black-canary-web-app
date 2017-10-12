@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
+import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, updateLocationActive} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
@@ -143,6 +143,7 @@ class LevelOne extends Component {
 
   sendLocToSocket() {
     console.log('I am ',this.props.userLoc);
+    this.props.updateLocationActive(true);
     sendLocation({
       user_id: this.props.user.id,
       user_coordinates: this.props.userLoc,
@@ -153,6 +154,10 @@ class LevelOne extends Component {
       group_recip: this.state.groupRecipients,
       time_active: this.state.timeActive
     })
+    setTimeout(() => {
+      this.props.updateLocationActive(false);
+    }, +this.state.timeActive)
+
   }
 
   render() {
@@ -212,4 +217,8 @@ function mapStateToProps(state){
     return state;
 }
 
-export default connect(mapStateToProps)(LevelOne);
+let outputActions = {
+  updateLocationActive
+}
+
+export default connect(mapStateToProps, outputActions)(LevelOne);

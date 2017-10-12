@@ -15,6 +15,7 @@ const initialState = {
     friends: [], //array of friend objects [{friend_username, friend_firstname, friend_lastname, friend_email, friend_user_id, friend_status, friend_pic, current_user_id, friend_table_id}] 
     groups: [], //array of group objects [{groupID, groupName, members:[{username, userID}]}]
     pendingFriendRequests: [],
+    locationActive: false,
     activeLocations: {
         1: [
             {
@@ -72,7 +73,8 @@ const GET_USER_INFO = 'GET_USER_INFO',
       GET_GROUPS = 'GET_GROUPS',
       GET_EMERGENCY_GROUP = 'GET_EMERGENCY_GROUP',
       GET_ACTIVE_LOCATIONS = 'GET_ACTIVE_LOCATIONS',
-      DELETE_USER = 'DELETE_USER';
+      DELETE_USER = 'DELETE_USER',
+      UPDATE_LOCATION_ACTIVE = 'UPDATE_LOCATION_ACTIVE';
 
 
 //get user info
@@ -89,6 +91,14 @@ export function updateUserLocation(locString){
     return {
         type: UPDATE_USER_LOCATION,
         payload: locString 
+    }
+}
+
+//update user location, stored as 'lat*lng'
+export function updateLocationActive(bool){
+    return {
+        type: UPDATE_LOCATION_ACTIVE,
+        payload: bool 
     }
 }
 
@@ -170,6 +180,10 @@ export default function reducer(state = initialState, action){
         case GET_ACTIVE_LOCATIONS:
         // console.log('reducer get active locations', action.payload)
             return Object.assign({}, state, {activeLocations: action.payload})
+            break;
+        case UPDATE_LOCATION_ACTIVE:
+        // console.log('reducer get active locations', action.payload)
+            return Object.assign({}, state, {locationActive: action.payload})
             break;
 
         default:
