@@ -1623,7 +1623,7 @@ table {
     font-size: 1.7em; }
 
 .alertBubble {
-  width: 100%;
+  width: 100vw;
   height: calc(100vh - 80px);
   margin-top: 80px;
   overflow: scroll;
@@ -1633,7 +1633,7 @@ table {
   display: flex;
   flex-wrap: wrap; }
   .alertBubble .container {
-    width: 320px;
+    width: 100vw;
     border-radius: 10px;
     margin-top: 15px;
     display: flex;
@@ -1644,7 +1644,7 @@ table {
       background-color: #d13030; }
     .alertBubble .container .from {
       padding: 20px;
-      width: 100%;
+      width: 100vw;
       color: #efefef;
       height: 50px;
       display: flex;
@@ -1669,16 +1669,8 @@ table {
         padding: 0 30px; }
     .alertBubble .container .mapHere {
       display: block;
-      width: 310px;
+      width: 100vw;
       height: 400px; }
-
-@media (min-width: 600px) {
-  .alertBubble .container {
-    width: 600px; } }
-
-@media (min-width: 900px) {
-  .alertBubble .container {
-    width: 800px; } }
 
 .GroupsModal {
   width: 100%;

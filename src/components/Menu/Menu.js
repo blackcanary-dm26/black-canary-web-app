@@ -15,7 +15,7 @@ class Menu extends Component{
 
     componentWillReceiveProps(props){
         if(props.user) {
-            if(this.props.locationActive){
+            if(this.props.locationActive){               
                 navigator.geolocation.getCurrentPosition(position => {
                     updateSenderLocation(`${position.coords.latitude}*${position.coords.longitude}`)
                 })

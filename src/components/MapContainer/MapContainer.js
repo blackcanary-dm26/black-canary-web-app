@@ -30,18 +30,6 @@ export class MapContainer extends Component {
 
     }
 
-    moveJanise(){
-        setInterval(() => {
-            
-            let janise = Object.assign({}, this.state.canary)
-            janise.lng += 0.1;
-            janise.lat += 0.01;
-            this.setState({
-                canary: janise
-            })
-        }, 1000);
-    }
-
     componentWillReceiveProps(props){
         // console.log(props);
         if (props.isHome) {
@@ -58,7 +46,7 @@ export class MapContainer extends Component {
             this.setState({
                 canary: canary,
                 style: {
-                    width: '310px',
+                    width: '100vw',
                     height: '400px',
                     margin: '0'
                 }

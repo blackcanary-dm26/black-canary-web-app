@@ -1,5 +1,5 @@
     .alertBubble{
-        width: 100%;
+        width: 100vw;
         height: calc(100vh - 80px);
         margin-top: 80px;
         overflow: scroll;
@@ -11,7 +11,7 @@
 
 
         .container{
-            width: 320px;
+            width: 100vw;
             border-radius: 10px;
             // min-height: 120px;
             &:hover {
@@ -25,7 +25,7 @@
 
             .from{
                 padding: 20px;
-                width: 100%;
+                width: 100vw;
                 color: $white;
                 height: 50px;
                 // border: 1px solid blue;
@@ -62,7 +62,7 @@
 
             .mapHere {
                 display: block;
-                width: 310px;
+                width: 100vw;
                 height: 400px;
             }
             
@@ -70,19 +70,19 @@
 
     }
 
-    @media (min-width: 600px) {
-        .alertBubble{
+    // @media (min-width: 600px) {
+    //     .alertBubble{
         
-            .container{
-                width: 600px;
-            }
-        }
-    }
-    @media (min-width: 900px) {
-        .alertBubble{
+    //         .container{
+    //             width: 600px;
+    //         }
+    //     }
+    // }
+    // @media (min-width: 900px) {
+    //     .alertBubble{
         
-            .container{
-                width: 800px;
-            }
-        }
-    }
+    //         .container{
+    //             width: 800px;
+    //         }
+    //     }
+    // }
