@@ -50,41 +50,47 @@ class Contacts extends Component{
  
     render(){
         // console.log(this.props.pendingFriendRequests)
-
-    const allGroups = this.props.groups.map((group, i)=>{
-        return(
-            <div key={i}>
-                <p className="groups">{group.name}</p>
-            </div>
-        )
-    })
-
-    const pendingFriends= this.props.pendingFriendRequests.map((friend, i) => {
-        return (
-            <div key={i} className="listOfFriends">
-                <div><img className="imgContainer" src={friend.friend_pic} alt="profile pic"/></div>
-                <div className='nameContainer'>
-                    <p className="name">{friend.friend_firstname}</p>
-                    <button onClick={()=>confirmFriendRequest(friend.friend_table_id)}>WATCH OVER</button>
-                    <button onClick={()=>declineFriendRequest(friend.friend_table_id)}>DECLINE</button>
-                </div>
-            </div>)
-        });
-
-    const allFriends = this.props.friends.map((friend, i)=>{
-        if(friend.friend_status === true) {
+    let allGroups, pendingFriends, allFriends;
+    if(this.props.groups) {
+        allGroups = this.props.groups.map((group, i)=>{
             return(
-                    <div key={i} className="listOfFriends">
-                        <div><img className= "imgContainer" src={friend.friend_pic} alt="profile pic"/></div>
-                        <div className='nameContainer'>
-                            <p className="name">{friend.friend_firstname}</p>
-                            <button className="seeInfo" onClick={_=>this.showModalMethod(friend)}>SEE INFO</button>
-                            <button onClick={()=> deleteFriend(friend.friend_table_id)}>REMOVE</button>
-                        </div>
-                    </div>
+                <div key={i}>
+                    <p className="groups">{group.name}</p>
+                </div>
             )
-        } 
-    })
+        })
+    }
+
+    if(this.props.pendingFriendRequests){
+        pendingFriends= this.props.pendingFriendRequests.map((friend, i) => {
+            return (
+                <div key={i} className="listOfFriends">
+                    <div><img className="imgContainer" src={friend.friend_pic} alt="profile pic"/></div>
+                    <div className='nameContainer'>
+                        <p className="name">{friend.friend_firstname}</p>
+                        <button onClick={()=>confirmFriendRequest(friend.friend_table_id)}>WATCH OVER</button>
+                        <button onClick={()=>declineFriendRequest(friend.friend_table_id)}>DECLINE</button>
+                    </div>
+                </div>)
+            });
+    }
+
+    if(this.props.friends){
+        allFriends = this.props.friends.map((friend, i)=>{
+            if(friend.friend_status === true) {
+                return(
+                        <div key={i} className="listOfFriends">
+                            <div><img className= "imgContainer" src={friend.friend_pic} alt="profile pic"/></div>
+                            <div className='nameContainer'>
+                                <p className="name">{friend.friend_firstname}</p>
+                                <button className="seeInfo" onClick={_=>this.showModalMethod(friend)}>SEE INFO</button>
+                                <button onClick={()=> deleteFriend(friend.friend_table_id)}>REMOVE</button>
+                            </div>
+                        </div>
+                )
+            } 
+        })
+    }
 
         return(
             <div className="Contacts">

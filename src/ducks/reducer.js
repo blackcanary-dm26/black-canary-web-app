@@ -69,7 +69,12 @@ const initialState = {
 
 
 const GET_USER_INFO = 'GET_USER_INFO',
-    GET_INITIAL_USER_INFO = 'GET_INITIAL_USER_INFO',
+      GET_INITIAL_USER_INFO = 'GET_INITIAL_USER_INFO',
+      GET_INITIAL_FRIENDS_LIST = 'GET_INITIAL_FRIENDS_LIST',
+      GET_INITIAL_PENDING_FRIEND_REQUESTS = 'GET_INITIAL_PENDING_FRIEND_REQUESTS',
+      GET_INITIAL_GROUPS = 'GET_INITIAL_GROUPS',
+      GET_INITIAL_EMERGENCY_GROUP = 'GET_INITIAL_EMERGENCY_GROUP',
+      GET_INITIAL_ACTIVE_LOCATIONS = 'GET_INITIAL_ACTIVE_LOCATIONS',      
       UPDATE_USER_LOCATION = 'UPDATE_USER_LOCATION',
       GET_FRIENDS_LIST = 'GET_FRIENDS_LIST',
       GET_PENDING_FRIEND_REQUESTS = 'GET_PENDING_FRIEND_REQUESTS',
@@ -79,6 +84,66 @@ const GET_USER_INFO = 'GET_USER_INFO',
       DELETE_USER = 'DELETE_USER',
       UPDATE_LOCATION_ACTIVE = 'UPDATE_LOCATION_ACTIVE';
 
+//get initial info
+      export function getInitialUserInfo(){
+          return {
+              type: GET_INITIAL_USER_INFO,
+              payload: axios.get('/userinfo')
+                .then(response => {
+                    return response
+                }) 
+          }
+      }
+
+      export function getInitialFriends(){
+          return{
+              type: GET_INITIAL_FRIENDS_LIST,
+              payload: axios.get('/getfriends')
+                .then(response=> {
+                    return response
+                })
+          }
+      }
+
+      export function getInitialPendingFriendRequests(){
+          return {
+              type: GET_INITIAL_PENDING_FRIEND_REQUESTS,
+              payload: axios.get('/pendingfriendrequests')
+                .then(response=> {
+                    return response
+                })
+          }
+      }
+
+      export function getInitialGroups(){
+          return{
+              type: GET_INITIAL_GROUPS,
+              payload: axios.get('/getgroups')
+                .then(response=> {
+                    return response
+                })
+          }
+      }
+
+      export function getInitialEmergencyGroup(){
+          return{
+              type: GET_INITIAL_EMERGENCY_GROUP,
+              payload: axios.get('/getemergencygroup')
+                .then(response=> {
+                    return response
+                })
+          }
+      }
+
+      export function getInitialActiveLocations(){
+          return{
+              type: GET_INITIAL_ACTIVE_LOCATIONS,
+              payload: axios.get('/getactivelocations')
+                .then(response=> {
+                    return response
+                })
+          }
+      }
 
 //get user info
 //add to componentDidMount, inside socket.on('update user')/socket.on('heartbeat')
@@ -89,15 +154,6 @@ export function getUserInfo(user){
     }
 }
 
-export function getInitialUserInfo(){
-    return {
-        type: GET_INITIAL_USER_INFO,
-        payload: axios.get('/userinfo')
-        .then(response => {
-            return response
-        }) 
-    }
-}
 
 //update user location, stored as 'lat*lng'
 export function updateUserLocation(locString){
@@ -167,18 +223,58 @@ export default function reducer(state = initialState, action){
     let { user, friends, groups, activeLocations } = state;
 
     switch (action.type) {
-        case GET_USER_INFO:
-        // console.log('pending get user info')
-        return Object.assign({}, state, {user: action.payload})
-        break;
         case GET_INITIAL_USER_INFO + "_FULFILLED":
             console.log('reducer get user info', action.payload)
             return Object.assign({}, state, {user: action.payload.data})
             break;
-            case GET_INITIAL_USER_INFO + "_REJECTED":
+        case GET_INITIAL_USER_INFO + "_REJECTED":
             console.log('ERROR get user info')
             // return Object.assign({}, state, {user: action.payload})
             break;
+            case GET_INITIAL_FRIENDS_LIST + "_FULFILLED":
+            console.log('reducer get user info', action.payload)
+            return Object.assign({}, state, {friends: action.payload.data})
+            break;
+        case GET_INITIAL_FRIENDS_LIST + "_REJECTED":
+            console.log('ERROR get friends')
+            // return Object.assign({}, state, {user: action.payload})
+            break;
+        case GET_INITIAL_PENDING_FRIEND_REQUESTS + "_FULFILLED":
+            console.log('reducer get user info', action.payload)
+            return Object.assign({}, state, {pendingFriendRequests: action.payload.data})
+            break;
+        case GET_INITIAL_PENDING_FRIEND_REQUESTS + "_REJECTED":
+            console.log('ERROR get pending friend requests')
+            // return Object.assign({}, state, {user: action.payload})
+            break;    
+        case GET_INITIAL_GROUPS + "_FULFILLED":
+            console.log('reducer get user info', action.payload)
+            return Object.assign({}, state, {groups: action.payload.data})
+            break;
+        case GET_INITIAL_GROUPS + "_REJECTED":
+            console.log('ERROR get groups')
+            // return Object.assign({}, state, {user: action.payload})
+            break;
+        case GET_INITIAL_EMERGENCY_GROUP + "_FULFILLED":
+            console.log('reducer get user info', action.payload)
+            return Object.assign({}, state, {emergencyGroup: action.payload.data})
+            break;
+        case GET_INITIAL_EMERGENCY_GROUP + "_REJECTED":
+            console.log('ERROR get emergency group')
+            // return Object.assign({}, state, {user: action.payload})
+            break;
+        case GET_INITIAL_ACTIVE_LOCATIONS + "_FULFILLED":
+            console.log('reducer get user info', action.payload)
+            return Object.assign({}, state, {activeLocations: action.payload.data})
+            break;
+        case GET_INITIAL_ACTIVE_LOCATIONS + "_REJECTED":
+            console.log('ERROR get active locations')
+            // return Object.assign({}, state, {user: action.payload})
+            break;
+        case GET_USER_INFO:
+        // console.log('pending get user info')
+        return Object.assign({}, state, {user: action.payload})
+        break;
         case UPDATE_USER_LOCATION:
             // console.log('reducer get user info', action.payload)
             return Object.assign({}, state, {userLoc: action.payload})

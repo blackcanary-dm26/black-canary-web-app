@@ -157,7 +157,7 @@ class Profile extends Component{
                         !this.state.toggleNameInput
                         ?
                         <div className='nameContainer'>
-                            <div className="name">{this.props.user.username}</div>
+                            <div className="name">{user ? user.username : 'USER'}</div>
                             <img className="editIcon" onClick={this.toggleName} src={editIcon} alt="edit"/>
                         </div>
 
@@ -174,7 +174,7 @@ class Profile extends Component{
 
                     <div className="imgContainer">
                         <div>
-                            <img className="imgPlaceholder" src={this.props.user.profilepic ? this.props.user.profilepic : marauder} alt='user'/>
+                            <img className="imgPlaceholder" src={this.props.user ? this.props.user.profilepic : marauder} alt='user'/>
                         </div>
                     </div>
 
@@ -205,9 +205,13 @@ class Profile extends Component{
                                 })}
                             </div>
                             <div className="recipWrapper">
-                                {this.props.friends.map((e, i) => {
+                                {this.props.friends ? 
+                                    this.props.friends.map((e, i) => {
                                     return <button key={`${i}${e.friend_user_id}`} id={e.friend_user_id} style={{ backgroundColor: this.state.emergencyGroupMembersByID.indexOf(e.friend_user_id) < 0 ? 'rgba(239, 239, 239, 0.3)' : '#fef36e', color: this.state.emergencyGroupMembersByID.indexOf(e.friend_user_id) < 0 ? '#efefef' : '#111'}} onClick={event => this.toggleFriend(event, e)} >{`${e.friend_firstname} ${e.friend_lastname}`}</button>
-                                })}
+                                })
+                                : 
+                                null
+                                }
                             </div>
                             <div className="messageWrapper">
                                 <h3>Message:</h3>

@@ -218,7 +218,7 @@ Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
 // ========================== ENDPOINTS ===============================//
 
 app.get('/userinfo', (req, res)=> {
-    app.get('db').get_user_info([currentUser.id])
+    app.get('db').get_user_info([req.user.id])
     .then(user=> {
         // response.userInfo = user[0];
         // console.log('get user info', response)
@@ -226,7 +226,92 @@ app.get('/userinfo', (req, res)=> {
     });
 })
 
+app.get('/getfriends', (req, res)=> {
+    app.get('db').get_friends([req.user.id])
+        .then(data=> {
+            // console.log('get friends', data)
+            // friends = data
+            res.status(200).send(data)
+        });
+})
 
+app.get('/pendingfriendrequests', (req, res)=> {
+    app.get('db').get_pending_friend_requests([currentUser.id])
+        .then(requests => {
+        // console.log(requests)
+        // pendingFriendRequests = requests
+            res.status(200).send(requests)
+        })
+})
+
+app.get('/getgroups', (req, res)=> {
+    app.get('db').get_groups([currentUser.id])
+    .then(data => {
+        let groupsObj = {};
+        for(let i = 0; i < data.length; i++) {
+            if(groupsObj.hasOwnProperty(data[i].group_id)){
+                groupsObj[data[i].group_id].members.push({ username: data[i].member_username,
+                userID: data[i].member_user_id});
+            } else {
+                groupsObj[data[i].group_id] = {
+                    groupID: data[i].group_id,
+                    groupName: data[i].group_name,
+                    members: [{username: data[i].member_username,
+                        userID: data[i].member_user_id}]
+                }
+            }
+        }
+        let groupsArr = [];
+        for (group in groupsObj) {
+            groupsArr.push(groupsObj[group]);
+        }
+        //ultimate return: the array "groups" of object {groupName, groupID, members: [{username, userID}, {username, userID}]}
+        // console.log('groups data line 197', groupsArr)
+        // groups = groupsArr;
+        res.status(200).send(groupsArr)
+
+    })
+})
+
+app.get('/getemergencygroup', (req, res)=> {
+    app.get('db').get_emergency_group([currentUser.id])
+    .then(data=> {
+        // console.log('emergency group', data)
+        // emergencyGroup = data
+        res.status(200).send(data)
+    })
+})
+
+
+app.get('/getactivelocations', (req, res)=> {
+    app.get('db').get_active_locations([currentUser.id])
+    .then(data => {
+        // console.log('get active locations', data)
+        //change data and save to activeLocations
+        activeLocations = {
+            1: [],
+            2: [],
+            3: []
+        }
+        data.map(e => {
+            // console.log(e);
+            let {message, situation} = e;
+            let coordinates;
+            if(e.coordinates) {
+                let coord = e.coordinates.split('*');
+                coordinates = {lat: 1*coord[0], lng: 1*coord[1]};
+            }else {
+                coordinates ={lat: 40.226192, lng:  -111.660776}
+            }
+            
+            let senderName = `${e.senderfirstname} ${e.senderlastname}`;
+
+            activeLocations[e.situationlevel].push({senderName, coordinates, message, situation})
+        })
+
+        res.status(200).send(activeLocations)
+    });
+})
 
 //========================= SOCKETS ===================================//
 

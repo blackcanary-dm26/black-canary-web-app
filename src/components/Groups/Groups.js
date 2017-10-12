@@ -106,17 +106,20 @@ class Groups extends Component{
 
 render(){
   let {groups, friends} = this.props
-  const allGroups = groups.map((group,i) => {
-        return (
-        <div className='listOfGroups' key={i}>
-            <div className="nameContainer">
-                <p className='groupName'>{group.groupName}</p>
-                <button className="seeInfo" onClick={_=>this.showModalMethod(group)}>SEE INFO</button>
-            </div>
-
-        </div>
-        )
-  })
+  let allGroups;
+  if(groups) {
+    allGroups = groups.map((group,i) => {
+          return (
+          <div className='listOfGroups' key={i}>
+              <div className="nameContainer">
+                  <p className='groupName'>{group.groupName}</p>
+                  <button className="seeInfo" onClick={_=>this.showModalMethod(group)}>SEE INFO</button>
+              </div>
+  
+          </div>
+          )
+    })
+  }
 
   return(
       <div className='Groups'>
