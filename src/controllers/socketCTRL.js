@@ -10,15 +10,16 @@ const socket = io('http://localhost:3069');
         })
     }
     
-    export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests){ //in home component 
+    export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup){ //in home component 
         socket.on('heartbeat', data=> {
-            // console.log('data in controller', data)
+            // console.log('data in controller', data.activeLocations)
             //pass in action reducers to heartbeat function in component
             getFriendsList(data.friends);
             getUserInfo(data.userInfo);
             getGroups(data.groups);
             getActiveLocations(data.activeLocations);
             getPendingFriendRequests(data.pendingFriendRequests);
+            getEmergencyGroup(data.emergencyGroup);
         })
     }
 
@@ -109,20 +110,30 @@ const socket = io('http://localhost:3069');
         socket.emit('rename group', group)
     }
 
-    export function createEmergencyGroup(userId, group){
+    export function createEmergencyGroup(group){
         //group includes message and recipients
         //on settings/profile page
-        socket.emit('create emergency group', {userId, group})
+        socket.emit('create emergency group', group)
     }
 
-    // export function editEmergencyGroup(contacts){
-    //     //on settings/profile page
-    //     // contacts are an array of contact_ids
-    //     socket.emit('edit emergency group', contacts)
-    // }
+    export function editEmergencyMessage(message){
+        //on settings/profile page
+        // contacts are an array of contact_ids
+        socket.emit('edit emergency message', message)
+    }
 
+    export function removeEmergencyContact(contactId){
+        socket.emit('remove emergency contact', contactId)
+    }
 
+    export function addEmergencyContact(contacts){
+        socket.emit('add emergency contact', contacts)
+    }
 
     export function friendSearch(firstName){
         socket.emit('friend search', firstName);
+    }
+
+    export function updateSenderLocation(location){
+        socket.emit('update sender location', location)
     }

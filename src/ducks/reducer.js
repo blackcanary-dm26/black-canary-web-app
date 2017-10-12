@@ -15,6 +15,7 @@ const initialState = {
     friends: [], //array of friend objects [{friend_username, friend_firstname, friend_lastname, friend_email, friend_user_id, friend_status, friend_pic, current_user_id, friend_table_id}] 
     groups: [], //array of group objects [{groupID, groupName, members:[{username, userID}]}]
     pendingFriendRequests: [],
+    locationActive: false,
     activeLocations: {
         1: [
             {
@@ -60,7 +61,7 @@ const initialState = {
         ]
     }, //array of active locations with messages and fromUser {1: [{senderName, coordinates, situation, message, alertID}]}
     //activeLocations: [], //array of active locations with messages and fromUser {senderName, coordinates, situation, message, alertID}
-    emergencyGroup: {}, //{user_id, emergency_id, message, contact_id: []}
+    emergencyGroup: [], //{user_id, emergency_id, message, contact_id: []}
     userLoggedIn: false
 };
 
@@ -70,8 +71,10 @@ const GET_USER_INFO = 'GET_USER_INFO',
       GET_FRIENDS_LIST = 'GET_FRIENDS_LIST',
       GET_PENDING_FRIEND_REQUESTS = 'GET_PENDING_FRIEND_REQUESTS',
       GET_GROUPS = 'GET_GROUPS',
+      GET_EMERGENCY_GROUP = 'GET_EMERGENCY_GROUP',
       GET_ACTIVE_LOCATIONS = 'GET_ACTIVE_LOCATIONS',
-      DELETE_USER = 'DELETE_USER';
+      DELETE_USER = 'DELETE_USER',
+      UPDATE_LOCATION_ACTIVE = 'UPDATE_LOCATION_ACTIVE';
 
 
 //get user info
@@ -88,6 +91,14 @@ export function updateUserLocation(locString){
     return {
         type: UPDATE_USER_LOCATION,
         payload: locString 
+    }
+}
+
+//update user location, stored as 'lat*lng'
+export function updateLocationActive(bool){
+    return {
+        type: UPDATE_LOCATION_ACTIVE,
+        payload: bool 
     }
 }
 
@@ -116,6 +127,14 @@ export function getGroups(groups){
     }
 }
 
+
+//get emergency group
+export function getEmergencyGroup(group){
+    return {
+        type: GET_EMERGENCY_GROUP,
+        payload: group
+    }
+}
 
 //get active locations sent to current user
 // add to componentDidMount, inside socket.on('heartbeat')
@@ -154,9 +173,17 @@ export default function reducer(state = initialState, action){
         // console.log('reducer get groups', action.payload)
             return Object.assign({}, state, {groups: action.payload})
             break;
+        case GET_EMERGENCY_GROUP:
+            // console.log(action.payload);
+            return Object.assign({}, state, {emergencyGroup: action.payload})
+            break;
         case GET_ACTIVE_LOCATIONS:
         // console.log('reducer get active locations', action.payload)
             return Object.assign({}, state, {activeLocations: action.payload})
+            break;
+        case UPDATE_LOCATION_ACTIVE:
+        // console.log('reducer get active locations', action.payload)
+            return Object.assign({}, state, {locationActive: action.payload})
             break;
 
         default:

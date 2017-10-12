@@ -27,8 +27,9 @@ export default class GroupsModal extends Component{
     componentDidMount(){
         this.setState({
             friends: this.props.group.members,
-            groupName: this.props.group.name
+            groupName: this.props.group.groupName
         })
+        console.log(this.state);
     }
 
     // deleteFriendFromGroup(i){
@@ -98,11 +99,12 @@ export default class GroupsModal extends Component{
                             ?
                             <div className='inputArea'>
                                 <input type="text" className="newGroupName" onChange={e=>this.handleChange(e)} value={this.state.newGroupName}/>
-                                <button className="addBtn" onClick={_=>this.toggleEdit('added')}>ADD</button>
+                                <button className="addBtn" onClick={_=>this.toggleEdit('added')}>&#10004;</button>
                             </div>
                             :
                             <div className="heady">
-                                <p className="head">GROUP: {this.state.groupName}</p>
+                                {console.log(group)}
+                                <p className="head">{this.state.groupName}</p>
                                 <img className="edit" onClick={_=>this.toggleEdit('edit')} src={editIcon} alt="edit"/>
                             </div>
                         }

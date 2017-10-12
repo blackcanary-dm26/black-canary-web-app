@@ -5,8 +5,8 @@ import Login from '../Login/Login';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests} from './../../ducks/reducer';
-import {heartbeat, renameGroup, socketOn} from './../../controllers/socketCTRL';
+import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} from './../../ducks/reducer';
+// import {heartbeat, renameGroup, socketOn, updateSenderLocation} from './../../controllers/socketCTRL';
 import map from '../../images/placeholder_map.gif'
 
 // import io from 'socket.io-client';
@@ -23,23 +23,24 @@ class Home extends Component{
             lat: 40.226192,
             lng: -111.660776
         },
-        user: {username: 'Odysseus'}
+        user: {username: 'Odysseus'},
+        locationActive: false
       }
     }
 
-    componentDidMount(){
+    // componentDidMount(){
 
-        // socket.on('connect', ()=> {
-        //     console.log('home socket id:',socket.id)
-        //     socket.emit('save socket_id', {socketId: socket.id})
-        // })
-        socketOn();
+    //     // socket.on('connect', ()=> {
+    //     //     console.log('home socket id:',socket.id)
+    //     //     socket.emit('save socket_id', {socketId: socket.id})
+    //     // })
+    //     socketOn();
 
-        let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests} = this.props;
+    //     let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} = this.props;
 
-        heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests);
+    //     heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup);
 
-    }
+    // }
 
     componentWillReceiveProps(props){
         // console.log(props)
@@ -52,9 +53,6 @@ class Home extends Component{
                     user: props.user,
                     userLoggedIn: true
                 })
-                setInterval(() => {
-                    
-                }, 1000)
 
 
             }
@@ -68,6 +66,7 @@ class Home extends Component{
                 props.updateUserLocation(`${position.coords.latitude}*${position.coords.longitude}`)
                 
             })
+            // this.locationTracker();
         }
     }
 
@@ -86,6 +85,10 @@ class Home extends Component{
                     <Link to='/profile'> <p className="head"> PROFILE</p> </Link>
                 </div>
                 <MapContainer styleMapContainer={{height: '60vh', width: '100vw'}} style={{width: '100vw'}} isHome={true} canary={{name: `User`, lat: this.state.location.lat, lng: this.state.location.lng }}/>
+                {/* <div className="redirect">
+                    <p>You do not have any emergency contacts set. Please add your emergency contacts.</p>
+                    <Link to="/profile">Set Emergency Contacts</Link>
+                </div> */}
             </div>
         )
     }
@@ -101,7 +104,8 @@ let outputActions = {
     getFriendsList,
     getGroups,
     getActiveLocations,
-    getPendingFriendRequests
+    getPendingFriendRequests,
+    getEmergencyGroup
 }
 
 export default connect(mapStateToProps, outputActions)(Home);

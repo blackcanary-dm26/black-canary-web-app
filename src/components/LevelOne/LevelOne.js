@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
+import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, updateLocationActive} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
@@ -18,9 +18,13 @@ class LevelOne extends Component {
         title: '',
         message: '',
         individualRecipients: [],
-        timeActive: 0,
+        timeActive: 60 * 1000 * 60,
         groupRecipients: [],
         timeOptions: [
+          {
+            time: 0,
+            timeMS: (1000 * 60)
+          },
           {
             time: 1,
             timeMS: 3600000
@@ -77,9 +81,9 @@ class LevelOne extends Component {
 
   toggleFriend(event, userObj) {
     event.preventDefault()
-    let index = this.state.individualRecipients.indexOf(userObj.friend_id);
+    let index = this.state.individualRecipients.indexOf(userObj.friend_user_id);
   
-    let r = [...this.state.individualRecipients.slice(0)];
+    let r = this.state.individualRecipients.slice(0);
     if(index >= 0) {
       //remove from recip and change color back
       TweenMax.to($(`#${userObj.friend_username}`), 0, { backgroundColor: 'rgba(239, 239, 239, 0.3)', color: '#efefef', ease: TweenMax.Power1.easeInOut})
@@ -87,18 +91,22 @@ class LevelOne extends Component {
     } else {
       //to recip, change color
       TweenMax.to($(`#${userObj.friend_username}`), 0, { backgroundColor: '#fef36e', color: '#111', ease: TweenMax.Power1.easeInOut})
-      r.push(userObj.friend_id);
+      r.push(userObj.friend_user_id);
     }
 
     this.setState({
       individualRecipients: r
     })
 
+    // setTimeout(()=>{
+    //   console.log(this.state.individualRecipients)
+    // }, 1000);
+
   }
 
   toggleGroup(event, groupObj) {
     event.preventDefault()
-    let gr = [...this.state.groupRecipients];
+    let gr = this.state.groupRecipients.slice(0);
     let index = -1;
     for(let i = 0; i < gr; i++){
       if(groupObj.groupID === gr[i].groupID) {
@@ -107,13 +115,13 @@ class LevelOne extends Component {
     }
   
     if(index >= 0) {
-      console.log('We, the '+groupObj.groupName+'are being removed')      
+      // console.log('We, the '+groupObj.groupName+'are being removed')      
       //remove from recip and change color back
       TweenMax.to($(`#${groupObj.groupID}`), 0, { backgroundColor: 'rgba(239, 239, 239, 0.3)', color: '#efefef', ease: TweenMax.Power1.easeInOut})
       gr.splice(index, 1);
     } else {
       //to recip, change color
-      console.log('We, the '+groupObj.groupName+'were added')
+      // console.log('We, the '+groupObj.groupName+'were added')
       TweenMax.to($(`#${groupObj.groupID}`), 0, { backgroundColor: '#fef36e', color: '#111', ease: TweenMax.Power1.easeInOut})
       gr.push(groupObj);
     }
@@ -121,20 +129,21 @@ class LevelOne extends Component {
     this.setState({
       groupRecipients: gr
     })
-    setTimeout(()=>{
-      console.log(this.state.groupRecipients)
-    }, 1000);
+    // setTimeout(()=>{
+    //   console.log(this.state.groupRecipients)
+    // }, 1000);
 
   }
 
   chooseTime(val) {
     this.setState({
-      timeActive: val
+      timeActive: +val
     })
   }
 
   sendLocToSocket() {
     console.log('I am ',this.props.userLoc);
+    this.props.updateLocationActive(true);
     sendLocation({
       user_id: this.props.user.id,
       user_coordinates: this.props.userLoc,
@@ -142,8 +151,13 @@ class LevelOne extends Component {
       situation_level: 1,
       message: this.state.message,
       individual_recip: this.state.individualRecipients,
-      group_recip: this.state.groupRecipients
+      group_recip: this.state.groupRecipients,
+      time_active: this.state.timeActive
     })
+    setTimeout(() => {
+      this.props.updateLocationActive(false);
+    }, +this.state.timeActive)
+
   }
 
   render() {
@@ -183,13 +197,14 @@ class LevelOne extends Component {
               <div className="timeWrapper">
                 <h3>Time Active:</h3>
                 <select value={this.state.timeActive} onChange={e => this.chooseTime(e.target.value)}>
+                  <option disabled selected value>Select a Time</option>
                   {this.state.timeOptions.map(e => {
-                    return <option key={e.time} value={e.timeMS}>{`${e.time} hours`}</option>
+                    return <option key={+e.time} value={+e.timeMS}>{`${e.time} hours`}</option>
                   })}
                 </select>
               </div>
               <div className="buttnWrapper">
-                <button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button>
+                <button onClick={() => {this.sendLocToSocket()}}>SEND</button>
               </div>
             </section>
           </div>
@@ -202,4 +217,8 @@ function mapStateToProps(state){
     return state;
 }
 
-export default connect(mapStateToProps)(LevelOne);
+let outputActions = {
+  updateLocationActive
+}
+
+export default connect(mapStateToProps, outputActions)(LevelOne);

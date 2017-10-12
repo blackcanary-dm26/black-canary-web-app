@@ -8,7 +8,7 @@
   .addGroupModal{
     width: 100%;
     height: 100%;
-    z-index: 9999999;
+    z-index: 3;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -18,39 +18,132 @@
 
     .modalBox{
       width: 90%;
-      height: 90%;
+      height: 400px;
       background-color: $grey;
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: flex-start;
+      position: relative;
     
       .exit{
         margin: 15px;
         width: 10px;
         height: 10px;
         cursor: pointer;
+        position: relative;
+        left: -120px;
       }
 
       .head{
         color: white;
         display: flex;
-        font-size: 1.2em;
+        font-size: 1.5em;
         justify-content: center;
         align-items: flex-start;
-        letter-spacing: 1;
-        height: 50px;
+        letter-spacing: 0.2em;
+        // height: 25px;
       }
 
       .inputField{
         display: flex;
-        margin-top: 50px;
-        margin-left: 20px;
-        align-items: center;
-        justify-content: center;
-        margin-left: -20px;
+        margin-top: 20px;
+        // width: 200px;
 
-        .btn{
-          color: $yellow;
-          font-size: .8em;
+        input {
+          width: 250px;
+          background-color: $white-translucent;
+          border-radius: 10px;
           border: none;
+          &:focus {
+            outline: none;
+          }
+          color: $white;
+          padding: 7px;
+          font: {
+            size: 1.3rem;
+            family: $sans;
+          }
+          text: {
+            align: center;
+            transform: uppercase;
+          }
+          letter-spacing: 0.2em;
+        }
+        // margin-top: 50px;
+        // margin-left: 20px;
+
+      }
+
+      .addMembersWrapper {
+        // width: 100%;
+        margin-top: 10px;
+        p {
+          color: $white;
+          letter-spacing: 0.2em;
+          font-size: 1.2rem;
+          text-align: center;
+        }
+
+      }
+
+      .groupsbox {
+        width: 100%;
+        max-height: 170px;
+        overflow: scroll;
+        text-align: center;
+        margin-top: 20px;
+        padding: 0 10px;
+        h3 {
+          margin-bottom: 10px;
+        }
+        button{
+          background-color: $white-translucent;
+          border: none;
+          height: 30px;
+          padding: 7px;
+          margin: 5px 2px;
+          border-radius: 10px;
+          color: $white;
+          letter-spacing: 0.2em;
+          font: {
+              family: $sans;
+              size: 1rem;
+          }
+          &:focus {
+              outline: none;
+          }
+          &:hover {
+              background-color: $yellow;
+              color: $black
+          }
+        }
+      }
+
+      .buttnWrapper {
+        button {
+          background-color: $white-translucent;
+          color: $yellow;
+          font: {
+            size: 1.2rem;
+            family: $sans;
+          }
+          border-radius: 10px;
+          border: none;
+<<<<<<< HEAD
           margin-right: 10px;
+=======
+          padding: 5px 10px;
+          &:hover {
+            color: $black;
+            background-color: $yellow;
+          }
+          &:focus {
+            outline: none;
+          }
+          margin-top: 10px;
+>>>>>>> master
         }
       }
 
@@ -114,15 +207,17 @@
   }
   }
 
-  .header{
+  .header {
     width: 100%;
-    height: 20%;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     color: $white;
     font-size: 1.6em;
+    z-index: 2;
+    background-color: $black;
     position: absolute;
 
     .addNewGroup{
@@ -130,27 +225,37 @@
       height: 20px;
       margin-left: 10px;
       cursor: pointer;
-      z-index: 999;
+      z-index: 2;
 
-    .head{
-        color: $white;
-        font-family: $sans;
-        letter-spacing: .1em;
-        font-size: 1.25em;
-        margin-left: 10px;
+      .head{
+          color: $white;
+          font-family: $sans;
+          letter-spacing: .1em;
+          font-size: 1.25em;
+          margin-left: 10px;
+      }
+
+      .addGroup{
+        width: 22px;
+        height: 22px;
+        margin: .5em;
+        margin-top: 9px;
+        margin-right: 10px;
+      }
+
     }
+    .groupsbox{
+      width: 90%;
+      height: 55%;
+      padding: 5px;
+      // margin-top: 10px;
+      background-color: $black;
+      border-radius: 10px;
+      border-color: $yellow;
+      border: 2px; 
+      color: white;
 
-    .addGroup{
-      width: 22px;
-      height: 22px;
-      margin: .5em;
-      margin-top: 9px;
-      margin-right: 10px;
-    }
-  }
-
-
-
+<<<<<<< HEAD
 
 
                 button {
@@ -176,12 +281,35 @@
                 }
               }
 
+=======
+      button {
+        background-color: $white-translucent;
+        border: none;
+        height: 30px;
+        padding: 7px;
+        margin: 5px 2px;
+        border-radius: 10px;
+        color: $white;
+        letter-spacing: 0.2em;
+        font: {
+            family: $sans;
+            size: 1rem;
+        }
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            background-color: $yellow;
+            color: $black
+        }
+      }
+    }
+}
+>>>>>>> master
     .listOfGroups{
       display: flex;
-      justify-content: space-around;
-      justify-content: flex-start;
-      margin-left: 20px;
-      margin-top: 100px;
+      justify-content: center;
+
       width: 100%;
       align-items: flex-start;
       position: relative;
@@ -189,11 +317,17 @@
       .nameContainer{
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin-top: 70px;
 
       .groupName{
         color: $white;
-        letter-spacing: 1
+        letter-spacing: 0.2em;
+      }
+      button {
+        border-radius: 10px;
+        color: $white;
+        background-color: $red;
       }
 
       .seeInfo{
@@ -205,6 +339,7 @@
         height: 30px;
         font-size: 1em;
         cursor: pointer;
+
       }
     }
   }

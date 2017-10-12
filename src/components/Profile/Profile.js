@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import x from '../../images/x.png'
 import marauder from './../../images/placeholder_map.gif';
-import editIcon from '../../images/whiteEditIcon.svg'
+import editIcon from '../../images/whiteEditIcon.svg';
+import $ from 'jquery';
+import TweenMax from 'gsap';
 import {connect} from 'react-redux';
 import {getUserInfo} from './../../ducks/reducer';
-import {editUser, updateUser, editSafeHaven, heartbeat, deleteUser} from './../../controllers/socketCTRL';
+import {editUser, createEmergencyGroup, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -16,25 +18,41 @@ class Profile extends Component{
 
         this.state={
             newUsername: '',
-            newSafeHaven: '',
             toggleNameInput: false,
-            toggleSafeHavenInput: false,
-            delete: false
+            emergencyToggle: false,
+            delete: false,
+            emergencyGroupMembersByID: [],
+            emergencyGroupMembersByName: [],
+            emergencyMessage: ''
         }
         this.toggleName = this.toggleName.bind(this)
-        this.toggleSafeHaven = this.toggleSafeHaven.bind(this)
         this.addedNewName = this.addedNewName.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.changeSafeHaven = this.changeSafeHaven.bind(this)
         this.deleteModal = this.deleteModal.bind(this)
         this.confirmDelete = this.confirmDelete.bind(this)
     }
 
     componentDidMount(){
         
-        // console.log('mount profile', this.props.user)
         updateUser(getUserInfo)
-        // heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations);
+ 
+        if(this.props.emergencyGroup.length === 0){
+            this.setState({
+                emergencyToggle: true
+            })
+        } else if (this.props.emergencyGroup){
+            let x = [];
+            let y = [];
+            this.props.emergencyGroup.map(e => {
+                x.push(e.emergency_contact_id)
+                y.push(`${e.emergency_contact_firstname.toUpperCase()} ${e.emergency_contact_lastname.toUpperCase()}`)
+            })
+            this.setState({
+                emergencyGroupMembersByID: x,
+                emergencyGroupMembersByName: y,
+                emergencyMessage: this.props.emergencyGroup[0].emergency_message
+            })
+        }
     }
 
     toggleName(){
@@ -45,18 +63,6 @@ class Profile extends Component{
         } else {
             this.setState({
                 toggleNameInput: true
-            })
-        }
-    }
-
-    toggleSafeHaven(){
-        if (this.state.toggleSafeHavenInput){
-            this.setState({
-                toggleSafeHavenInput: false
-            })
-        } else {
-            this.setState({
-                toggleSafeHavenInput: true
             })
         }
     }
@@ -80,14 +86,6 @@ class Profile extends Component{
         })
     }
 
-    changeSafeHaven(){
-        editSafeHaven({safeHaven: this.state.newSafeHaven, userId: this.props.user.id})
-        this.setState({
-            toggleSafeHavenInput: false,
-            newSafeHaven: ''
-        })
-    }
-
     deleteModal(type){
         if(type === 'popup'){
             this.setState({
@@ -105,13 +103,49 @@ class Profile extends Component{
         this.props.getUserInfo({user:{username: '', firstName: '', lastName: '', email: '', profilepic: '', auth_id: '', socket_id: '', id: '', location: '', safe_haven: ''}})
     }
 
-    // componentDidMount(){
-    //     socket.emit('save socket_id', {socketID: socket.id})
-    // }
+    changeEmergencySettings(){
+        if(this.props.emergencyGroup.length === 0) {
+            createEmergencyGroup({message: this.state.emergencyMessage, group: this.state.emergencyGroupMembersByID}) 
+        } else {
+            addEmergencyContact(this.state.emergencyGroupMembersByID);
+            editEmergencyMessage(this.state.emergencyMessage);
+        }
+        this.setState({
+            emergencyToggle: false
+        })
+        
+    }
+
+    saveMessage(event){
+        event.preventDefault()
+        this.setState({
+            emergencyMessage: event.target.value
+        })
+    }
+
+    toggleFriend(event, friend) {
+        event.preventDefault()
+        let index = this.state.emergencyGroupMembersByID.indexOf(friend.friend_user_id)
+        let r = this.state.emergencyGroupMembersByID.slice(0);
+        let n = this.state.emergencyGroupMembersByName.slice(0);
+    
+        if(index >= 0) {
+            r.splice(index, 1);
+            n.splice(index, 1);
+        } else {
+            r.push(friend.friend_user_id);
+            n.push(`${friend.friend_firstname.toUpperCase()} ${friend.friend_lastname.toUpperCase()}`);
+        }
+
+        this.setState({
+            emergencyGroupMembersByID: r,
+            emergencyGroupMembersByName: n
+        })
+
+    }
 
     render(){
         let {user} = this.props;
-        // console.log('profile page user:', user)
 
         return(
             <div className="ProfileContainer">
@@ -147,20 +181,38 @@ class Profile extends Component{
 
 
 
-                <div className='nameWrapper safeHavenWrapper'>
-                    SafeHaven:
+                <div className='nameWrapper emergencyWrapper'>
                     {
-                        !this.state.toggleSafeHavenInput
+                        (!this.state.emergencyToggle)
                         ?
                         <div className="safehavenContainer">
-                            <p className="safeHaven">{this.props.user.safe_haven}</p>
-                            <img onClick={this.toggleSafeHaven} className="editIcon" src={editIcon} alt="edit"/>
+                            <p className="safeHaven">Emergency Settings</p>
+                            <img onClick={() => this.setState({emergencyToggle: true})} className="editIcon" src={editIcon} alt="edit"/>
                         </div>
                         :
                         <div className="safeHavenInputContainer">
-                            <button onClick={this.changeSafeHaven} className="addNewNameBtn">&#10004;</button>                                                        
-                            <input type="text" className="safeHavenInput" name="newSafeHaven" placeholder="New safeHaven" onChange={e=>this.handleChange(e)} value={this.state.newSafeHaven}/>
-                            <img className="editIcon editNameIcon" onClick={this.toggleSafeHaven} src={editIcon} alt="edit"/>
+                            <button onClick={() => {if(this.state.emergencyGroupMembersByID.length > 0) {this.changeEmergencySettings()}} } className="addNewNameBtn changeEmergencyStuffBtn">&#10004;</button>                                                        
+                            <span style={{color: '#d13030'}}>Emergency Settings</span>
+                            <img className="editIcon editNameIcon" onClick={() => {if(this.state.emergencyGroupMembersByID.length > 0) {this.setState({emergencyToggle: false})} }} src={editIcon} alt="edit"/>
+                            <p>Contacts:</p>
+                            <div className="recipWrapper names">
+                                {this.state.emergencyGroupMembersByName.map((e, i) => {
+                                    if (i !== this.state.emergencyGroupMembersByName.length - 1) {
+                                        return `${e}, `
+                                    } else {
+                                        return `${e}`                                        
+                                    }
+                                })}
+                            </div>
+                            <div className="recipWrapper">
+                                {this.props.friends.map((e, i) => {
+                                    return <button key={`${i}${e.friend_user_id}`} id={e.friend_user_id} style={{ backgroundColor: this.state.emergencyGroupMembersByID.indexOf(e.friend_user_id) < 0 ? 'rgba(239, 239, 239, 0.3)' : '#fef36e', color: this.state.emergencyGroupMembersByID.indexOf(e.friend_user_id) < 0 ? '#efefef' : '#111'}} onClick={event => this.toggleFriend(event, e)} >{`${e.friend_firstname} ${e.friend_lastname}`}</button>
+                                })}
+                            </div>
+                            <div className="messageWrapper">
+                                <h3>Message:</h3>
+                                <textarea maxLength="180" value={this.state.emergencyMessage} onChange={e => this.saveMessage(e)}></textarea>
+                            </div>
                         </div>
                     }
                 </div>

@@ -8,11 +8,13 @@
     letter-spacing: 1;
     text-transform: uppercase;
     z-index: 999;
+    
 
     .groupsBox{
         width: 95%;
         height: 80%;
         background-color: $white;
+        border-radius: 10px;
 
         .closeModal{
             width: 100%;
@@ -71,8 +73,9 @@
                 height: 100px;
 
                 .newGroupName{
-                    font-size: 1rem;
+                    font-size: 1.7rem;
                     line-height: 1.2em;
+                    border-radius: 10px;
                     text: {
                         align: center;
                         transform: uppercase;
