@@ -133,3 +133,7 @@ const socket = io('http://localhost:3069');
     export function friendSearch(firstName){
         socket.emit('friend search', firstName);
     }
+
+    export function updateSenderLocation(location){
+        socket.emit('update sender location', location)
+    }
