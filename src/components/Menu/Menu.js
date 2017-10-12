@@ -4,8 +4,8 @@ import x from '../../images/X.svg'
 import TweenMax from 'gsap'
 import $ from 'jquery'
 import {connect} from 'react-redux';
-import {updateLocationActive, getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} from './../../ducks/reducer';
-import {heartbeat, renameGroup, socketOn, updateSenderLocation} from './../../controllers/socketCTRL';
+import {updateLocationActive, getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup, getInitialUserInfo} from './../../ducks/reducer';
+import {heartbeat, renameGroup, socketOn, updateSenderLocation, sendCurrentUser} from './../../controllers/socketCTRL';
 import axios from 'axios';
 
 //LINK TO REDUX --> be able to change if userLoggedIn flag
@@ -15,17 +15,18 @@ class Menu extends Component{
     }
 
     componentWillMount(){
-        axios.get('/auth/me')
-            .then(response=> {
-                console.log('auth/me', response.data)
-                // this.props.getUserInfo(response.data.userInfo)
-                // this.props.getGroups(response.data.groups)
-                // this.props.getFriendsList(response.data.friends)
-                // this.props.getActiveLocations(response.data.getActiveLocations)
-                // this.props.getEmergencyGroup(response.data.getEmergencyGroup)
-                // this.props.getPendingFriendRequests(response.data.getPendingFriendRequests)
-            })
-            
+        // axios.get('/auth/me')
+        //     .then(response=> {
+        //         console.log('auth/me', response.data)
+        //         // this.props.getUserInfo(response.data)
+        //         sendCurrentUser(response.data)
+        //         // this.props.getGroups(response.data.groups)
+        //         // this.props.getFriendsList(response.data.friends)
+        //         // this.props.getActiveLocations(response.data.getActiveLocations)
+        //         // this.props.getEmergencyGroup(response.data.getEmergencyGroup)
+        //         // this.props.getPendingFriendRequests(response.data.getPendingFriendRequests)
+        //     })
+        this.props.getInitialUserInfo()    
 
         }
         
@@ -88,7 +89,8 @@ let outputActions = {
     getGroups,
     getActiveLocations,
     getPendingFriendRequests,
-    getEmergencyGroup
+    getEmergencyGroup,
+    getInitialUserInfo
 }
 
 export default connect(mapStateToProps, outputActions)(Menu);
