@@ -14,7 +14,7 @@ const express = require('express')
     , io = sockets(server)
     , port = process.env.PORT;
 
-    let currentUser = {};
+    // let currentUser = {};
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -161,6 +161,8 @@ passport.use(new Auth0Strategy({
 
 Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
 */
+
+
 // ================= AUTH ENDPOINTS =================//
 
 //authorize user
@@ -175,7 +177,7 @@ Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
 
   passport.serializeUser((user, done)=> {
     //   console.log('serialize', user)
-      currentUser = user;
+    //   currentUser = user;
       done(null, user)
   });
 
@@ -236,7 +238,7 @@ app.get('/getfriends', (req, res)=> {
 })
 
 app.get('/pendingfriendrequests', (req, res)=> {
-    app.get('db').get_pending_friend_requests([currentUser.id])
+    app.get('db').get_pending_friend_requests([req.user.id])
         .then(requests => {
         // console.log(requests)
         // pendingFriendRequests = requests
@@ -245,7 +247,7 @@ app.get('/pendingfriendrequests', (req, res)=> {
 })
 
 app.get('/getgroups', (req, res)=> {
-    app.get('db').get_groups([currentUser.id])
+    app.get('db').get_groups([req.user.id])
     .then(data => {
         let groupsObj = {};
         for(let i = 0; i < data.length; i++) {
@@ -317,19 +319,19 @@ app.get('/getactivelocations', (req, res)=> {
 
 io.on('connection', socket => {
     console.log('A user has connected, socket ID: ', socket.id);
-    let userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests;
-    // let currentUser;
+    let userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests, currentUser;
     //db get users stuff:
     //emit to socket
-    // socket.on('update current user', user=> {
-    //     currentUser = user
-    // })
+    socket.on('update current user', user=> {
+        currentUser = user
+        console.log('current user line 327', user)
+        setInterval(heartbeat, 500)
+    })
 // heartbeat updates the connected user every second
-console.log('current user', currentUser)
-// if(true) {
-    if(currentUser.id) {
-        
-    setInterval(heartbeat, 500);
+// if(currentUser) {
+    // console.log('current user 331', currentUser)
+    
+    // setInterval(heartbeat, 500);
     function heartbeat(){
         app.get('db').get_user_info([currentUser.id])
             .then(user=> {
@@ -413,7 +415,7 @@ console.log('current user', currentUser)
             // console.log('userInfo:', userInfo, 'groups:', groups, 'friends:', friends, 'activeLocations:', activeLocations)
         socket.emit('heartbeat', {userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests})
     }
-}
+// }
 
     // socket.on('save socket_id', data => {
     //     currentUser.id ?

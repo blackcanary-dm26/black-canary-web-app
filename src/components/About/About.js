@@ -12,6 +12,7 @@ import ap from './../../images/andiPlatter.jpeg';
 import apSilly from './../../images/andiPlatterSilly.jpeg';
 import at from './../../images/abigailThelin.JPG';
 import atSilly from './../../images/abigailThelinSilly.JPG';
+import {sendCurrentUser} from './../../controllers/socketCTRL';
 
 export default class About extends Component{
     constructor() {
@@ -26,6 +27,9 @@ export default class About extends Component{
     }
 
     componentDidMount() {
+        if(this.props.user.id){
+            sendCurrentUser(this.props.user)
+        }
         this.setState({
             aboutHeight: $('#about .withinSection').css('height'),
             levelsHeight: $('#levels .withinSection').css('height'),

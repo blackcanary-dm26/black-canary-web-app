@@ -3,8 +3,8 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {updateLocationActive} from './../../ducks/reducer';
-import {sendLocation} from './../../controllers/socketCTRL';
+import {updateLocationActive, getInitialEmergencyGroup, getInitialUserInfo} from './../../ducks/reducer';
+import {sendLocation, sendCurrentUser} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
 // import io from 'socket.io-client';
@@ -56,12 +56,26 @@ class LevelThree extends Component {
       }
   }
 
+//   componentWillMount(){
+//     let {getInitialUserInfo, getInitialEmergencyGroup} = this.props;
+//     getInitialUserInfo()
+//     getInitialEmergencyGroup()
+    
+// }
+
   componentDidMount(){
     console.log(this.props.match.params);
     let x = this.props.match.params.id.split("_").join(" ").toUpperCase()
     this.setState({
       title: x
     })
+
+    setTimeout(()=> {
+      if(this.props.user.id){
+          console.log('home send current user', this.props.user)
+          sendCurrentUser(this.props.user)
+      }}
+      , 500)
   }
 
   sendLocToSocket() {
@@ -109,7 +123,9 @@ function mapStateToProps(state){
 }
 
 let outputActions = {
-  updateLocationActive
+  updateLocationActive,
+  getInitialUserInfo,
+  getInitialEmergencyGroup
 }
 
 export default connect(mapStateToProps, outputActions)(LevelThree);

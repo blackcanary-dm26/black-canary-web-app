@@ -90,7 +90,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_USER_INFO,
               payload: axios.get('/userinfo')
                 .then(response => {
-                    return response
+                    return response.data
                 }) 
           }
       }
@@ -100,7 +100,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_FRIENDS_LIST,
               payload: axios.get('/getfriends')
                 .then(response=> {
-                    return response
+                    return response.data
                 })
           }
       }
@@ -110,7 +110,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_PENDING_FRIEND_REQUESTS,
               payload: axios.get('/pendingfriendrequests')
                 .then(response=> {
-                    return response
+                    return response.data
                 })
           }
       }
@@ -120,7 +120,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_GROUPS,
               payload: axios.get('/getgroups')
                 .then(response=> {
-                    return response
+                    return response.data
                 })
           }
       }
@@ -130,7 +130,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_EMERGENCY_GROUP,
               payload: axios.get('/getemergencygroup')
                 .then(response=> {
-                    return response
+                    return response.data
                 })
           }
       }
@@ -140,7 +140,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_ACTIVE_LOCATIONS,
               payload: axios.get('/getactivelocations')
                 .then(response=> {
-                    return response
+                    return response.data
                 })
           }
       }
@@ -225,7 +225,7 @@ export default function reducer(state = initialState, action){
     switch (action.type) {
         case GET_INITIAL_USER_INFO + "_FULFILLED":
             console.log('reducer get user info', action.payload)
-            return Object.assign({}, state, {user: action.payload.data})
+            return Object.assign({}, state, {user: action.payload})
             break;
         case GET_INITIAL_USER_INFO + "_REJECTED":
             console.log('ERROR get user info')

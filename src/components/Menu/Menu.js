@@ -14,23 +14,27 @@ class Menu extends Component{
         super();
     }
 
-    componentWillMount(){
-        // axios.get('/auth/me')
-        //     .then(response=> {
-        //         console.log('auth/me', response.data)
-        //         // this.props.getUserInfo(response.data)
-        //         sendCurrentUser(response.data)
-        //         // this.props.getGroups(response.data.groups)
-        //         // this.props.getFriendsList(response.data.friends)
-        //         // this.props.getActiveLocations(response.data.getActiveLocations)
-        //         // this.props.getEmergencyGroup(response.data.getEmergencyGroup)
-        //         // this.props.getPendingFriendRequests(response.data.getPendingFriendRequests)
-        //     })
-        this.props.getInitialUserInfo()    
+    // componentWillMount(){
+    //     // axios.get('/auth/me')
+    //     //     .then(response=> {
+    //     //         console.log('auth/me', response.data)
+    //     //         // this.props.getUserInfo(response.data)
+    //     //         sendCurrentUser(response.data)
+    //     //         // this.props.getGroups(response.data.groups)
+    //     //         // this.props.getFriendsList(response.data.friends)
+    //     //         // this.props.getActiveLocations(response.data.getActiveLocations)
+    //     //         // this.props.getEmergencyGroup(response.data.getEmergencyGroup)
+    //     //         // this.props.getPendingFriendRequests(response.data.getPendingFriendRequests)
+    //     //     })
+    //     this.props.getInitialUserInfo()    
 
-        }
+    //     }
         
     componentDidMount(){
+        if(this.props.user.id){
+            sendCurrentUser(this.props.user)
+        }
+
         socketOn();
         
         let {getUserInfo, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} = this.props;

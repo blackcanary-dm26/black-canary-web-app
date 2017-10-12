@@ -6,7 +6,8 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import x from '../../images/X.svg'
 import {connect} from 'react-redux'
-import {friendSearch, searchResults, deleteGroup, addGroup} from './../../controllers/socketCTRL';
+import {getInitialUserInfo, getInitialGroups, getInitialFriends} from './../../ducks/reducer';
+import {friendSearch, searchResults, deleteGroup, addGroup, sendCurrentUser} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -36,6 +37,21 @@ class Groups extends Component{
       this.handleChange = this.handleChange.bind(this)
     }
 
+    componentWillMount(){
+      let {getInitialUserInfo} = this.props;
+      getInitialUserInfo()
+      getInitialGroups()
+      getInitialFriends()
+  }
+    
+    componentDidMount(){
+      setTimeout(()=> {
+        if(this.props.user.id){
+            console.log('home send current user', this.props.user)
+            sendCurrentUser(this.props.user)
+        }}
+        , 500)
+    }
 
     handleChange(e){
       e.preventDefault();
@@ -177,6 +193,10 @@ function mapStateToProps(state){
   return state
 }
 
-let outputActions = {}
+let outputActions = {
+  getInitialUserInfo,
+  getInitialFriends,
+  getInitialGroups
+}
 
 export default connect(mapStateToProps, outputActions)(Groups)

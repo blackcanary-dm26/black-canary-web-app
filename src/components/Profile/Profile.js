@@ -6,8 +6,8 @@ import editIcon from '../../images/whiteEditIcon.svg';
 import $ from 'jquery';
 import TweenMax from 'gsap';
 import {connect} from 'react-redux';
-import {getUserInfo} from './../../ducks/reducer';
-import {editUser, createEmergencyGroup, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser} from './../../controllers/socketCTRL';
+import {getUserInfo, getInitialUserInfo, getInitialEmergencyGroup, getInitialFriends, getInitialGroups} from './../../ducks/reducer';
+import {editUser, createEmergencyGroup, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser, sendCurrentUser} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -32,10 +32,25 @@ class Profile extends Component{
         this.confirmDelete = this.confirmDelete.bind(this)
     }
 
+    componentWillMount(){
+        let {getInitialEmergencyGroup, getInitialFriends, getInitialGroups, getInitialUserInfo} = this.props;
+        getInitialUserInfo()
+        getInitialEmergencyGroup()
+        getInitialFriends()
+        getInitialUserInfo()
+    }
+
     componentDidMount(){
         
         updateUser(getUserInfo)
- 
+
+        setTimeout(()=> {
+            if(this.props.user.id){
+                console.log('home send current user', this.props.user)
+                sendCurrentUser(this.props.user)
+            }}
+            , 500)
+
         if(this.props.emergencyGroup.length === 0){
             this.setState({
                 emergencyToggle: true
@@ -53,6 +68,7 @@ class Profile extends Component{
                 emergencyMessage: this.props.emergencyGroup[0].emergency_message
             })
         }
+
     }
 
     toggleName(){
@@ -254,8 +270,12 @@ function mapStateToProps(state){
 }
 
 let outputActions = {
-    editUser,
-    getUserInfo
+    // editUser,
+    getUserInfo,
+    getInitialUserInfo,
+    getInitialEmergencyGroup,
+    getInitialFriends,
+    getInitialGroups
 }
 
 export default connect(mapStateToProps, outputActions)(Profile);

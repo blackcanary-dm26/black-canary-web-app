@@ -3,9 +3,9 @@ import addFriend from '../../images/addFriendIconReal.png'
 import x from '../../images/x.png'
 import FriendModal from './../FriendModal/FriendModal';
 import {connect} from 'react-redux';
-import {getFriendsList, getGroups} from './../../ducks/reducer';
+import {getFriendsList, getGroups, getInitialUserInfo, getInitialFriends, getInitialPendingFriendRequests, getInitialGroups} from './../../ducks/reducer';
 import FriendSearchModal from '../FriendSearchModal/FriendSearchModal'
-import {confirmFriendRequest, declineFriendRequest, deleteFriend} from './../../controllers/socketCTRL';
+import {confirmFriendRequest, declineFriendRequest, deleteFriend, sendCurrentUser} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -22,6 +22,24 @@ class Contacts extends Component{
         this.showModalMethod = this.showModalMethod.bind(this)
         this.exit = this.exit.bind(this)
         this.toggleSearch = this.toggleSearch.bind(this)
+    }
+
+    componentWillMount(){
+        let {getInitialFriends, getInitialGroups, getInitialUserInfo, getInitialPendingFriendRequests} = this.props;
+        getInitialUserInfo()
+        getInitialFriends()
+        getInitialGroups()
+        getInitialPendingFriendRequests()
+        
+    }
+
+    componentDidMount(){
+        setTimeout(()=> {
+            if(this.props.user.id){
+                console.log('home send current user', this.props.user)
+                sendCurrentUser(this.props.user)
+            }}
+            , 500)
     }
 
     showModalMethod(friend){
@@ -133,7 +151,11 @@ function mapStateToProps(state){
 
 let outputActions = {
     getFriendsList,
-    getGroups
+    getGroups,
+    getInitialUserInfo,
+    getInitialFriends,
+    getInitialGroups,
+    getInitialPendingFriendRequests
 }
 
 export default connect(mapStateToProps, outputActions)(Contacts);

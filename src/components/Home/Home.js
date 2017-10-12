@@ -5,8 +5,9 @@ import Login from '../Login/Login';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} from './../../ducks/reducer';
+import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup, getInitialUserInfo} from './../../ducks/reducer';
 // import {heartbeat, renameGroup, socketOn, updateSenderLocation} from './../../controllers/socketCTRL';
+import {sendCurrentUser} from './../../controllers/socketCTRL';
 import map from '../../images/placeholder_map.gif'
 
 // import io from 'socket.io-client';
@@ -28,8 +29,17 @@ class Home extends Component{
       }
     }
 
-    // componentDidMount(){
+    componentWillMount(){
+        this.props.getInitialUserInfo()
+    }
 
+    componentDidMount(){
+        setTimeout(()=> {
+            if(this.props.user.id){
+                console.log('home send current user', this.props.user)
+                sendCurrentUser(this.props.user)
+            }}
+            , 1000)
     //     // socket.on('connect', ()=> {
     //     //     console.log('home socket id:',socket.id)
     //     //     socket.emit('save socket_id', {socketId: socket.id})
@@ -40,7 +50,7 @@ class Home extends Component{
 
     //     heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup);
 
-    // }
+    }
 
     componentWillReceiveProps(props){
         // console.log(props)
@@ -105,7 +115,9 @@ let outputActions = {
     getGroups,
     getActiveLocations,
     getPendingFriendRequests,
-    getEmergencyGroup
+    getEmergencyGroup,
+    sendCurrentUser,
+    getInitialUserInfo
 }
 
 export default connect(mapStateToProps, outputActions)(Home);
