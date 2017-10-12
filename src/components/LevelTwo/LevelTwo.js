@@ -3,7 +3,7 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
+import {updateLocationActive} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
@@ -21,8 +21,13 @@ class LevelTwo extends Component {
         message: '',
         individualRecipients: ['should be set in profile'],
         timeActive: 0,
+        recipientIds: [], 
         groupRecipients: ['should be set in profile'],
         timeOptions: [
+          {
+            time: 0,
+            timeMS: (1000 * 60)
+          },
           {
             time: 1,
             timeMS: 3600000
@@ -57,9 +62,13 @@ class LevelTwo extends Component {
 
   componentDidMount(){
     console.log(this.props.match.params);
-    let x = this.props.match.params.id.split("_").join(" ").toUpperCase()
+    let x = this.props.match.params.id.split("_").join(" ").toUpperCase();
+    let recips = this.props.emergencyGroup.map(contact => {
+      return contact.emergency_contact_id
+    })
     this.setState({
-      title: x
+      title: x,
+      recipientIds: recips
     })
   }
 
@@ -77,16 +86,21 @@ class LevelTwo extends Component {
   }
 
   sendLocToSocket() {
-    // console.log('I am ',this.props.userLoc);
+    console.log('I am ',this.props.userLoc);
+    this.props.updateLocationActive(true);
     sendLocation({
       user_id: this.props.user.id,
       user_coordinates: this.props.userLoc,
       situation: this.state.title,
       situation_level: 2,
       message: this.state.message,
-      individual_recip: this.state.individualRecipients,
-      group_recip: this.state.groupRecipients
+      individual_recip: this.state.recipientIds,
+      // group_recip: [],
+      time_active: this.state.timeActive
     })
+    setTimeout(() => {
+      this.props.updateLocationActive(false);
+    }, +this.state.timeActive)
   }
 
   render() {
@@ -126,4 +140,8 @@ function mapStateToProps(state){
     return state;
 }
 
-export default connect(mapStateToProps)(LevelTwo);
+let outputActions = {
+  updateLocationActive
+}
+
+export default connect(mapStateToProps, outputActions)(LevelTwo);

@@ -3,7 +3,7 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations} from './../../ducks/reducer';
+import {updateLocationActive} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
@@ -19,8 +19,10 @@ class LevelThree extends Component {
         title: '',
         message: 'THIS SHOULD BE SET IN PROFILE',
         individualRecipients: ['should be set in profile'],
-        timeActive: 24 * 60 * 60 * 1000, //24 hours
+        // timeActive: 24 * 60 * 60 * 1000, //24 hours
+        timeActive: 30 * 1000, //for testing
         groupRecipients: ['should be set in profile'],
+        recipientIds: [], 
         timeOptions: [
           {
             time: 1,
@@ -63,16 +65,21 @@ class LevelThree extends Component {
   }
 
   sendLocToSocket() {
-    // console.log('I am ',this.props.userLoc);
+    console.log('I am ',this.props.userLoc);
+    this.props.updateLocationActive(true);
     sendLocation({
       user_id: this.props.user.id,
       user_coordinates: this.props.userLoc,
       situation: this.state.title,
       situation_level: 3,
       message: this.state.message,
-      individual_recip: this.state.individualRecipients,
-      group_recip: this.state.groupRecipients
+      individual_recip: this.state.recipientIds,
+      // group_recip: this.state.groupRecipients
+      time_active: this.state.timeActive
     })
+    setTimeout(() => {
+      this.props.updateLocationActive(false);
+    }, +this.state.timeActive)
   }
 
   render() {
@@ -101,4 +108,8 @@ function mapStateToProps(state){
     return state;
 }
 
-export default connect(mapStateToProps)(LevelThree);
+let outputActions = {
+  updateLocationActive
+}
+
+export default connect(mapStateToProps, outputActions)(LevelThree);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, updateLocationActive} from './../../ducks/reducer';
+import {updateLocationActive} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 

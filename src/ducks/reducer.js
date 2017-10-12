@@ -61,7 +61,7 @@ const initialState = {
         ]
     }, //array of active locations with messages and fromUser {1: [{senderName, coordinates, situation, message, alertID}]}
     //activeLocations: [], //array of active locations with messages and fromUser {senderName, coordinates, situation, message, alertID}
-    emergencyGroup: [], //{user_id, emergency_id, message, contact_id: []}
+    emergencyGroup: [], //[{emergency_contact_firstname, emergency_contact_lastname, emergency_contact_id, emergency_id, emergency_message, emergency_sender_id}]
     userLoggedIn: false
 };
 
