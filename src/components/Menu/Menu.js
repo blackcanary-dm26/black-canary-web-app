@@ -3,13 +3,28 @@ import {Link} from 'react-router-dom'
 import x from '../../images/X.svg'
 import TweenMax from 'gsap'
 import $ from 'jquery'
+import {connect} from 'react-redux';
+import {updateLocationActive} from './../../ducks/reducer';
+import {updateSenderLocation} from './../../controllers/socketCTRL';
 
 //LINK TO REDUX --> be able to change if userLoggedIn flag
-export default class Menu extends Component{
+class Menu extends Component{
+    constructor() {
+        super();
+    }
 
+    componentWillReceiveProps(props){
+        if(props.user) {
+            if(this.props.locationActive){
+                navigator.geolocation.getCurrentPosition(position => {
+                    updateSenderLocation(`${position.coords.latitude}*${position.coords.longitude}`)
+                })
+            } 
+        }
+        
+    }
     
     render(){
-      // console.log(this.props)
 
         return(
             <div className="Menu">
@@ -33,3 +48,13 @@ export default class Menu extends Component{
         )
     }
 }
+
+function mapStateToProps(state){
+    return state;
+}
+
+let outputActions = {
+    updateLocationActive
+}
+
+export default connect(mapStateToProps, outputActions)(Menu);

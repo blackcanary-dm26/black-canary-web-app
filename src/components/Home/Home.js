@@ -6,7 +6,7 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
 import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup} from './../../ducks/reducer';
-import {heartbeat, renameGroup, socketOn} from './../../controllers/socketCTRL';
+import {heartbeat, renameGroup, socketOn, updateSenderLocation} from './../../controllers/socketCTRL';
 import map from '../../images/placeholder_map.gif'
 
 // import io from 'socket.io-client';
@@ -23,7 +23,8 @@ class Home extends Component{
             lat: 40.226192,
             lng: -111.660776
         },
-        user: {username: 'Odysseus'}
+        user: {username: 'Odysseus'},
+        locationActive: false
       }
     }
 
@@ -52,9 +53,6 @@ class Home extends Component{
                     user: props.user,
                     userLoggedIn: true
                 })
-                setInterval(() => {
-                    
-                }, 1000)
 
 
             }
@@ -68,6 +66,7 @@ class Home extends Component{
                 props.updateUserLocation(`${position.coords.latitude}*${position.coords.longitude}`)
                 
             })
+            // this.locationTracker();
         }
     }
 
