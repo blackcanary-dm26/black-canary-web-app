@@ -1,0 +1,41 @@
+@import './../../sass/variables';
+
+#AlertPage {
+    margin-top: 80px;
+    width: 100vw;
+    
+    .info {
+        width: 100vw;
+        min-height: 150px;
+        // border: 1px solid red;
+        // border-radius: 10px;
+
+        // display: flex;
+        font: {
+            family: $sans;
+            size:1rem;
+        }
+        text: {
+            transform: uppercase;
+            align: center;
+        }
+        letter-spacing: 0.5em;
+        color: $white;
+        
+        .name {
+            height: 30px;
+            padding: 10px;
+        }
+        .situation{
+            height: 50px;
+            padding: 10px;
+        }
+        .message {
+            padding: 10px;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            text-transform: none;
+        }
+
+    }
+}
