@@ -93,6 +93,11 @@ const socket = io('http://localhost:3069');
         socket.emit('decline friend request', requestId)
     }
 
+    export function deleteFriend(friendTableId){
+        console.log('controller, delete friend by id:', friendTableId);
+        socket.emit('delete friend', friendTableId)
+    }
+
     export function deleteGroup(groupId){
         //on groups page
         // console.log('scktctrl delete group id',groupId)

@@ -7,12 +7,23 @@ import $ from 'jquery';
 import x from '../../images/X.svg'
 import {connect} from 'react-redux'
 import {friendSearch, searchResults, deleteGroup, addGroup} from './../../controllers/socketCTRL';
+<<<<<<< HEAD
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
+=======
+
+// import io from 'socket.io-client';
+// const socket = io('http://localhost:3069');
+
+>>>>>>> master
 class Groups extends Component{
     constructor(){
       super()
       this.state={
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         // groupName: [
         //     {name: 'urMom',
         //       friends: ['Abby', 'Janise', 'Emily', 'Duck Smith', 'Carl']},
@@ -53,6 +64,7 @@ class Groups extends Component{
         }
       })
     }
+
     exit(){
         console.log('exit')
         this.setState({
@@ -78,6 +90,7 @@ class Groups extends Component{
               index = i;
           }
       }
+
       let r = this.state.newGroup.members.slice(0);
       if(index >= 0) {
           //remove from recip and change color back
@@ -110,6 +123,7 @@ render(){
         </div>
         )
   })
+
   return(
       <div className='Groups'>
           <div className='header'>
