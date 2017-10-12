@@ -6,8 +6,8 @@ import editIcon from '../../images/whiteEditIcon.svg';
 import $ from 'jquery';
 import TweenMax from 'gsap';
 import {connect} from 'react-redux';
-import {getUserInfo} from './../../ducks/reducer';
-import {editUser, createEmergencyGroup, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser} from './../../controllers/socketCTRL';
+import {getUserInfo, getInitialUserInfo, getInitialEmergencyGroup, getInitialFriends, getInitialGroups} from './../../ducks/reducer';
+import {editUser, createEmergencyGroup, editEmergencyMessage, addEmergencyContact, updateUser, editSafeHaven, heartbeat, deleteUser, sendCurrentUser} from './../../controllers/socketCTRL';
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -32,10 +32,25 @@ class Profile extends Component{
         this.confirmDelete = this.confirmDelete.bind(this)
     }
 
+    componentWillMount(){
+        let {getInitialEmergencyGroup, getInitialFriends, getInitialGroups, getInitialUserInfo} = this.props;
+        getInitialUserInfo()
+        getInitialEmergencyGroup()
+        getInitialFriends()
+        getInitialUserInfo()
+    }
+
     componentDidMount(){
         
         updateUser(getUserInfo)
- 
+
+        setTimeout(()=> {
+            if(this.props.user.id){
+                console.log('home send current user', this.props.user)
+                sendCurrentUser(this.props.user)
+            }}
+            , 500)
+
         if(this.props.emergencyGroup.length === 0){
             this.setState({
                 emergencyToggle: true
@@ -53,6 +68,7 @@ class Profile extends Component{
                 emergencyMessage: this.props.emergencyGroup[0].emergency_message
             })
         }
+
     }
 
     toggleName(){
@@ -157,7 +173,7 @@ class Profile extends Component{
                         !this.state.toggleNameInput
                         ?
                         <div className='nameContainer'>
-                            <div className="name">{this.props.user.username}</div>
+                            <div className="name">{user ? user.username : 'USER'}</div>
                             <img className="editIcon" onClick={this.toggleName} src={editIcon} alt="edit"/>
                         </div>
 
@@ -174,7 +190,7 @@ class Profile extends Component{
 
                     <div className="imgContainer">
                         <div>
-                            <img className="imgPlaceholder" src={this.props.user.profilepic ? this.props.user.profilepic : marauder} alt='user'/>
+                            <img className="imgPlaceholder" src={this.props.user ? this.props.user.profilepic : marauder} alt='user'/>
                         </div>
                     </div>
 
@@ -205,9 +221,13 @@ class Profile extends Component{
                                 })}
                             </div>
                             <div className="recipWrapper">
-                                {this.props.friends.map((e, i) => {
+                                {this.props.friends ? 
+                                    this.props.friends.map((e, i) => {
                                     return <button key={`${i}${e.friend_user_id}`} id={e.friend_user_id} style={{ backgroundColor: this.state.emergencyGroupMembersByID.indexOf(e.friend_user_id) < 0 ? 'rgba(239, 239, 239, 0.3)' : '#fef36e', color: this.state.emergencyGroupMembersByID.indexOf(e.friend_user_id) < 0 ? '#efefef' : '#111'}} onClick={event => this.toggleFriend(event, e)} >{`${e.friend_firstname} ${e.friend_lastname}`}</button>
-                                })}
+                                })
+                                : 
+                                null
+                                }
                             </div>
                             <div className="messageWrapper">
                                 <h3>Message:</h3>
@@ -250,8 +270,12 @@ function mapStateToProps(state){
 }
 
 let outputActions = {
-    editUser,
-    getUserInfo
+    // editUser,
+    getUserInfo,
+    getInitialUserInfo,
+    getInitialEmergencyGroup,
+    getInitialFriends,
+    getInitialGroups
 }
 
 export default connect(mapStateToProps, outputActions)(Profile);

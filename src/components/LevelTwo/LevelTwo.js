@@ -3,8 +3,8 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {updateLocationActive} from './../../ducks/reducer';
-import {sendLocation} from './../../controllers/socketCTRL';
+import {updateLocationActive, getInitialFriends, getInitialGroups} from './../../ducks/reducer';
+import {sendLocation, sendCurrentUser} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
 // import io from 'socket.io-client';
@@ -60,6 +60,12 @@ class LevelTwo extends Component {
       }
   }
 
+//   componentWillMount(){
+//     let {getInitialFriends, getInitialGroups} = this.props;
+//     getInitialFriends()
+//     getInitialGroups()
+// }
+
   componentDidMount(){
     console.log(this.props.match.params);
     let x = this.props.match.params.id.split("_").join(" ").toUpperCase();
@@ -70,6 +76,13 @@ class LevelTwo extends Component {
       title: x,
       recipientIds: recips
     })
+
+    setTimeout(()=> {
+      if(this.props.user.id){
+          console.log('home send current user', this.props.user)
+          sendCurrentUser(this.props.user)
+      }}
+      , 500)
   }
 
   saveMessage(event){
@@ -141,7 +154,9 @@ function mapStateToProps(state){
 }
 
 let outputActions = {
-  updateLocationActive
+  updateLocationActive,
+  getInitialFriends,
+  getInitialGroups
 }
 
 export default connect(mapStateToProps, outputActions)(LevelTwo);
