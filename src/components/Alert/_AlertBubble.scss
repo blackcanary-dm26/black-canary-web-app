@@ -9,6 +9,11 @@
         display: flex;
         flex-wrap: wrap;
 
+        a {
+            color: $white;
+            text-decoration: none;
+            height: 80px;
+        }
 
         .container{
             width: 100vw;
@@ -28,7 +33,6 @@
                 width: 100vw;
                 color: $white;
                 height: 50px;
-                // border: 1px solid blue;
                 display: flex;
                 align-items: center;
                 
@@ -44,45 +48,12 @@
                 }
             }
 
-            .messageContainer{
-                display: flex;
-                // height: 0px;
-                overflow: hidden;
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
-                // border: 1px solid blue;
-                .message {
-                    text-align: center;
-                    line-height: 1.2em;
-                    width: 100%;
-                    padding: 0 30px;
-                }
-            }
-
-            .mapHere {
-                display: block;
-                width: 100vw;
-                height: 400px;
-            }
+            // .mapHere {
+            //     display: block;
+            //     width: 100vw;
+            //     height: 400px;
+            // }
             
         }
 
     }
-
-    // @media (min-width: 600px) {
-    //     .alertBubble{
-        
-    //         .container{
-    //             width: 600px;
-    //         }
-    //     }
-    // }
-    // @media (min-width: 900px) {
-    //     .alertBubble{
-        
-    //         .container{
-    //             width: 800px;
-    //         }
-    //     }
-    // }

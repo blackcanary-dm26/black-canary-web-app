@@ -12,6 +12,7 @@ import Contacts from './components/Contacts/Contacts'
 import About from './components/About/About'
 import Menu from './components/Menu/Menu'
 import Alerts from './components/Alert/Alert'
+import AlertPage from './components/AlertPage/AlertPage'
 import Groups from './components/Groups/Groups.js'
 
 
@@ -28,7 +29,8 @@ export default (
         <Route component={About} path='/about'/>
         <Route component={Contacts} path='/contacts'/>
         <Route component={Menu} path='/menu'/>
-        <Route component={Alerts} path='/alerts'/>
+        <Route component={Alerts} exact path='/alerts'/>
+        <Route component={AlertPage} path='/alerts/:situationLevel/:senderName/:situation'/>
         <Route component={Groups} path='/groups'/>
     </Switch>
 )

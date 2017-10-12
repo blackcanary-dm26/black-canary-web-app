@@ -85,10 +85,7 @@ class Home extends Component{
                     <Link to='/profile'> <p className="head"> PROFILE</p> </Link>
                 </div>
                 <MapContainer styleMapContainer={{height: '60vh', width: '100vw'}} style={{width: '100vw'}} isHome={true} canary={{name: `User`, lat: this.state.location.lat, lng: this.state.location.lng }}/>
-                {/* <div className="redirect">
-                    <p>You do not have any emergency contacts set. Please add your emergency contacts.</p>
-                    <Link to="/profile">Set Emergency Contacts</Link>
-                </div> */}
+                
             </div>
         )
     }
