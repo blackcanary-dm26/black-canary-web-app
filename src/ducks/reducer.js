@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const initialState = {
     user: {
         username: 'Odysseus',
@@ -67,6 +69,7 @@ const initialState = {
 
 
 const GET_USER_INFO = 'GET_USER_INFO',
+    GET_INITIAL_USER_INFO = 'GET_INITIAL_USER_INFO',
       UPDATE_USER_LOCATION = 'UPDATE_USER_LOCATION',
       GET_FRIENDS_LIST = 'GET_FRIENDS_LIST',
       GET_PENDING_FRIEND_REQUESTS = 'GET_PENDING_FRIEND_REQUESTS',
@@ -83,6 +86,16 @@ export function getUserInfo(user){
     return {
         type: GET_USER_INFO,
         payload: user 
+    }
+}
+
+export function getInitialUserInfo(){
+    return {
+        type: GET_INITIAL_USER_INFO,
+        payload: axios.get('/userinfo')
+        .then(response => {
+            return response
+        }) 
     }
 }
 
@@ -155,8 +168,16 @@ export default function reducer(state = initialState, action){
 
     switch (action.type) {
         case GET_USER_INFO:
-            // console.log('reducer get user info', action.payload)
-            return Object.assign({}, state, {user: action.payload})
+        // console.log('pending get user info')
+        return Object.assign({}, state, {user: action.payload})
+        break;
+        case GET_INITIAL_USER_INFO + "_FULFILLED":
+            console.log('reducer get user info', action.payload)
+            return Object.assign({}, state, {user: action.payload.data})
+            break;
+            case GET_INITIAL_USER_INFO + "_REJECTED":
+            console.log('ERROR get user info')
+            // return Object.assign({}, state, {user: action.payload})
             break;
         case UPDATE_USER_LOCATION:
             // console.log('reducer get user info', action.payload)
