@@ -12,7 +12,7 @@ const socket = io('http://localhost:3069');
     
     export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup){ //in home component 
         socket.on('heartbeat', data=> {
-            // console.log('data in controller', data.activeLocations)
+            console.log('data in controller', data.emergencyGroup)
             //pass in action reducers to heartbeat function in component
             getFriendsList(data.friends);
             getUserInfo(data.userInfo);

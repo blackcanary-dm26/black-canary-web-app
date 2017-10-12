@@ -230,11 +230,13 @@ if(currentUser.id) {
             .then(alert=> {
                 console.log('send location alert[0]', alert[0])
                 let all = [...data.individual_recip];
-                data.group_recip.map(group => {
-                    group.members.map(member => {
-                        all.push(member.userID)
-                    })
-                });
+                if(data.group_recip) {
+                    data.group_recip.map(group => {
+                        group.members.map(member => {
+                            all.push(member.userID)
+                        })
+                    });
+                }
                 let x = new Set(all);
                 allRecip = Array.from(x);
 
