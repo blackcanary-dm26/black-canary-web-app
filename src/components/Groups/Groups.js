@@ -7,23 +7,14 @@ import $ from 'jquery';
 import x from '../../images/X.svg'
 import {connect} from 'react-redux'
 import {friendSearch, searchResults, deleteGroup, addGroup} from './../../controllers/socketCTRL';
-<<<<<<< HEAD
-// import io from 'socket.io-client';
-// const socket = io('http://localhost:3069');
-=======
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
 
->>>>>>> master
 class Groups extends Component{
     constructor(){
       super()
       this.state={
-<<<<<<< HEAD
-=======
-
->>>>>>> master
         // groupName: [
         //     {name: 'urMom',
         //       friends: ['Abby', 'Janise', 'Emily', 'Duck Smith', 'Carl']},
@@ -60,8 +51,9 @@ class Groups extends Component{
       this.setState({
         newGroup: {
           group_name: '',
-          members: []
-        }
+          members: [],
+        },
+          AddGroupModal: false
       })
     }
 
@@ -152,7 +144,7 @@ render(){
                   </div>
                 </div>
                       <div>
-                        <button onClick={()=> this.addNewGroup()}>ADD GROUP</button>
+                        <button className="addNewGroup" onClick={()=> this.addNewGroup()}>ADD GROUP</button>
                       </div>
               </div>
             </div>

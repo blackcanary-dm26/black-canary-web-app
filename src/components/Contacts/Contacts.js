@@ -5,11 +5,8 @@ import FriendModal from './../FriendModal/FriendModal';
 import {connect} from 'react-redux';
 import {getFriendsList, getGroups} from './../../ducks/reducer';
 import FriendSearchModal from '../FriendSearchModal/FriendSearchModal'
-<<<<<<< HEAD
-import {confirmFriendRequest, declineFriendRequest} from './../../controllers/socketCTRL';
-=======
+
 import {confirmFriendRequest, declineFriendRequest, deleteFriend} from './../../controllers/socketCTRL';
->>>>>>> master
 
 // import io from 'socket.io-client';
 // const socket = io('http://localhost:3069');
@@ -103,7 +100,7 @@ class Contacts extends Component{
 
     }
 
-    toggleSearch(){
+    toggleSearch(input){
       this.setState({
         showSearch: !this.state.showSearch
       })
@@ -174,7 +171,9 @@ class Contacts extends Component{
                     {
                       this.state.showSearch
                       ?
-                      <FriendSearchModal toggleSearch={this.toggleSearch} />
+                      <FriendSearchModal toggleSearch={this.toggleSearch} 
+                      
+                      />
                       :
                       null
                     }
