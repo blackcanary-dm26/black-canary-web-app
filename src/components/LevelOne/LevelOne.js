@@ -23,7 +23,7 @@ class LevelOne extends Component {
         timeOptions: [
           {
             time: 0,
-            timeMS: (1000 * 20)
+            timeMS: (1000 * 60)
           },
           {
             time: 1,
