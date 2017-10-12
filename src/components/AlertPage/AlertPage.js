@@ -50,12 +50,11 @@ class AlertPage extends Component{
 
 
     render(){
-        // console.log('in the render', this.props)
         return(
             <div id="AlertPage">
                 <div className="info">
                     <div className="name">{this.state.name}</div>
-                    <div className="situation">{this.state.situation}</div>
+                    <div className="situation" style={{color: this.props.match.params.situationLevel === "2" ? "#FEF36E" : this.props.match.params.situationLevel === "3" ? "#d13030" : "#efefef"}}>{this.state.situation}</div>
                     <div className="message">{this.state.message}</div>
                 </div>
                 <MapContainer isHome={false} styleMapContainer={{height: '60vh', width: '100vw'}} canary={{name: this.state.name, lat: this.state.coordinates.lat, lng: this.state.coordinates.lng}}/>
