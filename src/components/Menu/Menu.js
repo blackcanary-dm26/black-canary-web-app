@@ -68,7 +68,7 @@ class Menu extends Component{
                       <Link onClick={()=> this.props.toggleMenu('exit')} to='/profile' className="profile buttn" > Profile</Link>
                       <Link onClick={()=> this.props.toggleMenu('exit')} to='/situations' className="situations buttn">Situations</Link>
                       <Link onClick={()=> this.props.toggleMenu('exit')} to='/about' className="about buttn">About</Link>
-                      <a onClick={()=> this.props.toggleMenu('exit')} href='http://localhost:3069/auth/logout' className="logout buttn">Logout</a>
+                      <a onClick={()=> this.props.toggleMenu('exit')} href='/auth/logout' className="logout buttn">Logout</a>
                       <div className="exit">
                           <img className="x" onClick={()=> this.props.toggleMenu('exit')} src={x} alt="close"/>
                       </div>

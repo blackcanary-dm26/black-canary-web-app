@@ -241,7 +241,7 @@ class Profile extends Component{
                 <div className="navigationBtns">
                     <Link className="contacts" to="/contacts">CONTACTS</Link>
                     <Link className="contacts" to="/groups">GROUPS</Link>
-                    <a href='http://localhost:3069/auth/logout'> <p className="logOut">LOGOUT</p> </a>
+                    <a href='/auth/logout'> <p className="logOut">LOGOUT</p> </a>
                     {
                         !this.state.delete
                         ?

@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-const socket = io('http://localhost:3069');
+const socket = io('/');
 
 //these functions are invoked in their components' componentsDidMount() life cycle method
 

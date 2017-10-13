@@ -59,7 +59,7 @@ class Contacts extends Component{
 
     }
 
-    toggleSearch(){
+    toggleSearch(input){
       this.setState({
         showSearch: !this.state.showSearch
       })
@@ -136,7 +136,9 @@ class Contacts extends Component{
                     {
                       this.state.showSearch
                       ?
-                      <FriendSearchModal toggleSearch={this.toggleSearch} />
+                      <FriendSearchModal toggleSearch={this.toggleSearch} 
+                      
+                      />
                       :
                       null
                     }
