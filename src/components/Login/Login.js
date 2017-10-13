@@ -41,7 +41,7 @@ class Login extends Component {
               </div>
             </div>
             <div className="infoWrapper">
-              <a href="http://localhost:3069/auth"><button>LOGIN OR SIGN UP</button></a>
+              <a href="/auth"><button>LOGIN OR SIGN UP</button></a>
               {/*REMOVE THE LINK ONCE ALL IS SET UP*/}
             </div>
           </div>
