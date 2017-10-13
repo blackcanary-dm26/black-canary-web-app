@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
-import {updateLocationActive} from './../../ducks/reducer';
-import {sendLocation} from './../../controllers/socketCTRL';
+import {updateLocationActive, getInitialFriends, getInitialGroups} from './../../ducks/reducer';
+import {sendLocation, sendCurrentUser} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
 // import io from 'socket.io-client';
@@ -57,11 +57,25 @@ class LevelOne extends Component {
       }
   }
 
+//   componentWillMount(){
+//     let {getInitialFriends, getInitialGroups, getInitialUserInfo, getInitialPendingFriendRequests} = this.props;
+//     getInitialFriends()
+//     getInitialGroups()
+    
+// }
+
   componentDidMount(){
     let x = this.props.match.params.id.split("_").join(" ").toUpperCase()
     this.setState({
       title: x
     })
+
+    setTimeout(()=> {
+      if(this.props.user.id){
+          console.log('home send current user', this.props.user)
+          sendCurrentUser(this.props.user)
+      }}
+      , 500)
   }
 
   setCustomTitle(event){
@@ -218,7 +232,9 @@ function mapStateToProps(state){
 }
 
 let outputActions = {
-  updateLocationActive
+  updateLocationActive,
+  getInitialFriends,
+  getInitialGroups
 }
 
 export default connect(mapStateToProps, outputActions)(LevelOne);

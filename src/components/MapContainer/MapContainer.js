@@ -45,11 +45,6 @@ export class MapContainer extends Component {
             canary.icon = friends;
             this.setState({
                 canary: canary,
-                style: {
-                    width: '100vw',
-                    height: '400px',
-                    margin: '0'
-                }
             })
         }
         

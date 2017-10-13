@@ -12,7 +12,7 @@ const socket = io('/');
     
     export function heartbeat(getFriendsList, getUserInfo, getGroups, getActiveLocations, getPendingFriendRequests, getEmergencyGroup){ //in home component 
         socket.on('heartbeat', data=> {
-            console.log('data in controller', data.emergencyGroup)
+            // console.log('data in controller', data.emergencyGroup)
             //pass in action reducers to heartbeat function in component
             getFriendsList(data.friends);
             getUserInfo(data.userInfo);
@@ -136,4 +136,8 @@ const socket = io('/');
 
     export function updateSenderLocation(location){
         socket.emit('update sender location', location)
+    }
+    
+    export function sendCurrentUser(user){
+        socket.emit('update current user', user)
     }

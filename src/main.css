@@ -9,6 +9,7 @@
 @import url("https://fonts.googleapis.com/css?family=ABeeZee|Crushed");
 @import url("https://fonts.googleapis.com/css?family=ABeeZee|Crushed");
 @import url("https://fonts.googleapis.com/css?family=ABeeZee|Crushed");
+@import url("https://fonts.googleapis.com/css?family=ABeeZee|Crushed");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -1677,6 +1678,10 @@ table {
   justify-content: center;
   display: flex;
   flex-wrap: wrap; }
+  .alertBubble a {
+    color: #efefef;
+    text-decoration: none;
+    height: 80px; }
   .alertBubble .container {
     width: 100vw;
     border-radius: 10px;
@@ -1701,21 +1706,30 @@ table {
         margin-right: 10px; }
         .alertBubble .container .from em:hover {
           color: #111; }
-    .alertBubble .container .messageContainer {
-      display: flex;
-      overflow: hidden;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap; }
-      .alertBubble .container .messageContainer .message {
-        text-align: center;
-        line-height: 1.2em;
-        width: 100%;
-        padding: 0 30px; }
-    .alertBubble .container .mapHere {
-      display: block;
-      width: 100vw;
-      height: 400px; }
+
+#AlertPage {
+  margin-top: 80px;
+  width: 100vw; }
+  #AlertPage .info {
+    width: 100vw;
+    min-height: 150px;
+    font-family: "ABeeZee", sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.5em;
+    color: #efefef; }
+    #AlertPage .info .name {
+      height: 30px;
+      padding: 10px; }
+    #AlertPage .info .situation {
+      height: 50px;
+      padding: 10px; }
+    #AlertPage .info .message {
+      padding: 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: none; }
 
 .GroupsModal {
   width: 100%;
