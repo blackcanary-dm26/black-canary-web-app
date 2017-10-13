@@ -26,7 +26,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(express.static(__dirname + './../build')) //npm build to deploy app
+app.use(express.static(__dirname + '/../build')) //npm build to deploy app
 
 massive({
     host: process.env.DB_HOST,
@@ -171,8 +171,8 @@ Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
 
 //redirect user to home page
   app.get('/auth/callback', passport.authenticate('auth0', {
-      successRedirect: `http://localhost:3070/#/home`,
-      failureRedirect: `http://localhost:3070/#/`
+      successRedirect: `/#/home`,
+      failureRedirect: `/#/`
   }));
 
   passport.serializeUser((user, done)=> {
@@ -189,7 +189,6 @@ Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
          done(null, user[0])
       })
   });
-
   app.get('/auth/me', (req, res, next) => {
       console.log('req.user', req.user)
       let response, status=200
@@ -214,7 +213,7 @@ Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
   //log out
   app.get('/auth/logout', (req, res)=> {
       req.logOut();
-      res.redirect(302, 'http://localhost:3070/#/')
+      res.redirect(302, '/')
   });
 
 // ========================== ENDPOINTS ===============================//

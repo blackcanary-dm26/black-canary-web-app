@@ -16,7 +16,6 @@ class Groups extends Component{
     constructor(){
       super()
       this.state={
-
         // groupName: [
         //     {name: 'urMom',
         //       friends: ['Abby', 'Janise', 'Emily', 'Duck Smith', 'Carl']},
@@ -59,14 +58,12 @@ class Groups extends Component{
         newGroupName: e.target.value
       })
     }
-
     showModalMethod(group){
       this.setState({
         groupModal: true,
         group
       })
     }
-
     addNewGroup(){
 
       addGroup({group_name: this.state.newGroupName, members: this.state.newGroupMembers})
@@ -84,7 +81,6 @@ class Groups extends Component{
             AddGroupModal: false
         })
     }
-
     addNewGroupModal(input){
       if(input==="show"){
         this.setState({
@@ -96,9 +92,7 @@ class Groups extends Component{
         })
       }
     }
-
 //=============== SOMETHING WEIRD GOING ON PLS HELP ================//
-
     toggleFriendAdd(event, friend) {
       event.preventDefault();
       let index = this.state.newGroupMembers.indexOf(friend.friend_user_id);
@@ -117,9 +111,6 @@ class Groups extends Component{
           newGroupMembers: r
       })
   }
-
-
-
 render(){
   let {groups, friends} = this.props
   let allGroups;
@@ -139,12 +130,10 @@ render(){
 
   return(
       <div className='Groups'>
-
           <div className='header'>
             <p>GROUPS</p>
             <img onClick={_=>this.addNewGroupModal("show")} className="addNewGroup" src={editIcon} alt=""/>
           </div>
-
           {
             !this.state.AddGroupModal
             ?
@@ -175,9 +164,7 @@ render(){
               </div>
             </div>
           }
-
             {
-
               !this.state.groupModal
               ?
                 <div style={{marginBottom: '20px'}}>{allGroups}</div>
@@ -188,7 +175,6 @@ render(){
   )
 }
 }
-
 function mapStateToProps(state){
   return state
 }
