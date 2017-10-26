@@ -166,7 +166,7 @@ Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
 // ================= AUTH ENDPOINTS =================//
 
 //authorize user
-  app.get('/auth', passport.authenticate('auth0'));
+  app.get('/auth/', passport.authenticate('auth0'));
 
 
 //redirect user to home page

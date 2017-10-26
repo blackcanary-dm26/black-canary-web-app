@@ -113,7 +113,6 @@ let outputActions = {
     getActiveLocations,
     getPendingFriendRequests,
     getEmergencyGroup,
-    sendCurrentUser,
     getInitialUserInfo
 }
 
