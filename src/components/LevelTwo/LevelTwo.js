@@ -3,7 +3,7 @@ import TweenMax from 'gsap';
 import $ from 'jquery';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {updateLocationActive, getInitialFriends, getInitialGroups} from './../../ducks/reducer';
+import {updateLocationActive, getInitialEmergencyGroup, getInitialUserInfo} from './../../ducks/reducer';
 import {sendLocation, sendCurrentUser} from './../../controllers/socketCTRL';
 // import blackCanaryLogo from './../../images/canaryLogoWithoutWords.svg';
 
@@ -24,10 +24,6 @@ class LevelTwo extends Component {
         recipientIds: [], 
         groupRecipients: ['should be set in profile'],
         timeOptions: [
-          {
-            time: 0,
-            timeMS: (1000 * 60)
-          },
           {
             time: 1,
             timeMS: 3600000
@@ -60,11 +56,12 @@ class LevelTwo extends Component {
       }
   }
 
-//   componentWillMount(){
-//     let {getInitialFriends, getInitialGroups} = this.props;
-//     getInitialFriends()
-//     getInitialGroups()
-// }
+  componentWillMount(){
+    let {getInitialUserInfo, getInitialEmergencyGroup} = this.props;
+    getInitialUserInfo()
+    getInitialEmergencyGroup()
+    
+  }
 
   componentDidMount(){
     console.log(this.props.match.params);
@@ -136,14 +133,14 @@ class LevelTwo extends Component {
                 </select>
               </div>
               <div className="buttnWrapper">
-                <button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button>
+                <Link to="/home"><button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button></Link>
               </div>
             </section>
           </div>
-          <div className="redirect">
+          {/* <div className="redirect">
               <p>You do not have any emergency contacts set. Please add your emergency contacts.</p>
               <Link to="/profile">Set Emergency Contacts</Link>
-          </div>
+          </div> */}
         </div>
     );
   }
@@ -155,8 +152,8 @@ function mapStateToProps(state){
 
 let outputActions = {
   updateLocationActive,
-  getInitialFriends,
-  getInitialGroups
+  getInitialUserInfo,
+  getInitialEmergencyGroup
 }
 
 export default connect(mapStateToProps, outputActions)(LevelTwo);
