@@ -110,10 +110,12 @@ export default class GroupsModal extends Component{
 
                     </div>
 
-                    <div>
-                        <p className="title">members:</p>
-                        <div className="list">{membersOfGroup}</div>
-                    <button className="deleteButton" onClick={()=> deleteGroup(this.props.group.groupID)}>DELETE THIS GROUP</button>
+                    <div className="membersContainer">
+                        <div className="membersWrapper">
+                            <p className="title">members:</p>
+                            <div className="list">{membersOfGroup}</div>
+                            <button className="deleteButton" onClick={()=> deleteGroup(this.props.group.groupID)}>DELETE THIS GROUP</button>
+                        </div>
                     </div>
 
                 </div>

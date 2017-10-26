@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TweenMax from 'gsap';
 import $ from 'jquery';
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {getUserInfo, updateUserLocation, getFriendsList, getGroups, getActiveLocations, updateLocationActive} from './../../ducks/reducer';
 import {sendLocation} from './../../controllers/socketCTRL';
@@ -21,10 +22,6 @@ class LevelOne extends Component {
         timeActive: 60 * 1000 * 60,
         groupRecipients: [],
         timeOptions: [
-          {
-            time: 0,
-            timeMS: (1000 * 60)
-          },
           {
             time: 1,
             timeMS: 3600000
@@ -204,7 +201,7 @@ class LevelOne extends Component {
                 </select>
               </div>
               <div className="buttnWrapper">
-                <button onClick={() => {this.sendLocToSocket()}}>SEND</button>
+                <Link to='/home'><button onClick={() => {this.sendLocToSocket()}}>SEND</button></Link>
               </div>
             </section>
           </div>

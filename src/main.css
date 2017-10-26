@@ -313,6 +313,7 @@ table {
         color: #FEF36E;
         background-color: #3a3a3a;
         width: 90px;
+        font-family: "ABeeZee", sans-serif;
         margin-top: 1em;
         border: none;
         height: 30px;
@@ -1687,6 +1688,7 @@ table {
       text-transform: none; }
 
 .GroupsModal {
+  margin-top: 10px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -1695,7 +1697,7 @@ table {
   font-family: "ABeeZee", sans-serif;
   letter-spacing: 1;
   text-transform: uppercase;
-  z-index: 999; }
+  z-index: 7; }
   .GroupsModal .groupsBox {
     width: 95%;
     height: 80%;
@@ -1712,13 +1714,19 @@ table {
         cursor: pointer;
         margin-left: 10px;
         margin-top: 10px; }
+    .GroupsModal .groupsBox .membersContainer {
+      height: 290px;
+      margin-top: 30px;
+      overflow: scroll; }
     .GroupsModal .groupsBox .header {
       width: 100%;
       display: flex;
       align-items: flex-start;
       position: relative;
       color: #111;
-      font-size: 1.7em; }
+      font-size: 1.7em;
+      background-color: #efefef;
+      border-radius: 10px; }
       .GroupsModal .groupsBox .header .heady {
         display: flex;
         flex-direction: row;
