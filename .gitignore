@@ -2,5 +2,3 @@
 .env
 src/components/MapContainer/config.js
 debug.log
-
-yarn.lock
