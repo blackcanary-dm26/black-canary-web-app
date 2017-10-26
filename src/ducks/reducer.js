@@ -130,6 +130,7 @@ const GET_USER_INFO = 'GET_USER_INFO',
               type: GET_INITIAL_EMERGENCY_GROUP,
               payload: axios.get('/getemergencygroup')
                 .then(response=> {
+                    console.log(response.data, 'this is the emergency group!')
                     return response.data
                 })
           }

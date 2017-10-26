@@ -100,6 +100,26 @@
                 z-index: 55;
             }
         }
+
+        a {
+            width: 100vw;
+            color: $yellow;
+            margin-top: 30px;
+            text: {
+                transform: uppercase;
+                decoration: none;
+                align: center;
+            }
+            font: {
+                family: $sans;
+                size: 1rem;
+            }
+            letter-spacing: 0.2em;
+            &:hover {
+                color: $white;
+            }
+            
+        }
     }
 
     img {

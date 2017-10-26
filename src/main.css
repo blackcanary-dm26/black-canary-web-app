@@ -358,6 +358,7 @@ table {
         color: #FEF36E;
         background-color: #3a3a3a;
         width: 90px;
+        font-family: "ABeeZee", sans-serif;
         margin-top: 1em;
         border: none;
         height: 30px;
@@ -457,6 +458,18 @@ table {
         #login .loginWrapper .infoWrapper button:hover {
           background-color: #FEF36E;
           color: #111; }
+    #login .loginWrapper a {
+      width: 100vw;
+      color: #FEF36E;
+      margin-top: 30px;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      font-family: "ABeeZee", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em; }
+      #login .loginWrapper a:hover {
+        color: #efefef; }
   #login img {
     width: 300px;
     z-index: 99; }
@@ -1326,6 +1339,41 @@ table {
     #About header h3 {
       width: 100vw;
       text-align: center; }
+  #About #intro {
+    width: 320px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: "ABeeZee", sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    letter-spacing: 0.2em;
+    color: #efefef; }
+    #About #intro ul {
+      width: 320px;
+      margin-top: 20px;
+      background-color: #87835e;
+      color: #111;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left; }
+      #About #intro ul li {
+        margin-top: 20px;
+        width: 300px;
+        overflow: scroll; }
+      #About #intro ul em {
+        text-transform: uppercase; }
+    #About #intro a {
+      color: #FEF36E;
+      text-decoration: none; }
+    #About #intro p {
+      margin: 10px 0;
+      padding: 0 10px; }
+    #About #intro .videoTour {
+      border-radius: 10px;
+      border: solid 2px #FEF36E;
+      padding: 20px; }
   #About #about,
   #About #levels,
   #About #tech,
@@ -1456,6 +1504,12 @@ table {
       margin-top: 20px; }
 
 @media (min-width: 600px) {
+  #About #intro {
+    width: 550px; }
+    #About #intro ul {
+      width: 550px; }
+      #About #intro ul li {
+        width: 550px; }
   #About #about,
   #About #levels,
   #About #tech,
@@ -1481,6 +1535,12 @@ table {
       width: 550px; } }
 
 @media (min-width: 900px) {
+  #About #intro {
+    width: 700px; }
+    #About #intro ul {
+      width: 700px; }
+      #About #intro ul li {
+        width: 700px; }
   #About #about,
   #About #levels,
   #About #tech,
@@ -1732,6 +1792,7 @@ table {
       text-transform: none; }
 
 .GroupsModal {
+  margin-top: 10px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -1740,7 +1801,7 @@ table {
   font-family: "ABeeZee", sans-serif;
   letter-spacing: 1;
   text-transform: uppercase;
-  z-index: 999; }
+  z-index: 7; }
   .GroupsModal .groupsBox {
     width: 95%;
     height: 80%;
@@ -1757,13 +1818,19 @@ table {
         cursor: pointer;
         margin-left: 10px;
         margin-top: 10px; }
+    .GroupsModal .groupsBox .membersContainer {
+      height: 290px;
+      margin-top: 30px;
+      overflow: scroll; }
     .GroupsModal .groupsBox .header {
       width: 100%;
       display: flex;
       align-items: flex-start;
       position: relative;
       color: #111;
-      font-size: 1.7em; }
+      font-size: 1.7em;
+      background-color: #efefef;
+      border-radius: 10px; }
       .GroupsModal .groupsBox .header .heady {
         display: flex;
         flex-direction: row;

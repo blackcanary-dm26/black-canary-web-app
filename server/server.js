@@ -455,7 +455,7 @@ io.on('connection', socket => {
     })
 
     socket.on('update sender location', location=> {
-        console.log('updated location', location)
+        // console.log('updated location', location)
         app.get('db').update_sender_location([location, currentUser.id])
     })
 

@@ -67,6 +67,64 @@
     justify-content: center;
     align-items: center;
 
+    #intro {
+        width: 320px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        font: {
+            family: $sans;
+            size: 1.3rem;
+        }
+        text: {
+            align: center;
+            // transform: uppercase;
+        }
+        letter-spacing: 0.2em;
+        color: $white;
+        // .ul-wrapper {
+        //     width: 320px;
+        //     background-color: $yellow;
+        //     color: $black;
+        //     border-radius: 10px;
+        // }
+        ul {
+            width: 320px;
+            margin-top: 20px;
+            // min-height: 
+            background-color: $fake-it-yellow-over-white-translucent;
+            color: $black;
+            border-radius: 10px;
+            padding: 20px;
+            li {
+                margin-top: 20px;
+                width: 300px;
+                overflow: scroll;
+            }
+            text-align: left;
+            // overflow: scroll;
+            em {
+                text-transform: uppercase;
+            }
+        }
+        a {
+            color: $yellow;
+            text-decoration: none;
+        }
+        p {
+            margin: 10px 0;
+            padding: 0 10px;
+            
+        }
+        .videoTour {
+            border-radius: 10px;
+            border: solid 2px $yellow;
+            padding: 20px;
+        }
+    }
+
     #about,
     #levels,
     #tech, 
@@ -196,6 +254,15 @@
 
 @media (min-width: 600px) {
     #About {
+        #intro {
+            ul{
+                width: 550px; 
+                li {
+                    width: 550px;
+                }                
+            }
+            width: 550px;
+        }
         #about,
         #levels,
         #tech, 
@@ -216,6 +283,15 @@
 
 @media (min-width: 900px) {
     #About {
+        #intro {
+            ul{
+                width: 700px;  
+                li {
+                    width: 700px;
+                }              
+            }
+            width: 700px;
+        }
         #about,
         #levels,
         #tech, 
