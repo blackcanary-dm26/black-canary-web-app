@@ -136,7 +136,7 @@ class LevelTwo extends Component {
                 </select>
               </div>
               <div className="buttnWrapper">
-                <button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button>
+                <Link to="/home"><button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button></Link>
               </div>
             </section>
           </div>

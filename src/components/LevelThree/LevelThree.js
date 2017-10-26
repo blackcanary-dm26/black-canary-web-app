@@ -104,7 +104,7 @@ class LevelThree extends Component {
             <header>{this.props.match.params.id.split("_").join(" ")}</header>
             <section className="situationContainer">
               <div className="buttnWrapper">
-                <button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button>
+                <Link to='/home'><button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button></Link>
               </div>
             </section>
           </div>
