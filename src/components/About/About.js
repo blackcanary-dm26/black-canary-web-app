@@ -112,8 +112,20 @@ export default class About extends Component{
                     </div>
                     {/* <h3>Safety App</h3> */}
                 </header>
+                <section id="intro">
+                    <p className="videoTour">A video tour of Black Canary is available <a href="https://youtu.be/cw8VR4JNrwk" target="_blank">here</a>.</p>
+                    <p>If you would prefer to walk through the app yourself, you can log in to Google using this test account, and select it on Black Canary's Auth0 login:
+                        {/* <div className="ul-wrapper"> */}
+                            <ul>
+                                <li><em>Email:</em> blackcanarydemo@gmail.com</li>
+                                <li><em>Password:</em> blackcanary</li>
+                            </ul>
+                        {/* <div> */}
+                    </p>
+                </section>
                 <section id="about">
-                    <h1 onClick={()=> this.toggleSection('about')}>About</h1>
+                    {/* <h1 onClick={()=> this.toggleSection('about')}>About</h1> */}
+                    <h1>About</h1>
                     <div className="withinSection">
                         <p className="paragraphs">Ever been traveling, and had to text your mother, your best friend, your best
                         friend's roommate, and...everyone and their dog...that you boarded the plane
@@ -132,7 +144,6 @@ export default class About extends Component{
                                 <li>5. Set a time.</li>
                                 <li>6. Send!</li>
                             </ul>
-                            <img src={placeholder}/>
                         </div>
                         <p className="paragraphs">Your chosen recipients will be alerted as to your situation and will be updated
                             in real-time as to your location. If you receive an alert from one of
@@ -142,7 +153,8 @@ export default class About extends Component{
 
                 </section>
                 <section id="levels">
-                    <h1 onClick={()=> this.toggleSection('levels')}>Situations</h1>
+                    {/* <h1 onClick={()=> this.toggleSection('levels')}>Situations</h1> */}
+                    <h1>Situations</h1>
                     <div className="withinSection">
                         <p className="paragraphs">
                             Black Canary offers three levels of situations, for a variety
@@ -179,7 +191,8 @@ export default class About extends Component{
 
                 </section>
                 <section id="tech">
-                    <h1 onClick={()=> this.toggleSection('tech')}>Technology</h1>
+                    {/* <h1 onClick={()=> this.toggleSection('tech')}>Technology</h1> */}
+                    <h1>Technology</h1>
                     <div className="withinSection">
                         <ul className="ulWrapper">
                             <li>React</li>
@@ -190,17 +203,18 @@ export default class About extends Component{
                             <li>Auth0</li>
                             <li>Passport.js</li>
                             <li>Google Maps API</li>
+                            <li>Geolocation</li>
                             <li>Greensock Animation</li>
                             <li>Sass/Scss</li>
                             <li>Redux</li>
                             <li>PostgreSQL</li>
-                            <li>Heroku Database</li>
-                            <li>Hosted on Digital Ocean</li>
+                            <li>RESTful API's</li>
                         </ul>
                     </div>
                 </section>
                 <section id="creators">
-                    <h1 onClick={()=> this.toggleSection('creators')}>Creators</h1>
+                    {/* <h1 onClick={()=> this.toggleSection('creators')}>Creators</h1> */}
+                    <h1>Creators</h1>
                     <div className="withinSection">
                         <div className="ulWrapper">
                             <div className="creatorImgWrapper">
@@ -212,7 +226,7 @@ export default class About extends Component{
                                 charge of the geolocation/Google Maps services, and
                                 developed the design for the web app. She created and styled
                                 multiple React components. Much of her work was oriented towards
-                                the front-end, but she assisted with some of the server-side
+                                the front-end, but she assisted with the server-side
                                 javascript code and logic.
                                 Emily is a first-degree backbelt and is mildly obsessed with
                                 Parmesan cheese (Andi often asks is she would like some pasta with her cheese).</p>
@@ -227,7 +241,7 @@ export default class About extends Component{
                                 and back-end. She helped create several React components, set up
                                 the database, and create endpoints. Andi spearheaded the
                                 effort to get Auth0 set up and styled, and helped design
-                                the message alert system.
+                                the message alert system and the friend search.
                                 Andi grew up in Idaho and California, and loves dogs, providing
                                 daily dog facts for all of DevMountain.
                             </p>
@@ -242,7 +256,8 @@ export default class About extends Component{
                                 She worked on setting up the server and Redux, and helped create the
                                 database in PostgreSQL. While most of her work was on the server-side,
                                 her work with websockets required interaction and preparation with the
-                                front-end, including collaborating on the design on endpoints.
+                                front-end, including collaboration to create endpoints and send locations 
+                                from the front-end.
                                 Janise served in the Peace Corps in Micronesia for 27 months
                                 and EATS KIT-KATS LIKE A MONSTER. </p>
                         </div>
@@ -268,6 +283,7 @@ export default class About extends Component{
                     <a href="https://www.linkedin.com/in/andiplatter" target="_blank"><img src={ap} className="creatorImg"/></a>
                     <a href="https://www.linkedin.com/in/janise-suski" target="_blank"><img src={js} className="creatorImg"/></a>
                     <a href="http://www.linkedin.com/in/abigail-thelin" target="_blank"><img src={at} className="creatorImg"/></a>
+                    <span>We would like to thank all our instructors and mentors at DevMountain for getting us this far!</span>
                     <span>We do not own the name "Black Canary". This was created as a group project as DevMountain Student Developers.</span>
                 </footer>
             </div>

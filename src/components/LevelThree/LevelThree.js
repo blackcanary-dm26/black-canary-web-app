@@ -21,7 +21,6 @@ class LevelThree extends Component {
         individualRecipients: ['should be set in profile'],
         // timeActive: 24 * 60 * 60 * 1000, //24 hours
         timeActive: 30 * 1000, //for testing
-        groupRecipients: ['should be set in profile'],
         recipientIds: [], 
         timeOptions: [
           {
@@ -56,18 +55,22 @@ class LevelThree extends Component {
       }
   }
 
-//   componentWillMount(){
-//     let {getInitialUserInfo, getInitialEmergencyGroup} = this.props;
-//     getInitialUserInfo()
-//     getInitialEmergencyGroup()
+  componentWillMount(){
+    let {getInitialUserInfo, getInitialEmergencyGroup} = this.props;
+    getInitialUserInfo()
+    getInitialEmergencyGroup()
     
-// }
+  }
 
   componentDidMount(){
     console.log(this.props.match.params);
     let x = this.props.match.params.id.split("_").join(" ").toUpperCase()
+    let recips = this.props.emergencyGroup.map(contact => {
+      return contact.emergency_contact_id
+    })
     this.setState({
-      title: x
+      title: x,
+      recipientIds: recips
     })
 
     setTimeout(()=> {
@@ -86,7 +89,7 @@ class LevelThree extends Component {
       user_coordinates: this.props.userLoc,
       situation: this.state.title,
       situation_level: 3,
-      message: this.state.message,
+      message: this.props.emergencyGroup.emergency_message,
       individual_recip: this.state.recipientIds,
       // group_recip: this.state.groupRecipients
       time_active: this.state.timeActive
@@ -107,11 +110,6 @@ class LevelThree extends Component {
                 <Link to='/home'><button onClick={() => {console.log('no i hate u'); this.sendLocToSocket()}}>SEND</button></Link>
               </div>
             </section>
-          </div>
-
-          <div className="redirect">
-              <p>You do not have any emergency contacts set. Please add your emergency contacts.</p>
-              <Link to="/profile">Set Emergency Contacts</Link>
           </div>
         </div>
     );

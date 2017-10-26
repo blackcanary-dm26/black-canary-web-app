@@ -44,6 +44,7 @@ class Login extends Component {
               <a href="/auth"><button>LOGIN OR SIGN UP</button></a>
               {/*REMOVE THE LINK ONCE ALL IS SET UP*/}
             </div>
+            <Link to='/about'>About Black Canary</Link>
           </div>
       </div>
     );
