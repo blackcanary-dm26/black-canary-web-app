@@ -65,102 +65,6 @@ passport.use(new Auth0Strategy({
     }
 ));
 
-//=============ASYNC========================//
-// async function getInitialInfo(req, res) {
-//     let response ={};
-//     let db= app.get('db')
-//     let userInfo, groups, friends, activeLocations, emergencyGroup, pendingFriendRequests;
-//     app.get('db').get_user_info([req.user.id])
-//         .then(user=> {
-//             // response.userInfo = user[0];
-//             // console.log('get user info', response)
-//             res.status(200).send(user[0])
-//         });
-
-//     app.get('db').get_groups([req.user.id])
-//         .then(data => {
-//             let groupsObj = {};
-//             for(let i = 0; i < data.length; i++) {
-//                 if(groupsObj.hasOwnProperty(data[i].group_id)){
-//                     groupsObj[data[i].group_id].members.push({ username: data[i].member_username,
-//                     userID: data[i].member_user_id});
-//                 } else {
-//                     groupsObj[data[i].group_id] = {
-//                         groupID: data[i].group_id,
-//                         groupName: data[i].group_name,
-//                         members: [{username: data[i].member_username,
-//                             userID: data[i].member_user_id}]
-//                     }
-//                 }
-//         }
-//         let groupsArr = [];
-//         for (group in groupsObj) {
-//             groupsArr.push(groupsObj[group]);
-//         }
-//         //ultimate return: the array "groups" of object {groupName, groupID, members: [{username, userID}, {username, userID}]}
-//         response.groups = groupsArr;
-//         // console.log('groups data line 197', response)
-
-//     })
-
-// app.get('db').get_friends([req.user.id])
-//     .then(data=> {
-//         response.friends = data
-//         // console.log('get friends', response)
-//     });
-
-// app.get('db').get_active_locations([req.user.id])
-//     .then(data => {
-//         // console.log('get active locations', data)
-//         //change data and save to activeLocations
-//         activeLocations = {
-//             1: [],
-//             2: [],
-//             3: []
-//         }
-//         data.map(e => {
-//             // console.log(e);
-//             let {message, situation} = e;
-//             let coordinates;
-//             if(e.coordinates) {
-//                 let coord = e.coordinates.split('*');
-//                 coordinates = {lat: 1*coord[0], lng: 1*coord[1]};
-//             }else {
-//                 coordinates ={lat: 40.226192, lng:  -111.660776}
-//             }
-            
-//             let senderName = `${e.senderfirstname} ${e.senderlastname}`;
-
-//             activeLocations[e.situationlevel].push({senderName, coordinates, message, situation})
-//         })
-//         //"29348748*-983475"
-
-//         response.activeLocations = activeLocations
-//         // console.log('active locations', response)
-//     });
-    
-//     app.get('db').get_pending_friend_requests([req.user.id])
-//         .then(requests => {
-//             response.pendingFriendRequests = requests
-//             // console.log('pending friend requests', response)
-//         })
-
-//     app.get('db').get_emergency_group([req.user.id])
-//         .then(data=> {
-//             response.emergencyGroup = data
-//             // console.log('emergency group', response)
-//         })
-
-        // console.log('response', response)
-        // res.status(200).send(response)
-
-// }
-
-
-/*
-
-Promise.all([axios.get(url),axios.get(url2)]).then(response=>{res.send({})})
-*/
 
 
 // ================= AUTH ENDPOINTS =================//
@@ -617,6 +521,10 @@ io.on('connection', socket => {
 
 })
 
+//catch all endpoint
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + './../build')
+})
 
 
 //server listening for sockets
