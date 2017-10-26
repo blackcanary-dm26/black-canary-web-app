@@ -28,17 +28,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/../build')) //npm build to deploy app
 
-massive({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    ssl: true
-  }).then( db => {
+// massive({
+//     host: process.env.DB_HOST,
+//     port: process.env.DB_PORT,
+//     database: process.env.DB_DATABASE,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     ssl: true
+//   }).then( db => {
+//     app.set('db', db);
+//   })
+
+massive( process.env.DATABASE_URL )
+.then( db => {
     app.set('db', db);
   })
-
 
 
 passport.use(new Auth0Strategy({
