@@ -1,4 +1,4 @@
 /node_modules
 .env
 src/components/MapContainer/config.js
-/build
+debug.log
