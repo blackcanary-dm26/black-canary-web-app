@@ -1,3 +1,7 @@
 /node_modules
 .env
 src/components/MapContainer/config.js
+<<<<<<< HEAD
+=======
+debug.log
+>>>>>>> 3fac39d663cd58ed214d21ea1184341b798955ef
