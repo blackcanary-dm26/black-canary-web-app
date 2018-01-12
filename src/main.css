@@ -1565,6 +1565,15 @@ table {
     #About #creators .ulWrapper {
       width: 700px; } }
 
+@media (min-width: 1400px) {
+  #About #intro,
+  #About #about,
+  #About #levels,
+  #About #tech,
+  #About #creators {
+    margin-left: 100px;
+    margin-right: 100px; } }
+
 .FriendModal {
   letter-spacing: 1;
   text-transform: uppercase;

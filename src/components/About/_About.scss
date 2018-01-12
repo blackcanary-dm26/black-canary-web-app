@@ -309,3 +309,16 @@
         }
     }
 }
+
+@media (min-width: 1400px) {
+    #About {
+        #intro,
+        #about,
+        #levels,
+        #tech, 
+        #creators  {
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+    }
+}
